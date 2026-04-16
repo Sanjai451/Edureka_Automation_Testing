@@ -31,6 +31,12 @@
 			<scope>compile</scope>
 		</dependency>
 
+<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>5.4.1</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-picocontainer</artifactId>
@@ -38,10 +44,5 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>com.edureka</groupId>
-			<artifactId>edureka-automation</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
   </dependencies>
 </project>

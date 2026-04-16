@@ -7,18 +7,18 @@ import com.edureka.pages.SearchHomePage;
 import com.edureka.pages.SearchResultsPage;
 
 import pages.SearchResultPage;
+import com.edureka.pages.HomePage;
 
 
 public class Pages {
-	
-//	public static LoginPage loginPage;
+  
 	public static SearchHomePage shp;
 	public static SearchResultsPage srp;
+  public static HomePage homePage;
 	
 	public static void loadAllPages(WebDriver driver) {
-//		loginPage = PageFactory.initElements(driver, LoginPage.class);
 		shp = PageFactory.initElements(driver, SearchHomePage.class);
-		srp= PageFactory.initElements(driver, SearchResultsPage.class);
-		
+		srp = PageFactory.initElements(driver, SearchResultsPage.class);
+		homePage = PageFactory.initElements(driver, HomePage.class);
 	}
 }

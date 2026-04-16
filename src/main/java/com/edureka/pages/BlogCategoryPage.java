@@ -1,0 +1,38 @@
+package com.edureka.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class BlogCategoryPage {
+	
+	@FindBy(xpath = "//a[@title='Next']")
+	private WebElement nextPage;
+	
+	@FindBy(xpath = "//a[@title='Previous']")
+	private WebElement previousPage;
+	
+	@FindBy(xpath = "//li[contains(@class, 'active') and contains(@class, 'page-item')]//a")
+	private WebElement currentPage;
+
+	public void clickOnArticles(WebDriver driver, String value) {
+		driver.findElement(By.xpath("//a[.='" + value + "']")).click();
+	}
+	
+	public void goToNthPage(WebDriver driver, String value) {
+		System.out.println("Page Number to Navigate : " + value);
+		String currentPageNumber = currentPage.getText();
+		if(! value.equals(currentPageNumber)) {
+			driver.findElement(By.xpath("//li[contains(@class, 'page-item') and .='" + value + "']//a")).click();
+		}
+	}
+	
+	public void clickOnNextPage() {
+		nextPage.click();
+	}
+	
+	public void clickOnPreviousPage() {
+		previousPage.click();
+	}
+}
