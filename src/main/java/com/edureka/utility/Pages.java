@@ -3,12 +3,14 @@ package com.edureka.utility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import com.edureka.pages.HomePage;
+
 
 public class Pages {
 	
-//	public static LoginPage loginPage;
+	public static HomePage homePage;
 	
 	public static void loadAllPages(WebDriver driver) {
-//		loginPage = PageFactory.initElements(driver, LoginPage.class);
+		homePage = PageFactory.initElements(driver, HomePage.class);
 	}
 }
