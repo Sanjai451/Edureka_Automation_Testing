@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
  */
 
 @CucumberOptions(
-		features = {"./src/test/java/com/edureka/featureFile/homePage.feature"},
+		features = {"./src/test/java/com/edureka/featureFile/search.feature"},
 		glue = "com.edureka.stepDefinition",
 		dryRun = false
 		)
