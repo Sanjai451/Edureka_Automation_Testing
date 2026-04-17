@@ -28,7 +28,6 @@ public class CommunityQuestionPage {
 
 	@FindBy(xpath = "//button[contains(text(), 'Add answer')]")
 	private WebElement postAnswerButton;
-	 
 	public void addAnswerForQuestion(WebDriver driver, String answer) {
 		answerButton.click();
 		addTextToFrame(driver, answer);
