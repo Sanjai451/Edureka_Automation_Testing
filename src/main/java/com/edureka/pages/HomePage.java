@@ -66,24 +66,7 @@ public class HomePage {
     public void clickOnEdurekaLogo() {
     	edurekaIcon.click();
     }
-    
-    
-    @FindBy(xpath = "//span[contains(@class,'user_name')]")
-    WebElement profileIcon;
-
-    @FindBy(xpath = "//a[text()='My Profile']")
-    WebElement myProfile;
-
-    @FindBy(xpath = "//a[text()='My Orders']")
-    WebElement myOrders;
-
-    @FindBy(xpath = "//a[text()='My Wishlist']")
-    WebElement myWishlist;
-
-    @FindBy(xpath = "//a[text()='Change Password']")
-    WebElement changePassword;
-    
-
+   
     public void clickHomeSearchBar() {
         homeSearchBar.click();
     }
