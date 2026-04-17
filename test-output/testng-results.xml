@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
@@ -15,22 +16,52 @@
             <param index="0">
               <value>
                 <![CDATA[org.testng.TestRunner@31e130bf]]>
+=======
+<testng-results ignored="0" total="7" passed="6" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-04-16T21:51:42 IST" name="Default suite" finished-at="2026-04-16T21:52:50 IST" duration-ms="68351">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-04-16T21:51:42 IST" name="Default test" finished-at="2026-04-16T21:52:50 IST" duration-ms="68351">
+      <class name="com.edureka.testRunner.RunnerIO">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:51:42 IST" name="setUpClass" finished-at="2026-04-16T21:51:42 IST" duration-ms="176" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@2a50b32d]]>
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
+<<<<<<< HEAD
         <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:28 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T08:29:29 IST" duration-ms="365" status="FAIL">
           <params>
             <param index="0">
               <value>
                 <![CDATA["Verify all available webinars are displayed on the webinars page"]]>
+=======
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:51:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:51:46 IST" duration-ms="3936" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify search bar visibility and search panel opening"]]>
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
               </value>
             </param>
             <param index="1">
               <value>
+<<<<<<< HEAD
                 <![CDATA["Webinar End-to-End Flow"]]>
+=======
+                <![CDATA["Search functionality in Edureka"]]>
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
               </value>
             </param>
           </params>
@@ -113,15 +144,24 @@ at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceE
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
+<<<<<<< HEAD
         <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:29 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T08:29:29 IST" duration-ms="27" status="FAIL">
           <params>
             <param index="0">
               <value>
                 <![CDATA["Complete webinar flow from homepage to registration"]]>
+=======
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:51:46 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:00 IST" duration-ms="14425" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify valid search flow and navigation to course page"]]>
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
               </value>
             </param>
             <param index="1">
               <value>
+<<<<<<< HEAD
                 <![CDATA["Webinar End-to-End Flow"]]>
               </value>
             </param>
@@ -248,6 +288,110 @@ at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceE
           </reporter-output>
         </test-method> <!-- runScenario -->
         <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:29 IST" name="tearDownClass" finished-at="2026-04-17T08:29:29 IST" duration-ms="6" status="PASS">
+=======
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:00 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:17 IST" duration-ms="17217" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify partial and case insensitive search using datatable"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:17 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:26 IST" duration-ms="8933" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify empty search navigates to default search page"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:26 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:33 IST" duration-ms="6803" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify special character search is handled safely"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:33 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:41 IST" duration-ms="7748" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify invalid keyword search is handled safely and callback form is displayed"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:41 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:50 IST" duration-ms="9048" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify mobile number validation on callback form"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Search functionality in Edureka"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Defect: system accepted more than 10 digits expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Defect: system accepted more than 10 digits expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1590)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at com.edureka.stepDefinition.SearchStepDefinition.system_should_not_accept_more_than_10_digits_for_search_module(SearchStepDefinition.java:262)
+at ✽.system should not accept more than 10 digits for search module(file:///C:/Users/sathy/eclipse-workspace/seleniumTraining/Edureka_Automation_Testing/./src/test/java/com/edureka/featureFile/search.feature:55)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:50 IST" name="tearDownClass" finished-at="2026-04-16T21:52:50 IST" duration-ms="3" status="PASS">
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

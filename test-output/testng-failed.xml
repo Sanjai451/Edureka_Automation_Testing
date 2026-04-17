@@ -7,7 +7,11 @@
         <methods>
           <include name="setUpClass"/>
           <include name="tearDownClass"/>
+<<<<<<< HEAD
           <include name="runScenario" invocation-numbers="0 1"/>
+=======
+          <include name="runScenario" invocation-numbers="6"/>
+>>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
         </methods>
       </class> <!-- com.edureka.testRunner.RunnerIO -->
     </classes>
