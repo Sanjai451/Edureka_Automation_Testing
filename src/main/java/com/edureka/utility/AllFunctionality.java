@@ -22,168 +22,155 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class AllFunctionality {
 	Properties properties;
+
+	public AllFunctionality() {
+	}
+
+	// ================= WINDOW MANAGEMENT =================
+
+	public void setMaximizeBrowser(WebDriver driver) {
+		driver.manage().window().maximize();
+	}
+
+	public void setMinimizeBrowser(WebDriver driver) {
+		driver.manage().window().minimize();
+	}
+
+	public void setFullscreenBrowser(WebDriver driver) {
+		driver.manage().window().fullscreen();
+	}
+
+	public Dimension getSize(WebDriver driver) {
+		return driver.manage().window().getSize();
+	}
+
+	public void setSize(WebDriver driver, int width, int height) {
+		driver.manage().window().setSize(new Dimension(width, height));
+	}
+
+	public Point getPosition(WebDriver driver) {
+		return driver.manage().window().getPosition();
+	}
+
+	public void setPosition(WebDriver driver, int x, int y) {
+		driver.manage().window().setPosition(new Point(x, y));
+	}
+
+	/*
+	 * 
+	 * // ================= NAVIGATION =================
+	 * 
+	 * public void navigateTo(String url) { driver.navigate().to(url); }
+	 * 
+	 * public void navigateBack() { driver.navigate().back(); }
+	 * 
+	 * public void navigateForward() { driver.navigate().forward(); }
+	 * 
+	 * public void refreshPage() { driver.navigate().refresh(); }
+	 * 
+	 * 
+	 */
+
+// ================= DETAILS =================
+
+	public String getTitle(WebDriver driver) {
+		return driver.getTitle();
+	}
+
+	public String getUrl(WebDriver driver) {
+		return driver.getCurrentUrl();
+	}
 	
-	public AllFunctionality() {}
-	   
-    
- // ================= WINDOW MANAGEMENT =================
+	// ================= TIMEOUTS =================
 
-    public void setMaximizeBrowser(WebDriver driver) {
-        driver.manage().window().maximize();
-    }
+	public void implicitlyWait(WebDriver driver, int seconds) {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
+	}
 
-    public void setMinimizeBrowser(WebDriver driver) {
-        driver.manage().window().minimize();
-    }
+	public void pageLoadTimeout(WebDriver driver, int seconds) {
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(seconds));
+	}
 
-    public void setFullscreenBrowser(WebDriver driver) {
-        driver.manage().window().fullscreen();
-    }
+	// ================= EXPLICIT WAIT =================
 
-    public Dimension getSize(WebDriver driver) {
-        return driver.manage().window().getSize();
-    }
+	public void waitForElementVisible(WebDriver driver, WebElement element, int seconds) {
+		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOf(element));
+	}
 
-    public void setSize(WebDriver driver, int width, int height) {
-        driver.manage().window().setSize(new Dimension(width, height));
-    }
+	public void waitForElementClickable(WebDriver driver, WebElement element, int seconds) {
+		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.elementToBeClickable(element));
+	}
 
-    public Point getPosition(WebDriver driver) {
-        return driver.manage().window().getPosition();
-    }
+	public void waitForTitleContains(WebDriver driver, String title, int seconds) {
+		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.titleContains(title));
+	}
+	// ================= ALERT / POPUPS =================
 
-    public void setPosition(WebDriver driver, int x, int y) {
-        driver.manage().window().setPosition(new Point(x, y));
-    }
+	public void acceptPopup(WebDriver driver) {
+		driver.switchTo().alert().accept();
+	}
 
-    /*
-     
-    // ================= NAVIGATION =================
+	public void dismissPopup(WebDriver driver) {
+		driver.switchTo().alert().dismiss();
+	}
 
-    public void navigateTo(String url) {
-        driver.navigate().to(url);
-    }
+	public String getPopupText(WebDriver driver) {
+		return driver.switchTo().alert().getText();
+	}
 
-    public void navigateBack() {
-        driver.navigate().back();
-    }
+	public void printTextOnPopup(WebDriver driver) {
+		System.out.println(driver.switchTo().alert().getText());
+	}
 
-    public void navigateForward() {
-        driver.navigate().forward();
-    }
+	public void sendTextToPopup(WebDriver driver, String text) {
+		driver.switchTo().alert().sendKeys(text);
+	}
 
-    public void refreshPage() {
-        driver.navigate().refresh();
-    }
-    
-    // ================= DETAILS =================
-    
-    public String getTitle() {
-    	return driver.getTitle();
-    }
-    
-    public String getUrl() {
-    	return driver.getCurrentUrl();
-    }
-    
-    
-*/
- // ================= TIMEOUTS =================
+	// ================= WINDOW HANDLES =================
 
-    public void implicitlyWait(WebDriver driver, int seconds) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
-    }
+	public void switchToWindowByTitle(WebDriver driver, String textTitle) {
+		Set<String> all = driver.getWindowHandles();
+		String currentWindowHandle = driver.getWindowHandle();
+		all.remove(currentWindowHandle);
 
-    public void pageLoadTimeout(WebDriver driver, int seconds) {
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(seconds));
-    }
+		for (String window : all) {
+			driver.switchTo().window(window);
+			if (driver.getTitle().contains(textTitle)) {
+				break;
+			}
+		}
+	}
 
-    // ================= EXPLICIT WAIT =================
+	public void switchToWindowByUrl(WebDriver driver, String url) {
+		Set<String> all = driver.getWindowHandles();
+		String currentWindowHandle = driver.getWindowHandle();
+		all.remove(currentWindowHandle);
 
-    public void waitForElementVisible(WebDriver driver, WebElement element, int seconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(seconds))
-                .until(ExpectedConditions.visibilityOf(element));
-    }
+		for (String window : all) {
+			driver.switchTo().window(window);
+			if (driver.getCurrentUrl().contains(url)) {
+				break;
+			}
+		}
+	}
 
-    public void waitForElementClickable(WebDriver driver, WebElement element, int seconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(seconds))
-                .until(ExpectedConditions.elementToBeClickable(element));
-    }
+	// ================= WINDOW CLOSE =================
 
-    public void waitForTitleContains(WebDriver driver, String title, int seconds) {
-        new WebDriverWait(driver, Duration.ofSeconds(seconds))
-                .until(ExpectedConditions.titleContains(title));
-    }
-    // ================= ALERT / POPUPS =================
+	public void closeBrowser(WebDriver driver) {
+		driver.close();
+	}
 
-    public void acceptPopup(WebDriver driver) {
-        driver.switchTo().alert().accept();
-    }
+	public void quitBrowser(WebDriver driver) {
+		driver.quit();
+	}
 
-    public void dismissPopup(WebDriver driver) {
-        driver.switchTo().alert().dismiss();
-    }
+	// ==================== PROPERTIES UTILITIES ===============
 
-    public String getPopupText(WebDriver driver) {
-        return driver.switchTo().alert().getText();
-    }
-    
-    public void printTextOnPopup(WebDriver driver) {
-    	System.out.println(driver.switchTo().alert().getText());
-    }
-
-    public void sendTextToPopup(WebDriver driver, String text) {
-        driver.switchTo().alert().sendKeys(text);
-    }
-
-    // ================= WINDOW HANDLES =================
-    
-    public void switchToWindowByTitle(WebDriver driver, String textTitle) {
-    	Set<String> all = driver.getWindowHandles();
-    	String currentWindowHandle = driver.getWindowHandle();
-    	all.remove(currentWindowHandle);
-    	
-    	for(String window : all) {
-    		driver.switchTo().window(window);
-    		if(driver.getTitle().contains(textTitle)) {
-    			break;
-    		}
-    	}    	  
-    }
-    
-    public void switchToWindowByUrl(WebDriver driver, String url) {
-    	Set<String> all = driver.getWindowHandles();
-    	String currentWindowHandle = driver.getWindowHandle();
-    	all.remove(currentWindowHandle);
-    	
-    	for(String window : all) {
-    		driver.switchTo().window(window);
-    		if(driver.getCurrentUrl().contains(url)) {
-    			break;
-    		}
-    	}    	  
-    }
-
-
-    // ================= WINDOW CLOSE =================
-
-    public void closeBrowser(WebDriver driver) {
-        driver.close();
-    }
-
-    public void quitBrowser(WebDriver driver) {
-        driver.quit();
-    }
-    
-
- // ==================== PROPERTIES UTILITIES ===============
-	
 	public void initPropertiesUtility(String path) {
-		
-		try (FileInputStream fis = new FileInputStream(path);){
+
+		try (FileInputStream fis = new FileInputStream(path);) {
 			properties = new Properties();
 			properties.load(fis);
 			System.out.println("Properties : " + properties);
@@ -200,19 +187,19 @@ public class AllFunctionality {
 			return null;
 		}
 	}
-	
+
 	// ==================== JAVA UTILITIES ===============
 	public int getRandomNumber(int range) {
 		return new Random().nextInt(range);
 	}
-	
+
 	public String getCurrentDate(String dateFormat) {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat);
 		return simpleDateFormat.format(new Date());
 	}
-	
+
 	// ==================== EXCEL UTILITY =========================
-	
+
 	private static final String FILE_PATH = ".src/main/resources/eureka.xlsx";
 
 	Workbook workbook;
@@ -232,7 +219,7 @@ public class AllFunctionality {
 	}
 
 	public Row getRow(int rowNumber) {
-		if(sheet == null) {
+		if (sheet == null) {
 			System.out.println("Invaid Sheet : Initilize");
 			return null;
 		}
@@ -240,7 +227,7 @@ public class AllFunctionality {
 	}
 
 	public int getNumberOfRows() {
-		if(sheet == null) {
+		if (sheet == null) {
 			System.out.println("Invaid Sheet : Initilize");
 			return -1;
 		}
@@ -248,7 +235,7 @@ public class AllFunctionality {
 	}
 
 	public int getNumberOfCols() {
-		if(sheet == null) {
+		if (sheet == null) {
 			System.out.println("Invaid Sheet : Initilize");
 			return -1;
 		}
@@ -256,8 +243,8 @@ public class AllFunctionality {
 	}
 
 	public String getData(int row, int col) {
-		
-		if(sheet == null) {
+
+		if (sheet == null) {
 			System.out.println("Invaid Sheet : Initilize");
 			return null;
 		}
@@ -269,11 +256,10 @@ public class AllFunctionality {
 		}
 		return sheet.getRow(row).getCell(col).toString();
 	}
-	
+
 	public Object[][] getExcelDataAsArray(String sheetName) throws Exception {
 
-		try (FileInputStream fis = new FileInputStream(FILE_PATH); 
-				Workbook wb = WorkbookFactory.create(fis)) {
+		try (FileInputStream fis = new FileInputStream(FILE_PATH); Workbook wb = WorkbookFactory.create(fis)) {
 
 			Sheet sheet = wb.getSheet(sheetName);
 

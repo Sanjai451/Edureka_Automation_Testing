@@ -1,43 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-16T12:38:53 IST" name="Default suite" finished-at="2026-04-16T12:38:59 IST" duration-ms="5734">
+  <suite started-at="2026-04-17T09:40:40 IST" name="Default suite" finished-at="2026-04-17T09:40:59 IST" duration-ms="18366">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@6c40365c]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-04-16T12:38:53 IST" name="Default test" finished-at="2026-04-16T12:38:59 IST" duration-ms="5734">
+    <test started-at="2026-04-17T09:40:40 IST" name="Default test" finished-at="2026-04-17T09:40:59 IST" duration-ms="18366">
       <class name="com.edureka.testRunner.RunnerIO">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:53 IST" name="setUpClass" finished-at="2026-04-16T12:38:54 IST" duration-ms="487" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@6c40365c]" started-at="2026-04-17T09:40:41 IST" name="setUpClass" finished-at="2026-04-17T09:40:41 IST" duration-ms="902" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7ed7ae]]>
+                <![CDATA[org.testng.TestRunner@4e25147a]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:54 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T12:38:59 IST" duration-ms="5151" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@6c40365c]" started-at="2026-04-17T09:40:42 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T09:40:52 IST" duration-ms="10165" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["navigate to home page"]]>
+                <![CDATA["Verify all available webinars are displayed on the webinars page"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Add product to cart"]]>
+                <![CDATA["Webinar End-to-End Flow"]]>
               </value>
             </param>
           </params>
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[no such element: Unable to locate element: {"method":"xpath","selector":"//button[.='Resources']"}
+  (Session info: MicrosoftEdge=147.0.3912.60)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [e3d5ecf512a160072387a0c8d23e8ee5, findElement {value=//button[.='Resources'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 147.0.3912.60, fedcm:accounts: true, goog:processID: 3980, ms:edgeOptions: {debuggerAddress: localhost:62839}, msedge: {msedgedriverVersion: 147.0.3912.60 (edc5c90193d3..., userDataDir: C:\Users\Admin\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62839/devtoo..., se:cdpVersion: 147.0.3912.60, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e3d5ecf512a160072387a0c8d23e8ee5]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[.='Resources']"}
+  (Session info: MicrosoftEdge=147.0.3912.60)
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#nosuchelementexception
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [e3d5ecf512a160072387a0c8d23e8ee5, findElement {value=//button[.='Resources'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 147.0.3912.60, fedcm:accounts: true, goog:processID: 3980, ms:edgeOptions: {debuggerAddress: localhost:62839}, msedge: {msedgedriverVersion: 147.0.3912.60 (edc5c90193d3..., userDataDir: C:\Users\Admin\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62839/devtoo..., se:cdpVersion: 147.0.3912.60, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: e3d5ecf512a160072387a0c8d23e8ee5
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy23.click(Unknown Source)
+at com.edureka.pages.HomePage.clickOnWebinarFromNavbar(HomePage.java:41)
+at com.edureka.stepDefinition.WebinarTest.user_clicks_on_from_navigation_menu(WebinarTest.java:27)
+at ✽.user clicks on "Webinars" from navigation menu(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:10)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:59 IST" name="tearDownClass" finished-at="2026-04-16T12:38:59 IST" duration-ms="4" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@6c40365c]" started-at="2026-04-17T09:40:52 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T09:40:59 IST" duration-ms="7077" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Complete webinar flow from homepage to registration"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Webinar End-to-End Flow"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: MicrosoftEdge=147.0.3912.60)
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [2d0d3cf35106e1627daf2bf4d0096b96, findElement {value=//button[.='Resources'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 147.0.3912.60, fedcm:accounts: true, goog:processID: 13156, ms:edgeOptions: {debuggerAddress: localhost:62524}, msedge: {msedgedriverVersion: 147.0.3912.60 (edc5c90193d3..., userDataDir: C:\Users\Admin\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62524/devtoo..., se:cdpVersion: 147.0.3912.60, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 2d0d3cf35106e1627daf2bf4d0096b96]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: unable to send message to renderer
+  (Session info: MicrosoftEdge=147.0.3912.60)
+Build info: version: '4.38.0', revision: '6b412e825c*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '21.0.1'
+Driver info: org.openqa.selenium.edge.EdgeDriver
+Command: [2d0d3cf35106e1627daf2bf4d0096b96, findElement {value=//button[.='Resources'], using=xpath}]
+Capabilities {acceptInsecureCerts: false, browserName: MicrosoftEdge, browserVersion: 147.0.3912.60, fedcm:accounts: true, goog:processID: 13156, ms:edgeOptions: {debuggerAddress: localhost:62524}, msedge: {msedgedriverVersion: 147.0.3912.60 (edc5c90193d3..., userDataDir: C:\Users\Admin\AppData\Loca...}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:62524/devtoo..., se:cdpVersion: 147.0.3912.60, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 2d0d3cf35106e1627daf2bf4d0096b96
+at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:502)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:486)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:557)
+at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
+at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:380)
+at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:374)
+at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
+at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+at jdk.proxy2/jdk.proxy2.$Proxy23.click(Unknown Source)
+at com.edureka.pages.HomePage.clickOnWebinarFromNavbar(HomePage.java:41)
+at com.edureka.stepDefinition.WebinarTest.user_clicks_on_from_navigation_menu(WebinarTest.java:27)
+at ✽.user clicks on "Webinars" from navigation menu(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:19)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@6c40365c]" started-at="2026-04-17T09:40:59 IST" name="tearDownClass" finished-at="2026-04-17T09:40:59 IST" duration-ms="5" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
