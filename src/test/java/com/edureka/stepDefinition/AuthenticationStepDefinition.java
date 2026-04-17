@@ -29,13 +29,13 @@ public class AuthenticationStepDefinition extends AllFunctionality {
 
     @Given("User is in signup page")
     public void user_is_in_signup_page() {
-        signupPage = Pages.singupPage;
+        signupPage = Pages.signUpPage;
         signupPage.openSignupPage();
     }
 
     @When("User navigates to signup page")
     public void user_navigates_to_signup_page() {
-        signupPage = Pages.singupPage;
+        signupPage = Pages.signUpPage;
         signupPage.openSignupPage();
     }
 
