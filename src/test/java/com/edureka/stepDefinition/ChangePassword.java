@@ -10,7 +10,7 @@ import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 import com.edureka.utility.AllFunctionality;
 
-public class ChangePassword {
+public class ChangePassword extends AllFunctionality {
 
     private Base base;
 
@@ -76,7 +76,8 @@ public class ChangePassword {
     @Then("password should be updated successfully")
     public void password_should_be_updated_successfully() {
 
-        String pageSource = util.getPageSource(base.driver);
+//        String pageSource = util.getPageSource(base.driver);
+    	String pageSource = getUrl(base.driver);
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains("success"),
@@ -88,7 +89,8 @@ public class ChangePassword {
     @Then("{string} should be displayed")
     public void should_be_displayed(String message) {
 
-        String pageSource = util.getPageSource(base.driver);
+//        String pageSource = util.getPageSource(base.driver);
+    	String pageSource = getUrl(base.driver);
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains(message.toLowerCase()),

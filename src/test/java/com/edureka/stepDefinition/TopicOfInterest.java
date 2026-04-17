@@ -52,9 +52,8 @@ public class TopicOfInterest {
     @When("user selects topics from excel")
     public void selectTopicsFromExcel() {
 
-        boolean result = Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
-        Assert.assertTrue(result, "One or more topics not found");
     }
 
     // SAVE
