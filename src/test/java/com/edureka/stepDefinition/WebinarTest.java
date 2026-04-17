@@ -1,7 +1,9 @@
 package com.edureka.stepDefinition;
 
+import java.awt.Window;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
@@ -13,13 +15,15 @@ import io.cucumber.java.en.When;
 
 public class WebinarTest extends AllFunctionality {
 	Base base;
+	String homePageHandle;
 	public WebinarTest(Base base) {
 		this.base = base;
 	}
 	
 	@Given("user is on the Edureka homepage")
 	public void user_is_on_the_edureka_homepage() {
-		
+		System.out.println("Current Page : " + getUrl(base.driver));
+		homePageHandle = base.driver.getWindowHandle();
 	}
 
 	@When("user clicks on {string} from navigation menu")
@@ -59,6 +63,14 @@ public class WebinarTest extends AllFunctionality {
 	@Then("user should be navigated to {string} webinar details page")
 	public void user_should_be_navigated_to_webinar_details_page(String string) {
 		System.out.println("Current URL : " + getUrl(base.driver));
+		
+		Set<String> handles = base.driver.getWindowHandles();
+		for(String p : handles) {
+			if(! p.equals(homePageHandle)) {
+				base.driver.switchTo().window(p);
+				break;
+			}
+		}
 	}
 	
 

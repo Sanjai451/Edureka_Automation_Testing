@@ -39,7 +39,7 @@ public class WebinarCategoryPage {
     
     public void fillDetailAndSubmit(String email, String phone, String experience) {
     	Select sel = new Select(selectDropdown);
-    	sel.selectByContainsVisibleText(experience);
+    	sel.selectByVisibleText(experience);
     	emailInputField.sendKeys(email);
     	phoneNumber.sendKeys(phone);
     	submitButton.click();

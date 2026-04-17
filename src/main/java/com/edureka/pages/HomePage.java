@@ -37,21 +37,35 @@ public class HomePage {
     @FindBy(css = "[href='/community']")
     WebElement communityFromNavbar;
     
-    public void clickOnWebinarFromNavbar() {
-    	resourceIcon.click();
-    	webinarFromNavbar.click();
+    @FindBy(xpath = "//a[.='Corporate Training']")
+    WebElement corporateTraining;
+    
+    @FindBy(xpath = "//img[@title='Edureka Veranda logo']")
+    WebElement edurekaIcon;
+    
+    // For logged in cases
+    @FindBy(id = "dropdown-community")
+    WebElement communityIcon;
+    
+    // For logged in cases
+    @FindBy(xpath = "//a[.='Forum']")
+    WebElement forumIcon;
+    
+    @FindBy(css = "[href='https://www.edureka.co/community']")
+    private WebElement communityLinkFooter;
+    
+    public void goToCommunityPage() {
+    	communityLinkFooter.click();
     }
     
-    public void clickOnBlogFromNavbar() {
-    	resourceIcon.click();
-    	blogFromNavbar.click();
+    
+    public void clickOnCorporateTraining() {
+    	corporateTraining.click();
     }
     
-    public void clickOnCommunityFromNavbar() {
-    	resourceIcon.click();
-    	communityFromNavbar.click();
+    public void clickOnEdurekaLogo() {
+    	edurekaIcon.click();
     }
-
     
     public void clickHomeSearchBar() {
         homeSearchBar.click();
@@ -87,6 +101,49 @@ public class HomePage {
 	
 	public void clickOnCourse(WebDriver driver, String value) {
 		driver.findElement(By.xpath("//h2[.='" +  value + "']")).click();
+	}
+	
+	// for 'All Courses' and 'Corporate Training' in nav-bar
+	public void clickOnButtonFromNavbar(WebDriver driver, String value) {
+		driver.findElement(By.xpath("//a[.='" + value + "']")).click();
+	}
+	
+	public void clickOnButtonFromNavbarUnderResources(String value) {
+		if(value.equals("blogs")) {
+			clickOnBlogFromNavbar();
+		}
+		else if(value.equals("webinars")) {
+			clickOnWebinarFromNavbar();
+		}
+		else if(value.equals("community")) {
+			clickOnCommunityFromNavbar();
+		}
+	}
+	
+	public void clickOnCommunityFromNavbar() {
+    	resourceIcon.click();
+    	communityFromNavbar.click();
+    }
+    
+    public void clickOnWebinarFromNavbar() {
+    	resourceIcon.click();
+    	webinarFromNavbar.click();
+    }
+
+    public void clickOnBlogFromNavbar() {
+    	resourceIcon.click();
+    	blogFromNavbar.click();
+    }
+	
+//	Works when logged-in 
+	public void clickOnCommunity() {
+		communityIcon.click();
+	}
+	
+//	Works when logged-in 
+	public void clickOnForum() {
+		communityIcon.click();
+		forumIcon.click();
 	}
 
 }
