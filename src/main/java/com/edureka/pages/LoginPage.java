@@ -16,6 +16,17 @@ public class LoginPage {
 
     @FindBy(xpath = "//button[.='LOG IN']")
     WebElement loginBtn;
+    
+    @FindBy(linkText = "Forgot?")
+    WebElement showIcon;
+
+    public void clickShowIcon() {
+        showIcon.click();
+    }
+
+    public String getPasswordFieldType() {
+        return password.getAttribute("type");
+    }
 
     public void openLoginPopup() {
         loginLink.click();

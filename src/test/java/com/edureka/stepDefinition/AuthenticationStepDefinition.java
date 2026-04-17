@@ -59,6 +59,28 @@ public class AuthenticationStepDefinition extends AllFunctionality {
     @Then("Account should be created successfully")
     public void account_should_be_created_successfully() {
         System.out.println("Signup completed successfully");
+       
+    }
+    
+    @When("User enters password in login form")
+    public void user_enters_password_in_login_form() {
+
+        loginPage = Pages.loginPage;
+
+        init("AuthData");
+        String password = getData(1, 1);
+
+        loginPage.enterPassword(password);
+    }
+    
+    @And("User clicks on show password icon")
+    public void user_clicks_on_show_password_icon() {
+        loginPage.clickShowIcon();  
+    }
+
+    @Then("Password should be visible")
+    public void password_should_be_visible() {
+        Assert.assertEquals(loginPage.getPasswordFieldType(), "text");
     }
 
     // ---------------- LOGIN ----------------
@@ -78,8 +100,6 @@ public class AuthenticationStepDefinition extends AllFunctionality {
         String password = getData(1, 1);
       
 
-       
-
         loginPage.enterEmail(email);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
@@ -87,6 +107,6 @@ public class AuthenticationStepDefinition extends AllFunctionality {
 
     @Then("User should be redirected to dashboard")
     public void user_redirected_dashboard() {
-        Assert.assertFalse(base.driver.getCurrentUrl().contains("login"));
+        Assert.assertFalse(Base.driver.getCurrentUrl().contains("login"));
     }
 }
