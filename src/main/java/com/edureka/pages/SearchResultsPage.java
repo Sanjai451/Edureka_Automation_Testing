@@ -1,19 +1,30 @@
 package com.edureka.pages;
 
+import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.edureka.utility.Base;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResultsPage {
 
-    @FindBy(xpath = "//div[contains(@class,'card giTrackElement')]")
+    private WebDriver driver;
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(xpath = "//div[contains(@class,'giTrackElement')]")
     private List<WebElement> resultList;
 
-    @FindBy(xpath = "(//div[contains(@class,'card giTrackElement')]//h3)[1]")
+    @FindBy(xpath = "(//div[contains(@class,'giTrackElement')]//h3)[1]")
     private WebElement firstResultTitle;
 
     @FindBy(xpath = "(//span[contains(text(),'View Details')])[1]")
@@ -28,12 +39,28 @@ public class SearchResultsPage {
     @FindBy(xpath = "//input[@placeholder='Your mobile number']")
     private WebElement mobileNumberField;
 
-    public boolean areResultsDisplayed() {
+    public boolean areResultsDisplayed(WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+
+        try {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//div[contains(@class,'giTrackElement')]")),
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//*[contains(text(),'did not match')]"))
+            ));
+        } catch (Exception e) {
+            return false;
+        }
+
         return resultList.size() > 0;
     }
 
     public String getFirstResultTitle() {
-        String text = firstResultTitle.getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement element = wait.until(ExpectedConditions.visibilityOf(firstResultTitle));
+
+        String text = element.getText();
 
         if (text == null || text.trim().isEmpty()) {
             throw new RuntimeException("First result title is EMPTY");
@@ -43,7 +70,8 @@ public class SearchResultsPage {
     }
 
     public void clickFirstResult() {
-        viewDetailsBtn.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.elementToBeClickable(viewDetailsBtn)).click();
     }
 
     public boolean isNoResultMessageDisplayed() {
@@ -54,12 +82,8 @@ public class SearchResultsPage {
         return callbackForm.size() > 0;
     }
 
-    public WebElement getMobileNumberField() {
-        return mobileNumberField;
-    }
-
-    public void enterMobileNumber(String mobile) {
-        JavascriptExecutor js = (JavascriptExecutor) Base.driver;
+    public void enterMobileNumber(WebDriver driver, String mobile) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
         js.executeScript("arguments[0].scrollIntoView({block:'center'});", mobileNumberField);
         js.executeScript("arguments[0].value='';", mobileNumberField);
