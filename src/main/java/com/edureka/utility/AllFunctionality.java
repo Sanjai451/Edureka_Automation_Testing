@@ -213,7 +213,7 @@ public class AllFunctionality {
 	
 	// ==================== EXCEL UTILITY =========================
 	
-	private static final String FILE_PATH = ".src/main/resources/eureka.xlsx";
+	private static final String FILE_PATH = "./src/main/resources/eureka.xlsx";
 
 	Workbook workbook;
 	Sheet sheet;
