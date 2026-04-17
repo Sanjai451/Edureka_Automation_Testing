@@ -27,5 +27,8 @@ And fill the details in registration form
 | Name | Email | Phone | Experience |
 | TestUser | sampleuser123@test.com | 9876543210 | Student |
 
+<<<<<<< HEAD
+=======
 When user clicks on "Register Now" button
+>>>>>>> main
 Then registration form or login page should be displayed
