@@ -1,43 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-04-16T12:38:53 IST" name="Default suite" finished-at="2026-04-16T12:38:59 IST" duration-ms="5734">
+  <suite started-at="2026-04-17T08:29:28 IST" name="Default suite" finished-at="2026-04-17T08:29:29 IST" duration-ms="1103">
     <groups>
       <group name="cucumber">
-        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2026-04-16T12:38:53 IST" name="Default test" finished-at="2026-04-16T12:38:59 IST" duration-ms="5734">
+    <test started-at="2026-04-17T08:29:28 IST" name="Default test" finished-at="2026-04-17T08:29:29 IST" duration-ms="1103">
       <class name="com.edureka.testRunner.RunnerIO">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:53 IST" name="setUpClass" finished-at="2026-04-16T12:38:54 IST" duration-ms="487" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:28 IST" name="setUpClass" finished-at="2026-04-17T08:29:28 IST" duration-ms="578" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@7ed7ae]]>
+                <![CDATA[org.testng.TestRunner@31e130bf]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:54 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T12:38:59 IST" duration-ms="5151" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:28 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T08:29:29 IST" duration-ms="365" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["navigate to home page"]]>
+                <![CDATA["Verify all available webinars are displayed on the webinars page"]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA["Add product to cart"]]>
+                <![CDATA["Webinar End-to-End Flow"]]>
               </value>
             </param>
           </params>
+          <exception class="io.cucumber.testng.UndefinedStepException">
+            <message>
+              <![CDATA[The step 'user is on the Edureka homepage' and 5 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user is on the Edureka homepage")
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} from navigation menu")
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be redirected to webinars page")
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("webinars page should load successfully")
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("all upcoming webinars should be displayed")
+public void all_upcoming_webinars_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("all webinars category should be displayed")
+public void all_webinars_category_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[io.cucumber.testng.UndefinedStepException: The step 'user is on the Edureka homepage' and 5 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user is on the Edureka homepage")
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} from navigation menu")
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be redirected to webinars page")
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("webinars page should load successfully")
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("all upcoming webinars should be displayed")
+public void all_upcoming_webinars_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("all webinars category should be displayed")
+public void all_webinars_category_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:9)
+]]>
+            </full-stacktrace>
+          </exception> <!-- io.cucumber.testng.UndefinedStepException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@4a9cc6cb]" started-at="2026-04-16T12:38:59 IST" name="tearDownClass" finished-at="2026-04-16T12:38:59 IST" duration-ms="4" status="PASS">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:29 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T08:29:29 IST" duration-ms="27" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Complete webinar flow from homepage to registration"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Webinar End-to-End Flow"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="io.cucumber.testng.UndefinedStepException">
+            <message>
+              <![CDATA[The step 'user is on the Edureka homepage' and 8 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user is on the Edureka homepage")
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} from navigation menu")
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be redirected to webinars page")
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("webinars page should load successfully")
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user selects the category {string}")
+public void user_selects_the_category(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be navigated to {string} webinar details page")
+public void user_should_be_navigated_to_webinar_details_page(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("fill the details in registration form")
+public void fill_the_details_in_registration_form(io.cucumber.datatable.DataTable dataTable) {
+    // Write code here that turns the phrase above into concrete actions
+    // For automatic transformation, change DataTable to one of
+    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+    //
+    // For other transformations you can register a DataTableType.
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} button")
+public void user_clicks_on_button(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("registration form or login page should be displayed")
+public void registration_form_or_login_page_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[io.cucumber.testng.UndefinedStepException: The step 'user is on the Edureka homepage' and 8 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user is on the Edureka homepage")
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} from navigation menu")
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be redirected to webinars page")
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("webinars page should load successfully")
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user selects the category {string}")
+public void user_selects_the_category(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user should be navigated to {string} webinar details page")
+public void user_should_be_navigated_to_webinar_details_page(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("fill the details in registration form")
+public void fill_the_details_in_registration_form(io.cucumber.datatable.DataTable dataTable) {
+    // Write code here that turns the phrase above into concrete actions
+    // For automatic transformation, change DataTable to one of
+    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
+    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
+    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+    //
+    // For other transformations you can register a DataTableType.
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on {string} button")
+public void user_clicks_on_button(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("registration form or login page should be displayed")
+public void registration_form_or_login_page_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:18)
+]]>
+            </full-stacktrace>
+          </exception> <!-- io.cucumber.testng.UndefinedStepException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:29 IST" name="tearDownClass" finished-at="2026-04-17T08:29:29 IST" duration-ms="6" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->

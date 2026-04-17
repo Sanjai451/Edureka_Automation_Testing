@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-passed">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Admin\AppData\Local\Temp\testng-eclipse-1877482650\testng-customsuite.xml</span>
+                    <span>C:\Users\Admin\AppData\Local\Temp\testng-eclipse--312019499\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,21 +92,26 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">2 methods, 2 failed,   </span>
                   </li>
                   <li>
-                    <span class="method-list-title passed">Passed methods</span>
-                    <span class="show-or-hide-methods passed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods passed suite-Default_suite"> (hide)</a> <!-- hide-methods passed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
                     </span>
-                    <div class="method-list-content passed suite-Default_suite">
+                    <div class="method-list-content failed suite-Default_suite">
                       <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="com.edureka.testRunner.RunnerIO" class="method navigator-link" hash-for-method="runScenario(&quot;navigate to home page&quot;, &quot;Add product to cart&quot;)">runScenario("navigate to home page", "Add product to cart")</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.edureka.testRunner.RunnerIO" class="method navigator-link" hash-for-method="runScenario(&quot;Verify all available webinars are displayed on the webinars page&quot;, &quot;Webinar End-to-End Flow&quot;)">runScenario("Verify all available webinars are displayed on the webinars page", "Webinar End-to-End Flow")</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                    </div> <!-- method-list-content passed suite-Default_suite -->
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="com.edureka.testRunner.RunnerIO" class="method navigator-link" hash-for-method="runScenario(&quot;Complete webinar flow from homepage to registration&quot;, &quot;Webinar End-to-End Flow&quot;)">runScenario("Complete webinar flow from homepage to registration", "Webinar End-to-End Flow")</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -118,28 +123,133 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-passed">
+          <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="passed.png"/>
+              <img src="failed.png"/>
               <span class="class-name">com.edureka.testRunner.RunnerIO</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runScenario(&quot;navigate to home page&quot;, &quot;Add product to cart&quot;)">
-                  </a> <!-- runScenario("navigate to home page", "Add product to cart") -->
+                  <a name="runScenario(&quot;Verify all available webinars are displayed on the webinars page&quot;, &quot;Webinar End-to-End Flow&quot;)">
+                  </a> <!-- runScenario("Verify all available webinars are displayed on the webinars page", "Webinar End-to-End Flow") -->
                   <span class="method-name">runScenario</span>
-                  <span class="parameters">("navigate to home page","Add product to cart")</span>
+                  <span class="parameters">("Verify all available webinars are displayed on the webinars page","Webinar End-to-End Flow")</span>
+                  <div class="stack-trace">io.cucumber.testng.UndefinedStepException: The step &apos;user is on the Edureka homepage&apos; and 5 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given(&quot;user is on the Edureka homepage&quot;)
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When(&quot;user clicks on {string} from navigation menu&quot;)
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;user should be redirected to webinars page&quot;)
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;webinars page should load successfully&quot;)
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;all upcoming webinars should be displayed&quot;)
+public void all_upcoming_webinars_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;all webinars category should be displayed&quot;)
+public void all_webinars_category_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+	at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:9)
+
+</div> <!-- stack-trace -->
+                  <em>
+(Runs Cucumber Scenarios)                  </em>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="runScenario(&quot;Complete webinar flow from homepage to registration&quot;, &quot;Webinar End-to-End Flow&quot;)">
+                  </a> <!-- runScenario("Complete webinar flow from homepage to registration", "Webinar End-to-End Flow") -->
+                  <span class="method-name">runScenario</span>
+                  <span class="parameters">("Complete webinar flow from homepage to registration","Webinar End-to-End Flow")</span>
+                  <div class="stack-trace">io.cucumber.testng.UndefinedStepException: The step &apos;user is on the Edureka homepage&apos; and 8 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given(&quot;user is on the Edureka homepage&quot;)
+public void user_is_on_the_edureka_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When(&quot;user clicks on {string} from navigation menu&quot;)
+public void user_clicks_on_from_navigation_menu(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;user should be redirected to webinars page&quot;)
+public void user_should_be_redirected_to_webinars_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;webinars page should load successfully&quot;)
+public void webinars_page_should_load_successfully() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When(&quot;user selects the category {string}&quot;)
+public void user_selects_the_category(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;user should be navigated to {string} webinar details page&quot;)
+public void user_should_be_navigated_to_webinar_details_page(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;fill the details in registration form&quot;)
+public void fill_the_details_in_registration_form(io.cucumber.datatable.DataTable dataTable) {
+    // Write code here that turns the phrase above into concrete actions
+    // For automatic transformation, change DataTable to one of
+    // E, List&lt;E&gt;, List&lt;List&lt;E&gt;&gt;, List&lt;Map&lt;K,V&gt;&gt;, Map&lt;K,V&gt; or
+    // Map&lt;K, List&lt;V&gt;&gt;. E,K,V must be a String, Integer, Float,
+    // Double, Byte, Short, Long, BigInteger or BigDecimal.
+    //
+    // For other transformations you can register a DataTableType.
+    throw new io.cucumber.java.PendingException();
+}
+@When(&quot;user clicks on {string} button&quot;)
+public void user_clicks_on_button(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then(&quot;registration form or login page should be displayed&quot;)
+public void registration_form_or_login_page_should_be_displayed() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+	at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceEclipse/edureka-automation-testing/./src/test/java/com/edureka/featureFile/webinar.feature:18)
+
+</div> <!-- stack-trace -->
                   <em>
 (Runs Cucumber Scenarios)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-passed -->
+          </div> <!-- suite-Default_suite-class-failed -->
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Admin\AppData\Local\Temp\testng-eclipse-1877482650\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Admin\AppData\Local\Temp\testng-eclipse--312019499\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -196,16 +306,20 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'com.edureka.testRunner.RunnerIO')
-data.setCell(0, 3, 5151);
+data.setCell(0, 3, 365);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'runScenario')
+data.setCell(1, 2, 'com.edureka.testRunner.RunnerIO')
+data.setCell(1, 3, 27);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 392 ms</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -233,16 +347,24 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">com.edureka.testRunner.RunnerIO</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@7ed7ae)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@31e130bf)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">runScenario("navigate to home page", "Add product to cart")</span>
-                <span class="method-start">517 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("Verify all available webinars are displayed on the webinars page", "Webinar End-to-End Flow")</span>
+                <span class="method-start">613 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">runScenario("Complete webinar flow from homepage to registration", "Webinar End-to-End Flow")</span>
+                <span class="method-start">990 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">5674 ms</span>
+                <span class="method-start">1025 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
