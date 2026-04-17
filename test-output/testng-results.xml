@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <<<<<<< HEAD
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-04-17T09:11:33 IST" name="Default suite" finished-at="2026-04-17T09:11:43 IST" duration-ms="10507">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@2de23121]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2026-04-17T09:11:33 IST" name="Default test" finished-at="2026-04-17T09:11:43 IST" duration-ms="10507">
+      <class name="com.edureka.testRunner.RunnerIO">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:com.edureka.testRunner.RunnerIO@2de23121]" started-at="2026-04-17T09:11:33 IST" name="setUpClass" finished-at="2026-04-17T09:11:33 IST" duration-ms="257" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[org.testng.TestRunner@16a9eb2e]]>
+=======
+<<<<<<< HEAD
 <testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
   <reporter-output>
   </reporter-output>
@@ -34,12 +52,20 @@
               <value>
                 <![CDATA[org.testng.TestRunner@2a50b32d]]>
 >>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
+>>>>>>> main
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
+<<<<<<< HEAD
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@2de23121]" started-at="2026-04-17T09:11:33 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T09:11:38 IST" duration-ms="4707" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user registration using DataTable"]]>
+=======
 <<<<<<< HEAD
         <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:28 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T08:29:29 IST" duration-ms="365" status="FAIL">
           <params>
@@ -53,10 +79,14 @@
               <value>
                 <![CDATA["Verify search bar visibility and search panel opening"]]>
 >>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
+>>>>>>> main
               </value>
             </param>
             <param index="1">
               <value>
+<<<<<<< HEAD
+                <![CDATA["Authentication functionality"]]>
+=======
 <<<<<<< HEAD
                 <![CDATA["Webinar End-to-End Flow"]]>
 =======
@@ -290,28 +320,44 @@ at ✽.user is on the Edureka homepage(file:///C:/Users/Admin/SeleniumWorkSpaceE
         <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@26be6ca7]" started-at="2026-04-17T08:29:29 IST" name="tearDownClass" finished-at="2026-04-17T08:29:29 IST" duration-ms="6" status="PASS">
 =======
                 <![CDATA["Search functionality in Edureka"]]>
+>>>>>>> main
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
+<<<<<<< HEAD
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@2de23121]" started-at="2026-04-17T09:11:38 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-17T09:11:43 IST" duration-ms="5482" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Verify user login using Excel data"]]>
+=======
         <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:00 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:17 IST" duration-ms="17217" status="PASS">
           <params>
             <param index="0">
               <value>
                 <![CDATA["Verify partial and case insensitive search using datatable"]]>
+>>>>>>> main
               </value>
             </param>
             <param index="1">
               <value>
+<<<<<<< HEAD
+                <![CDATA["Authentication functionality"]]>
+=======
                 <![CDATA["Search functionality in Edureka"]]>
+>>>>>>> main
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
+<<<<<<< HEAD
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@2de23121]" started-at="2026-04-17T09:11:43 IST" name="tearDownClass" finished-at="2026-04-17T09:11:43 IST" duration-ms="2" status="PASS">
+=======
         <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:17 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2026-04-16T21:52:26 IST" duration-ms="8933" status="PASS">
           <params>
             <param index="0">
@@ -392,6 +438,7 @@ at ✽.system should not accept more than 10 digits for search module(file:///C:
         </test-method> <!-- runScenario -->
         <test-method is-config="true" signature="tearDownClass()[pri:0, instance:com.edureka.testRunner.RunnerIO@43c1b556]" started-at="2026-04-16T21:52:50 IST" name="tearDownClass" finished-at="2026-04-16T21:52:50 IST" duration-ms="3" status="PASS">
 >>>>>>> c4f2eca3f570ab5924c21ee7b350a52ecfb4f7da
+>>>>>>> main
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
