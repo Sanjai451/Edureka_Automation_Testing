@@ -53,7 +53,7 @@ public class TopicOfInterest {
     public void selectTopicsFromExcel() {
 
         boolean result = Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
-
+ 
         Assert.assertTrue(result, "One or more topics not found");
     }
 
