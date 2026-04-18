@@ -52,7 +52,12 @@ public class TopicOfInterest {
     @When("user selects topics from excel")
     public void selectTopicsFromExcel() {
 
+
         Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+
+
+        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+ 
 
     }
 

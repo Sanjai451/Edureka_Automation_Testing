@@ -3,6 +3,7 @@ package com.edureka.utility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+
 import com.edureka.pages.BlogCategoryPage;
 import com.edureka.pages.BlogHomePage;
 import com.edureka.pages.BlogPostPage;
@@ -29,6 +30,8 @@ import com.edureka.pages.ProfessionalDetailsPage;
 import com.edureka.pages.SearchHomePage;
 import com.edureka.pages.SearchResultsPage;
 import com.edureka.pages.SignUpPage;
+
+
 import com.edureka.pages.StudyPlanPage;
 import com.edureka.pages.TopicsOfInterestPage;
 import com.edureka.pages.TopicsSelectionPage;
@@ -115,4 +118,6 @@ public class Pages {
 		studyPlanPage = PageFactory.initElements(driver, StudyPlanPage.class);
 		ordersPage = PageFactory.initElements(driver, OrderPage.class);
 	}
+	 
 }
+
