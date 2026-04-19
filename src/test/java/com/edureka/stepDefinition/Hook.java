@@ -22,20 +22,21 @@ public class Hook extends AllFunctionality {
 	
 	@Before
 	public void setUp() throws IOException {
-		base.driver = new EdgeDriver();
+//		base.driver = new EdgeDriver();
+		base.initDriver();
 		
 		initPropertiesUtility("./src/main/resources/edureka.properties");
 		String URL = getPropertyData("url");
 //		String USERNAME = getPropertyData("username");
 //		String PASSWORD = getPropertyData("password");
 		
-		setMaximizeBrowser(base.driver);
-		implicitlyWait(base.driver, 5);
+		setMaximizeBrowser(base.getDriver());
+		implicitlyWait(base.getDriver(), 5);
 		
 		
-		base.driver.get(URL);
+		base.getDriver().get(URL);
 		
-		Pages.loadAllPages(base.driver);
+		Pages.loadAllPages(base.getDriver());
 		
 	}
 	
@@ -43,5 +44,6 @@ public class Hook extends AllFunctionality {
 	public void tearDown(){
 
 //		base.driver.quit();
+		base.getDriver().quit();
 	}
 }

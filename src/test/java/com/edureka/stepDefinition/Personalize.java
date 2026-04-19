@@ -28,17 +28,17 @@ public class Personalize {
 
     @When("user clicks edit for user details")
     public void click_edit_user_details() {
-        Pages.myProfile.clickUserDetailsEdit();
+        Pages.get().myProfile.clickUserDetailsEdit();
     }
 
     @When("user clicks edit for learning goals")
     public void click_edit_learning_goals() {
-        Pages.myProfile.clickLearningGoalsEdit();
+        Pages.get().myProfile.clickLearningGoalsEdit();
     }
 
     @When("user clicks edit for study plan")
     public void click_edit_study_plan() {
-        Pages.myProfile.clickStudyPlanEdit();
+        Pages.get().myProfile.clickStudyPlanEdit();
     }
 
     // ================= USER DETAILS =================
@@ -64,50 +64,50 @@ public class Personalize {
     public void fill_user_details() {
 
     	// 1. Name (top field)
-    	Pages.userDetailsPage.enterFullName(name);
+    	Pages.get().userDetailsPage.enterFullName(name);
 
     	// 2. Experience (FIRST dropdown in UI)
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getExperienceDropdown(), experience);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getExperienceDropdown(), experience);
 
     	// 3. Industry (SECOND dropdown)
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getIndustryDropdown(), industry);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getIndustryDropdown(), industry);
 
     	// 4. Designation (after dropdowns)
-    	Pages.userDetailsPage.enterDesignation(designation);
+    	Pages.get().userDetailsPage.enterDesignation(designation);
 
     	// 5. Current Timezone
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getCurrentTimezoneDropdown(), timezone);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getCurrentTimezoneDropdown(), timezone);
 
     	// 6. Preferred Timezone
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getPreferredTimezoneDropdown(), prefTimezone);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getPreferredTimezoneDropdown(), prefTimezone);
 
     	// 7. Weekdays (From → To)
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getWeekdaysFromDropdown(), weekFrom);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getWeekdaysFromDropdown(), weekFrom);
 
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getWeekdaysToDropdown(), weekTo);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getWeekdaysToDropdown(), weekTo);
 
     	// 8. Weekends (From → To)
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getWeekendsFromDropdown(), weekendFrom);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getWeekendsFromDropdown(), weekendFrom);
 
-    	Pages.userDetailsPage.selectFromDropdown(
-    	        Pages.userDetailsPage.getWeekendsToDropdown(), weekendTo);
+    	Pages.get().userDetailsPage.selectFromDropdown(
+    	        Pages.get().userDetailsPage.getWeekendsToDropdown(), weekendTo);
     }
 
     @When("user clicks Save and Continue")
     public void click_save_continue() {
-        Pages.userDetailsPage.clickSaveAndContinue();
+        Pages.get().userDetailsPage.clickSaveAndContinue();
     }
 
     @Then("user should be navigated to Learning Goals page")
     public void validate_learning_page() {
-        Assert.assertTrue(Pages.learningGoalsPage.getSaveAndContinueButton().isDisplayed());
+        Assert.assertTrue(Pages.get().learningGoalsPage.getSaveAndContinueButton().isDisplayed());
     }
 
     // ================= LEARNING GOALS =================
@@ -120,12 +120,12 @@ public class Personalize {
 
     @When("user selects learning goal from excel")
     public void select_learning_goal() {
-        Pages.learningGoalsPage.selectLearningGoal(learningGoal);
+        Pages.get().learningGoalsPage.selectLearningGoal(learningGoal);
     }
 
     @Then("user should be navigated to Study Plan page")
     public void validate_study_plan_page() {
-        Assert.assertTrue(Pages.studyPlanPage.getSaveButton().isDisplayed());
+        Assert.assertTrue(Pages.get().studyPlanPage.getSaveButton().isDisplayed());
     }
 
     // ================= STUDY PLAN =================
@@ -146,22 +146,22 @@ public class Personalize {
 
     @When("user fills study plan from excel")
     public void fill_study_plan1() {
-        Pages.studyPlanPage.fillStudyPlan(day1, from1, to1);
+        Pages.get().studyPlanPage.fillStudyPlan(day1, from1, to1);
     }
 
 //    @When("user adds another study plan")
 //    public void add_another_plan() {
-//        Pages.studyPlanPage.clickAddDay();
+//        Pages.get().studyPlanPage.clickAddDay();
 //    }
 //
 //    @When("user fills second study plan from excel")
 //    public void fill_study_plan2() {
-//        Pages.studyPlanPage.fillStudyPlan(day2, from2, to2);
+//        Pages.get().studyPlanPage.fillStudyPlan(day2, from2, to2);
 //    }
 
     @When("user clicks Save")
     public void click_save() {
-        Pages.studyPlanPage.clickSave();
+        Pages.get().studyPlanPage.clickSave();
     }
 
     // ================= FINAL VALIDATION =================
@@ -169,7 +169,7 @@ public class Personalize {
     @Then("all entered data should be displayed correctly in profile")
     public void validate_profile() {
 
-        String actualName = Pages.myProfile.getName()
+        String actualName = Pages.get().myProfile.getName()
                 .replace(".", "")
                 .trim();
 
@@ -181,7 +181,7 @@ public class Personalize {
         );
 
         Assert.assertTrue(
-            Pages.myProfile.verifyLearningGoal(learningGoal),
+            Pages.get().myProfile.verifyLearningGoal(learningGoal),
             "Learning goal mismatch"
         );
 
@@ -197,13 +197,13 @@ public class Personalize {
     @When("user enters invalid designation from excel")
     public void enter_invalid_designation() {
 
-        Pages.userDetailsPage.enterDesignation(invalidDesignation);
+        Pages.get().userDetailsPage.enterDesignation(invalidDesignation);
     }
 
    
     @Given("user clicks on Personalize tab")
     public void user_clicks_on_personalize_tab() {
-        Pages.myProfile.clickPersonalize();
+        Pages.get().myProfile.clickPersonalize();
     }
     @Then("system should not accept invalid designation")
     public void invalid_designation_should_not_be_accepted() {
@@ -211,7 +211,7 @@ public class Personalize {
         boolean isNavigated;
 
         try {
-            isNavigated = Pages.myProfile.getUserDetailsEdit().isDisplayed();
+            isNavigated = Pages.get().myProfile.getUserDetailsEdit().isDisplayed();
         } catch (Exception e) {
             isNavigated = false;
         }

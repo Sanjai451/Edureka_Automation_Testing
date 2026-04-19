@@ -9,6 +9,11 @@ import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
 public class SignUpPage {
+	
+	Base base;
+	public SignUpPage(Base base){
+		this.base = base;
+	}
 
     @FindBy(xpath = "//button[.='Sign up']")
     WebElement signupLink;
@@ -32,7 +37,7 @@ public class SignUpPage {
 
      
 
-        JavascriptExecutor js = (JavascriptExecutor) Base.driver;
+        JavascriptExecutor js = (JavascriptExecutor) base.getDriver();
 
         js.executeScript("arguments[0].scrollIntoView(true);", signupLink);
         js.executeScript("arguments[0].click();", signupLink);

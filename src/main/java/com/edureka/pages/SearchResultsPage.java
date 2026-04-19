@@ -9,6 +9,11 @@ import org.openqa.selenium.support.FindBy;
 import com.edureka.utility.Base;
 
 public class SearchResultsPage {
+	
+	Base base;
+	public SearchResultsPage(Base base) {
+		this.base = base;
+	}
 
     @FindBy(xpath = "//div[contains(@class,'card giTrackElement')]")
     private List<WebElement> resultList;
@@ -59,7 +64,7 @@ public class SearchResultsPage {
     }
 
     public void enterMobileNumber(String mobile) {
-        JavascriptExecutor js = (JavascriptExecutor) Base.driver;
+        JavascriptExecutor js = (JavascriptExecutor) base.getDriver();
 
         js.executeScript("arguments[0].scrollIntoView({block:'center'});", mobileNumberField);
         js.executeScript("arguments[0].value='';", mobileNumberField);

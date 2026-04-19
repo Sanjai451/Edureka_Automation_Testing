@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchHomePage {
+	
+	
 
     @FindBy(xpath = "//div[contains(@class,'navbar_search_click_bx')]")
     private WebElement searchTrigger;
