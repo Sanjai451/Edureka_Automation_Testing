@@ -40,7 +40,18 @@ public class HomePageTest extends AllFunctionality{
 	public void the_user_is_on_the_homepage() {
 		System.out.println("Current URL : " + getUrl(base.driver) + " From home page Checking message");
 	}
-
+	
+	@Given("User needs to login to view forum icon on home page")
+	public void user_needs_to_login_to_view_forum_icon_on_home_page() {
+		Pages.loginPage.openLoginPopup();
+	    Pages.loginPage.enterEmail("sanjai6369kumar@gmail.com");
+	    Pages.loginPage.enterPassword("Password");
+	    Pages.loginPage.clickLogin();
+	    
+	    try {Thread.sleep(4000);} catch (Exception e) {}
+	    
+	}
+	
 	@When("the user clicks on {string} in the navigation")
 	public void the_user_clicks_on_in_the_navigation(String string) {
 		Pages.homePage.clickOnButtonFromNavbar(base.driver, string);
@@ -75,6 +86,22 @@ public class HomePageTest extends AllFunctionality{
 	@Then("the page should go to {string}")
 	public void the_page_should_reload_to(String string) {
 		assertTrue(getUrl(base.driver).contains(string));
+	}
+	
+	@Given("user logs in for performing action in community page")
+	public void user_logs_in_for_performing_action_in_community_page() {
+		Pages.loginPage.openLoginPopup();
+	    Pages.loginPage.enterEmail("sanjai6369kumar@gmail.com");
+	    Pages.loginPage.enterPassword("Password");
+	    
+	    try {
+			Thread.sleep(1000);
+		} catch (Exception e) {}
+	    
+	    Pages.loginPage.clickLogin();
+	    
+	    try {Thread.sleep(5000);} catch (Exception e) {}
+	    
 	}
 
 }

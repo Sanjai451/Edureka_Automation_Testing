@@ -3,6 +3,7 @@ package com.edureka.utility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import com.edureka.pages.AllCoursePage;
 import com.edureka.pages.BlogCategoryPage;
 import com.edureka.pages.BlogHomePage;
 import com.edureka.pages.BlogPostPage;
@@ -22,6 +23,7 @@ import com.edureka.pages.LearningGoalsPage;
 import com.edureka.pages.WebinarCategoryPage;
 import com.edureka.pages.WebinarHomePage;
 import com.edureka.pages.LoginPage;
+import com.edureka.pages.MasterProgram;
 import com.edureka.pages.MyProfile;
 import com.edureka.pages.OrderPage;
 import com.edureka.pages.OtherDetailsPage;
@@ -32,6 +34,7 @@ import com.edureka.pages.SignUpPage;
 import com.edureka.pages.StudyPlanPage;
 import com.edureka.pages.TopicsOfInterestPage;
 import com.edureka.pages.TopicsSelectionPage;
+import com.edureka.pages.TrainingCourse;
 import com.edureka.pages.UserDetailsPage;
 import com.edureka.pages.WalletPage;
 
@@ -72,6 +75,10 @@ public class Pages {
 	public static LearningGoalsPage learningGoalsPage;
 	public static StudyPlanPage studyPlanPage;
 	public static OrderPage ordersPage;
+	
+	public static AllCoursePage allCoursePage;
+	public static MasterProgram masterProgram;
+	public static TrainingCourse trainingCourse;
 	
 	
 	public static void loadAllPages(WebDriver driver) {
@@ -114,5 +121,9 @@ public class Pages {
 		learningGoalsPage = PageFactory.initElements(driver, LearningGoalsPage.class);
 		studyPlanPage = PageFactory.initElements(driver, StudyPlanPage.class);
 		ordersPage = PageFactory.initElements(driver, OrderPage.class);
+		
+		allCoursePage = PageFactory.initElements(driver, AllCoursePage.class);
+		masterProgram = PageFactory.initElements(driver, MasterProgram.class);
+		trainingCourse = PageFactory.initElements(driver, TrainingCourse.class);
 	}
 }

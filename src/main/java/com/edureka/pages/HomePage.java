@@ -1,9 +1,14 @@
 package com.edureka.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
     
@@ -54,8 +59,18 @@ public class HomePage {
     @FindBy(css = "[href='https://www.edureka.co/community']")
     private WebElement communityLinkFooter;
     
-    public void goToCommunityPage() {
-    	communityLinkFooter.click();
+    @FindBy(linkText = "All Courses")
+    private WebElement allCourses;
+    
+    public void goToCommunityPage(WebDriver driver) {
+    	driver.get("https://www.edureka.co/community");
+//    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//    	WebElement answerSection = wait.until(
+//                ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[.='RESOURCES']"))
+//            );
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", answerSection);
+//        
+//        communityLinkFooter.click();
     }
     
     
@@ -126,6 +141,10 @@ public class HomePage {
 		else if(value.equals("community")) {
 			clickOnCommunityFromNavbar();
 		}
+	}
+	
+	public void clickAllCourses() {
+		allCourses.click();
 	}
 	
 	public void clickOnCommunityFromNavbar() {
