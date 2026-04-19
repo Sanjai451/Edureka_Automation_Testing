@@ -1,5 +1,7 @@
 package com.edureka.stepDefinition;
 
+import org.openqa.selenium.WebDriver;
+
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
@@ -17,7 +19,8 @@ public class CommunityQuestionTests extends AllFunctionality {
 	
 	@When("user navigates to Community section from footer link")
 	public void user_navigates_to_community_section_from_footer_link() {
-		Pages.homePage.goToCommunityPage();
+		Pages.homePage.goToCommunityPage(base.driver);
+//		Pages.communityHomePage.performLogin("sanjai6369kumar@gmail.com", "Password");
 	}
 
 	@When("user clicks on question {string}")
@@ -42,7 +45,7 @@ public class CommunityQuestionTests extends AllFunctionality {
 
 	@When("user clicks on Ask a Question")
 	public void user_clicks_on_ask_a_question() {
-		Pages.communityHomePage.clickAskQuestion();
+		Pages.communityHomePage.clickAskQuestion(base.driver);		
 	}
 
 	@When("user enters question details")
@@ -54,7 +57,13 @@ public class CommunityQuestionTests extends AllFunctionality {
 		// Double, Byte, Short, Long, BigInteger or BigDecimal.
 		
 		// here it will fill and submit 
-		Pages.communityAskQuestion.fillQuestionDetails(null, null, null);
+		
+		init("CommunityQuestions");
+		String title = getData(1, 0);
+		String category = getData(1, 1);
+		String tag = getData(0, 3);
+		
+		Pages.communityAskQuestion.fillQuestionDetails(base.driver, title, category, tag);
 	}
 
 	@When("user submits the question")

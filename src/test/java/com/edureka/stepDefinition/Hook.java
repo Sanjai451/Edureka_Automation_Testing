@@ -3,6 +3,7 @@ package com.edureka.stepDefinition;
 import java.io.IOException;
 
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
@@ -41,6 +42,6 @@ public class Hook extends AllFunctionality {
 	@After
 	public void tearDown(){
 
-		base.driver.quit();
+//		base.driver.quit();
 	}
 }

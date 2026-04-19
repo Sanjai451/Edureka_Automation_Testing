@@ -46,6 +46,9 @@ public class WebinarHomePage {
     @FindBy(css = "h1")
     private WebElement pageHeading;
     
+    @FindBy(xpath = "//h2[contains(text(),'Upcoming Webinars')]")
+    private List<WebElement> upComingWebinarTitle;
+    
     /** All individual upcoming webinar card headings */
     @FindBy(xpath = "//h2[contains(text(),'Upcoming Webinars')]/following-sibling::div//h3")
     private List<WebElement> upcomingWebinarTitles;
@@ -114,6 +117,10 @@ public class WebinarHomePage {
         return driver.getTitle();
     }
     
+    public List<WebElement> getUpcomingWebinarsTitles(){
+    	return upComingWebinarTitle;
+    }
+    
     public void printAllUpcomingWebinarTitles() {
         wait.until(ExpectedConditions.visibilityOfAllElements(upcomingWebinarTitles));
         upcomingWebinarTitles.stream()
@@ -124,6 +131,10 @@ public class WebinarHomePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(allCategories));
         allCategories.stream()
             .forEach(e -> System.out.println(e.getText().trim()));
+    }
+    
+    public List<WebElement> getAllWebinarsCategory() {
+    	return allCategories;
     }
     
     public void clickOnWebinarCategory(WebDriver driver, String value) {
