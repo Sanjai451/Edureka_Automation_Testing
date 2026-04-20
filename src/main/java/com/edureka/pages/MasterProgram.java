@@ -1,33 +1,42 @@
 package com.edureka.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class MasterProgram {
 
-@FindBy(xpath = "//button[.='Download Curriculum']")
-private WebElement downLoadCurriculumButton;
+    WebDriver driver;
 
-@FindBy(xpath = "//div[@class='topbanner_wishlist__3disw null']")
-private WebElement addToWishlistButton;
+    public MasterProgram(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-@FindBy(xpath = "//div[@class='topbanner_share__1G3OJ']")
-private WebElement shareButton;
+    @FindBy(xpath = "//button[.='Download Curriculum']")
+    private WebElement downLoadCurriculumButton;
 
-@FindBy(id = "formEmail-requestbox")
-private WebElement talkToAdvisorEmailInput;
+    @FindBy(xpath = "//div[contains(@class,'wishlist')]")
+    private WebElement addToWishlistButton;
 
-@FindBy(id = "formPhoneNumber-requestbox")
-private WebElement talkToAdvisorPhoneInput;
+    @FindBy(xpath = "//div[contains(@class,'share')]")
+    private WebElement shareButton;
 
-@FindBy(xpath = "//button[.='Request a Call']")
-private WebElement requestACallButton;
+    @FindBy(id = "formEmail-requestbox")
+    private WebElement talkToAdvisorEmailInput;
 
-public void addToWishlist() {
-addToWishlistButton.click();
-}
+    @FindBy(id = "formPhoneNumber-requestbox")
+    private WebElement talkToAdvisorPhoneInput;
 
-public void clickDownloadCurriculum() {
-downLoadCurriculumButton.click();
-}
+    @FindBy(xpath = "//button[.='Request a Call']")
+    private WebElement requestACallButton;
+
+    public void addToWishlist() {
+        addToWishlistButton.click();
+    }
+
+    public void clickDownloadCurriculum() {
+        downLoadCurriculumButton.click();
+    }
 }
