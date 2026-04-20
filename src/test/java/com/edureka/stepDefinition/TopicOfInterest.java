@@ -26,13 +26,13 @@ public class TopicOfInterest extends AllFunctionality {
     // NAVIGATION
     @Given("user clicks on Topics of Interest tab")
     public void clickTopicsTab() {
-        Pages.myProfile.clickTopicsOfInterest();
+        Pages.get().myProfile.clickTopicsOfInterest();
     }
 
     // CLICK ADD NOW
     @When("user clicks Add Now button")
     public void clickAddNow() {
-        Pages.topicsOfInterestPage.clickAddNow();
+        Pages.get().topicsOfInterestPage.clickAddNow();
     }
 
     // READ FROM EXCEL
@@ -50,7 +50,7 @@ public class TopicOfInterest extends AllFunctionality {
     @When("user selects topics from excel")
     public void selectTopicsFromExcel() {
 
-        boolean result = Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+    	boolean result = Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
         Assert.assertTrue(result, "One or more topics not found");
     }
@@ -58,7 +58,7 @@ public class TopicOfInterest extends AllFunctionality {
     // SAVE
     @When("user clicks Save and Continue in Topics")
     public void clickSaveContinueTopics() {
-        Pages.topicsSelectionPage.clickSaveAndContinue();
+        Pages.get().topicsSelectionPage.clickSaveAndContinue();
     }
 
     // VALIDATE SAVE
@@ -66,7 +66,7 @@ public class TopicOfInterest extends AllFunctionality {
     public void topicsSaved() {
 
         Assert.assertTrue(
-                Pages.topicsOfInterestPage.isAnyTopicSelected(),
+                Pages.get().topicsOfInterestPage.isAnyTopicSelected(),
                 "Topics not saved"
         );
     }
@@ -75,11 +75,11 @@ public class TopicOfInterest extends AllFunctionality {
     @Then("topics should persist after page refresh")
     public void verifyPersistence() {
 
-        topicsBeforeRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
+        topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
         base.getDriver().navigate().refresh();
 
-        String afterRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
+        String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
         Assert.assertEquals(
                 afterRefresh,
@@ -87,4 +87,4 @@ public class TopicOfInterest extends AllFunctionality {
                 "Topics not persisted after refresh"
         );
     }
-}s
+}

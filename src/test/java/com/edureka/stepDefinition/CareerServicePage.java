@@ -49,7 +49,7 @@ public class CareerServicePage extends AllFunctionality {
 		// Enter Password
 		WebElement password = base.getDriver().findElement(By.id("loginPassword"));
 		password.clear();
-		password.sendKeys("NewPass@123");
+		password.sendKeys("Password@123");
 
 		// Click LOGIN button
 		base.getDriver().findElement(By.xpath("//button[text()='LOG IN']")).click();
@@ -57,21 +57,21 @@ public class CareerServicePage extends AllFunctionality {
 
 	@Given("user navigates to My Profile")
 	public void goToProfile() {
-		Pages.dashboard.navigateToMyProfile();
+		Pages.get().dashboard.navigateToMyProfile();
 	}
 
 	// NAVIGATION
 
 	@Given("user clicks on Career Services tab")
 	public void clickCareerServices() {
-		Pages.myProfile.clickCareerServices();
+		Pages.get().myProfile.clickCareerServices();
 	}
 
 	// PROFESSIONAL
 
 	@When("user clicks Professional Details edit button")
 	public void clickProfessionalEdit() {
-		Pages.careerServicePage.clickProfessionalDetailsEdit();
+		Pages.get().careerServicePage.clickProfessionalDetailsEdit();
 	}
 
 	@When("user reads professional details from excel")
@@ -90,16 +90,16 @@ public class CareerServicePage extends AllFunctionality {
 	@When("user enters professional details from excel")
 	public void enterProfessionalData() {
 
-		Pages.professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
+		Pages.get().professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
 	}
 
 	// NEXT BUTTON
 
 	@When("user clicks Next button")
 	public void clickNext() {
-		waitForElementClickable(base.getDriver(), Pages.professionalDetailsPage.getNextButton(), 10);
+		waitForElementClickable(base.getDriver(), Pages.get().professionalDetailsPage.getNextButton(), 10);
 
-		Pages.professionalDetailsPage.getNextButton().click();
+		Pages.get().professionalDetailsPage.getNextButton().click();
 		waitForLoaderToDisappear(base.getDriver());
 	}
 
@@ -123,7 +123,8 @@ public class CareerServicePage extends AllFunctionality {
 
 		waitForLoaderToDisappear(base.getDriver()); // ADD THIS
 
-		Pages.careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
+		Pages.get().careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
+
 	}
 
 	// OTHER DETAILS
@@ -148,26 +149,31 @@ public class CareerServicePage extends AllFunctionality {
 	@When("user enters other details from excel")
 	public void enterOtherDetails() {
 
-		Pages.otherDetailsPage.fillDegree(degree, institute, smonth, syear, emonth, eyear);
+		Pages.get().otherDetailsPage.fillDegree(degree, institute, smonth, syear, emonth, eyear);
 
-		Pages.otherDetailsPage.fillCertification(certName, certInstitute, smonth, syear, emonth, eyear);
+		Pages.get().otherDetailsPage.fillCertification(certName, certInstitute, smonth, syear, emonth, eyear);
 	}
 
 	@When("user clicks Save button")
 	public void clickSave() {
 
-		waitForElementClickable(base.getDriver(), Pages.otherDetailsPage.getSaveButton(), 10);
+		waitForElementClickable(base.getDriver(), Pages.get().otherDetailsPage.getSaveButton(), 10);
 
-		Pages.otherDetailsPage.getSaveButton().click();
+		Pages.get().otherDetailsPage.getSaveButton().click();
 	}
 
-	// FINAL VALIDATION
+	@Then("all career service details should be saved successfully")
+	public void validateSaved() {
 
+		Assert.assertTrue(Pages.get().careerServicePage.getCompanyName().isDisplayed(), "Data not saved");
+	}
+
+	
 	@Then("updated career service details should be displayed correctly")
 	public void validateAllData() {
-		Pages.myProfile.getCareerServicesTab().click();
+		Pages.get().myProfile.getCareerServicesTab().click();
 		Assert.assertTrue(
-				Pages.careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, job, location,
+				Pages.get().careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, job, location,
 						relocate ? "Yes" : "No", employment, ctc, preferredLocation, institute),
 				"Career Service Data Mismatch");
 	}

@@ -1,29 +1,44 @@
 package com.edureka.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
+
+    WebDriver driver;
+
+    // Constructor
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
     
     @FindBy(xpath = "//input[@placeholder='Search courses']")
     WebElement homeSearchBar;
     
     @FindBy(xpath = "//span[contains(@class,'user_name')]")
-    WebElement profileIcon;
+    WebElement profileIcon1;
 
     @FindBy(xpath = "//a[text()='My Profile']")
-    WebElement myProfile;
+    WebElement myProfile1;
 
     @FindBy(xpath = "//a[text()='My Orders']")
-    WebElement myOrders;
+    WebElement myOrders1;
 
     @FindBy(xpath = "//a[text()='My Wishlist']")
-    WebElement myWishlist;
+    WebElement myWishlist1;
 
     @FindBy(xpath = "//a[text()='Change Password']")
-    WebElement changePassword;
+    WebElement changePassword1;
     
     @FindBy(xpath = "//button[.='Resources']")
     WebElement resourceIcon;
@@ -54,8 +69,18 @@ public class HomePage {
     @FindBy(css = "[href='https://www.edureka.co/community']")
     private WebElement communityLinkFooter;
     
-    public void goToCommunityPage() {
-    	communityLinkFooter.click();
+    @FindBy(linkText = "All Courses")
+    private WebElement allCourses;
+    
+    public void goToCommunityPage(WebDriver driver) {
+    	driver.get("https://www.edureka.co/community");
+//    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//    	WebElement answerSection = wait.until(
+//                ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[.='RESOURCES']"))
+//            );
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", answerSection);
+//        
+//        communityLinkFooter.click();
     }
     
     
@@ -84,23 +109,23 @@ public class HomePage {
 //	}
 	
 	public void openProfileMenu() {
-	    profileIcon.click();
+	    profileIcon1.click();
 	}
 
 	public void clickMyProfile() {
-	    myProfile.click();
+	    myProfile1.click();
 	}
 
 	public void clickMyOrders() {
-	    myOrders.click();
+	    myOrders1.click();
 	}
 
 	public void clickMyWishlist() {
-	    myWishlist.click();
+	    myWishlist1.click();
 	}
 
 	public void clickChangePassword() {
-	    changePassword.click();
+	    changePassword1.click();
 	}
 
     public void clickOnCategory(WebDriver driver, String value) {
@@ -126,6 +151,10 @@ public class HomePage {
 		else if(value.equals("community")) {
 			clickOnCommunityFromNavbar();
 		}
+	}
+	
+	public void clickAllCourses() {
+		allCourses.click();
 	}
 	
 	public void clickOnCommunityFromNavbar() {

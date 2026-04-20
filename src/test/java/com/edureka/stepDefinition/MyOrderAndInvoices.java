@@ -22,7 +22,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
     // NAVIGATION
     @Given("user clicks on My Orders and Invoices")
     public void user_clicks_on_my_orders_and_invoices() {
-        Pages.myProfile.clickMyOrders();
+        Pages.get().myProfile.clickMyOrders();
     }
 
     // NO COURSES MESSAGE
@@ -30,7 +30,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
     @Then("no courses message should be displayed")
     public void no_courses_message_should_be_displayed() {
         Assert.assertTrue(
-                Pages.ordersPage.isNoCoursesMessageDisplayed(),
+                Pages.get().ordersPage.isNoCoursesMessageDisplayed(),
                 "No courses message not displayed"
         );
     }
@@ -38,7 +38,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
     @Then("message should indicate no enrolled courses")
     public void message_should_indicate_no_enrolled_courses() {
 
-        String message = Pages.ordersPage.getNoCoursesMessageText();
+        String message = Pages.get().ordersPage.getNoCoursesMessageText();
 
         Assert.assertTrue(
                 message.toLowerCase().contains("not enrolled"),
@@ -50,7 +50,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
 
     @When("user clicks Browse All Courses button")
     public void user_clicks_browse_all_courses_button() {
-        Pages.ordersPage.clickBrowseCourses();
+        Pages.get().ordersPage.clickBrowseCourses();
     }
 
     // REDIRECTION

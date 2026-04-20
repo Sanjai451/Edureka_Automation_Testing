@@ -1,5 +1,7 @@
 package com.edureka.stepDefinition;
 
+import org.openqa.selenium.WebDriver;
+
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
@@ -17,12 +19,13 @@ public class CommunityQuestionTests extends AllFunctionality {
 	
 	@When("user navigates to Community section from footer link")
 	public void user_navigates_to_community_section_from_footer_link() {
-		Pages.homePage.goToCommunityPage();
+		Pages.get().homePage.goToCommunityPage(base.getDriver());
+//		Pages.get().communityHomePage.performLogin("sanjai6369kumar@gmail.com", "Password");
 	}
 
 	@When("user clicks on question {string}")
 	public void user_clicks_on_question(String question) {
-		Pages.communityHomePage.clickOnQuestion(base.driver, question);
+		Pages.get().communityHomePage.clickOnQuestion(base.getDriver(), question);
 	}
 
 	@When("user should see the question fully")
@@ -32,7 +35,7 @@ public class CommunityQuestionTests extends AllFunctionality {
 
 	@When("user add comment for the question")
 	public void user_add_comment_for_the_question() {
-		Pages.communityQuestionPage.addCommentForQuestion(base.driver, "Test comment");
+		Pages.get().communityQuestionPage.addCommentForQuestion(base.getDriver(), "Test comment");
 	}
 
 	@Then("verify the comment is added")
@@ -42,7 +45,7 @@ public class CommunityQuestionTests extends AllFunctionality {
 
 	@When("user clicks on Ask a Question")
 	public void user_clicks_on_ask_a_question() {
-		Pages.communityHomePage.clickAskQuestion();
+		Pages.get().communityHomePage.clickAskQuestion(base.getDriver());		
 	}
 
 	@When("user enters question details")
@@ -54,7 +57,13 @@ public class CommunityQuestionTests extends AllFunctionality {
 		// Double, Byte, Short, Long, BigInteger or BigDecimal.
 		
 		// here it will fill and submit 
-		Pages.communityAskQuestion.fillQuestionDetails(null, null, null);
+		
+		init("CommunityQuestions");
+		String title = getData(1, 0);
+		String category = getData(1, 1);
+		String tag = getData(0, 3);
+		
+		Pages.get().communityAskQuestion.fillQuestionDetails(base.getDriver(), title, category, tag);
 	}
 
 	@When("user submits the question")
@@ -64,13 +73,13 @@ public class CommunityQuestionTests extends AllFunctionality {
 
 	@Then("question should be posted successfully in the forum")
 	public void question_should_be_posted_successfully_in_the_forum() {
-		String titleString = Pages.communityQuestionAddedPage.getTitleOfQuestion();
+		String titleString = Pages.get().communityQuestionAddedPage.getTitleOfQuestion();
 		System.out.println("Question Added : " + titleString);
 	}
 	
 	@When("user add answer for the question")
 	public void user_add_answer_for_the_question() {
-		Pages.communityQuestionPage.addAnswerForQuestion(base.driver, "Test Answer");
+		Pages.get().communityQuestionPage.addAnswerForQuestion(base.getDriver(), "Test Answer");
 	}
 
 	@Then("verify the answer is added")
