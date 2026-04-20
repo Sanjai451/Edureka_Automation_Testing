@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.testng.Assert;
 
+import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class MyOrderAndInvoices {
+public class MyOrderAndInvoices extends AllFunctionality {
 
     private Base base;
 
@@ -60,7 +61,7 @@ public class MyOrderAndInvoices {
         List<List<String>> data = dataTable.asLists();
         String expectedUrlPart = data.get(1).get(0);
 
-        String currentUrl = base.driver.getCurrentUrl();
+        String currentUrl = base.getDriver().getCurrentUrl();
 
         System.out.println("Current URL: " + currentUrl);
 

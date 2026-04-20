@@ -4,6 +4,7 @@ import io.cucumber.java.en.*;
 import io.cucumber.datatable.DataTable;
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import com.edureka.utility.Base;
@@ -13,12 +14,13 @@ import com.edureka.utility.AllFunctionality;
 public class ChangePassword extends AllFunctionality {
 
     private Base base;
+    private Pages pages;
 
     public ChangePassword(Base base) {
         this.base = base;
+//        page = new Pages(base.getDriver());
     }
 
-    AllFunctionality util = new AllFunctionality();
 
     String existingPassword;
     String newPassword;
@@ -76,8 +78,7 @@ public class ChangePassword extends AllFunctionality {
     @Then("password should be updated successfully")
     public void password_should_be_updated_successfully() {
 
-//        String pageSource = util.getPageSource(base.driver);
-    	String pageSource = getUrl(base.driver);
+        String pageSource = getPageSource(base.getDriver());
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains("success"),
@@ -89,8 +90,7 @@ public class ChangePassword extends AllFunctionality {
     @Then("{string} should be displayed")
     public void should_be_displayed(String message) {
 
-//        String pageSource = util.getPageSource(base.driver);
-    	String pageSource = getUrl(base.driver);
+        String pageSource = getPageSource(base.getDriver());
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains(message.toLowerCase()),

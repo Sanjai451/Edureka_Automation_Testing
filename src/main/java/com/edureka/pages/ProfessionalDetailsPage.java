@@ -26,10 +26,10 @@ public class ProfessionalDetailsPage {
     @FindBy(name = "currentIndustry")
     private WebElement currentIndustryDropdown;
 
-    @FindBy(id = "resume")
+    @FindBy(css = "[type='file']")
     private WebElement resumeUploadInput;
 
-    @FindBy(xpath = "//button[@type='submit' and contains(text(),'Next')]")
+    @FindBy(xpath = "//button[text()='Next']")
     private WebElement nextButton;
 
     // Getters
@@ -69,45 +69,45 @@ public class ProfessionalDetailsPage {
     // Business methods
 
     public void clickProfessionalDetailsTab() {
-        professionalDetailsTab.click();
+        getProfessionalDetailsTab().click();
     }
 
     public void enterCompanyName(String companyName) {
-        companyNameInput.clear();
-        companyNameInput.sendKeys(companyName);
+        getCompanyNameInput().clear();
+        getCompanyNameInput().sendKeys(companyName);
     }
 
     public void enterLinkedin(String linkedin) {
-        linkedinInput.clear();
-        linkedinInput.sendKeys(linkedin);
+        getLinkedinInput().clear();
+        getLinkedinInput().sendKeys(linkedin);
     }
 
     public void enterSkills(String skills) {
-        skillsInput.clear();
-        skillsInput.sendKeys(skills);
+        getSkillsInput().clear();
+        getSkillsInput().sendKeys(skills);
     }
 
     public void selectJobLevel(String value) {
-        Select select = new Select(currentJobLevelDropdown);
-        select.selectByVisibleText(value);
+        new Select(getCurrentJobLevelDropdown()).selectByVisibleText(value);
     }
 
     public void selectIndustry(String value) {
-        Select select = new Select(currentIndustryDropdown);
-        select.selectByVisibleText(value);
+        new Select(getCurrentIndustryDropdown()).selectByVisibleText(value);
     }
 
     public void uploadResume(String filePath) {
-        resumeUploadInput.sendKeys(filePath);
+        getResumeUploadInput().sendKeys(filePath);
     }
 
     public void clickNextButton() {
-        if (nextButton.isEnabled()) {
-            nextButton.click();
+        if (getNextButton().isEnabled()) {
+            getNextButton().click();
         } else {
             System.out.println("Next button is disabled");
         }
     }
+
+    // Combined action
 
     public void fillProfessionalDetails(String company, String linkedin,
                                         String skills, String jobLevel,
@@ -120,5 +120,6 @@ public class ProfessionalDetailsPage {
         selectJobLevel(jobLevel);
         selectIndustry(industry);
         uploadResume(resumePath);
+        clickNextButton();
     }
 }

@@ -11,7 +11,7 @@ import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class TopicOfInterest {
+public class TopicOfInterest extends AllFunctionality {
 
     private Base base;
 
@@ -19,8 +19,7 @@ public class TopicOfInterest {
         this.base = base;
     }
 
-    AllFunctionality util = new AllFunctionality();
-
+   
     List<String> topicsFromExcel = new ArrayList<>();
     String topicsBeforeRefresh;
 
@@ -40,25 +39,20 @@ public class TopicOfInterest {
     @When("user reads topics from excel")
     public void readTopicsExcel() {
 
-        util.init("Topics");
-
-        topicsFromExcel.clear();
-        topicsFromExcel.add(util.getData(1, 0));
-        topicsFromExcel.add(util.getData(1, 1));
-        topicsFromExcel.add(util.getData(1, 2));
+    	init("Topics");
+    	topicsFromExcel.clear();
+    	topicsFromExcel.add(getData(1, 0));
+    	topicsFromExcel.add(getData(1, 1));
+    	topicsFromExcel.add(getData(1, 2));
     }
 
     // SELECT TOPICS
     @When("user selects topics from excel")
     public void selectTopicsFromExcel() {
 
+        boolean result = Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
-        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
-
-
-        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
- 
-
+        Assert.assertTrue(result, "One or more topics not found");
     }
 
     // SAVE
@@ -83,7 +77,7 @@ public class TopicOfInterest {
 
         topicsBeforeRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
 
-        base.driver.navigate().refresh();
+        base.getDriver().navigate().refresh();
 
         String afterRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
 
@@ -93,4 +87,4 @@ public class TopicOfInterest {
                 "Topics not persisted after refresh"
         );
     }
-}
+}s

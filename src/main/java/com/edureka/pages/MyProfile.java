@@ -2,8 +2,10 @@ package com.edureka.pages;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class MyProfile {
 
@@ -23,6 +25,9 @@ public class MyProfile {
 
 	@FindBy(linkText = "My Orders and Invoices")
 	private WebElement myOrdersLink;
+
+	@FindBy(linkText = "My Wallet")
+	private WebElement myWalletTab;
 
 	// ================= EDIT BUTTONS =================
 
@@ -48,6 +53,7 @@ public class MyProfile {
 
 	@FindBy(xpath = "//span[text()='Current TimeZone']/following-sibling::span")
 	private WebElement currentTimezoneValue;
+
 
 	// ================= PREFERRED TIME =================
 
@@ -78,7 +84,7 @@ public class MyProfile {
 
 	// ================= STUDY PLAN =================
 
-	@FindBy(xpath = "//h4[contains(text(),'Study Plan')]/following::div[contains(text(),'Day')]")
+	@FindBy(xpath = "//strong[text()='Day 1']/..")
 	private WebElement studyDay;
 
 	@FindBy(xpath = "//h4[contains(text(),'Study Plan')]/following::span[contains(text(),'AM') or contains(text(),'PM')]")
@@ -94,8 +100,13 @@ public class MyProfile {
 
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement uploadBtn;
-
+	@FindBy(xpath = "//span[text()='Designation']/following-sibling::span")
+	private WebElement designationValue;
 	// ================= GETTERS =================
+
+	public MyProfile(WebDriver driver) {
+		PageFactory.initElements(driver, this);
+	}
 
 	public WebElement getPersonalizeTab() {
 		return personalizeTab;
@@ -117,6 +128,10 @@ public class MyProfile {
 		return myOrdersLink;
 	}
 
+	public WebElement getMyWalletTab() {
+		return myWalletTab;
+	}
+
 	public WebElement getUserDetailsEdit() {
 		return userDetailsEdit;
 	}
@@ -132,35 +147,39 @@ public class MyProfile {
 	// ================= BUSINESS METHODS =================
 
 	public void clickPersonalize() {
-		personalizeTab.click();
+		getPersonalizeTab().click();
 	}
 
 	public void clickTopicsOfInterest() {
-		topicsOfInterestTab.click();
+		getTopicsOfInterestTab().click();
 	}
 
 	public void clickCareerServices() {
-		careerServicesTab.click();
+		getCareerServicesTab().click();
 	}
 
 	public void clickChangePassword() {
-		changePasswordTab.click();
+		getChangePasswordTab().click();
 	}
 
 	public void clickMyOrders() {
-		myOrdersLink.click();
+		getMyOrdersLink().click();
+	}
+
+	public void clickMyWallet() {
+		getMyWalletTab().click(); // ✅ using getter
 	}
 
 	public void clickUserDetailsEdit() {
-		userDetailsEdit.click();
+		getUserDetailsEdit().click();
 	}
 
 	public void clickLearningGoalsEdit() {
-		learningGoalsEdit.click();
+		getLearningGoalsEdit().click();
 	}
 
 	public void clickStudyPlanEdit() {
-		studyPlanEdit.click();
+		getStudyPlanEdit().click();
 	}
 
 	public void uploadProfileImage(String filePath) {
@@ -170,10 +189,6 @@ public class MyProfile {
 
 	public void clickCameraIcon() {
 		cameraIcon.click();
-	}
-	
-	public void clickMyWallet() {
-
 	}
 
 	// ================= VALUE GETTERS =================
@@ -230,7 +245,7 @@ public class MyProfile {
 		return learningGoalsList;
 	}
 
-	// ================= VALIDATIONS (VERY IMPORTANT) =================
+	// ================= VALIDATIONS =================
 
 	public boolean verifyUserDetails(String name, String mobile, String email, String timezone) {
 		return getName().equalsIgnoreCase(name) && getMobile().contains(mobile) && getEmail().equalsIgnoreCase(email)
@@ -259,5 +274,9 @@ public class MyProfile {
 		return getPartnerName().equalsIgnoreCase("Not Available")
 				&& getPartnerMobile().equalsIgnoreCase("Not Available")
 				&& getPartnerEmail().equalsIgnoreCase("Not Available");
+	}
+
+	public String getDesignation() {
+		return designationValue.getText().trim();
 	}
 }
