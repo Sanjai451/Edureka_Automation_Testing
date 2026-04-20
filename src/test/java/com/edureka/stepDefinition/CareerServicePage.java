@@ -38,40 +38,40 @@ public class CareerServicePage {
 
 	@Given("user logs in using config credentials")
 	public void login() throws InterruptedException {
-		base.driver.findElement(By.xpath("//button[text()='Log in']")).click();
+		base.getDriver().findElement(By.xpath("//button[text()='Log in']")).click();
 		Thread.sleep(2000);
 
 		// Enter Email
-		WebElement email = base.driver.findElement(By.id("loginFormEmail"));
+		WebElement email = base.getDriver().findElement(By.id("loginFormEmail"));
 		email.clear();
 		email.sendKeys("ramanasekar2004@gmail.com");
 
 		// Enter Password
-		WebElement password = base.driver.findElement(By.id("loginPassword"));
+		WebElement password = base.getDriver().findElement(By.id("loginPassword"));
 		password.clear();
 		password.sendKeys("Password");
 
 		// Click LOGIN button
-		base.driver.findElement(By.xpath("//button[text()='LOG IN']")).click();
+		base.getDriver().findElement(By.xpath("//button[text()='LOG IN']")).click();
 	}
 
 	@Given("user navigates to My Profile")
 	public void goToProfile() {
-		Pages.dashboard.navigateToMyProfile();
+		Pages.get().dashboard.navigateToMyProfile();
 	}
 
 	// ================= NAVIGATION =================
 
 	@Given("user clicks on Career Services tab")
 	public void clickCareerServices() {
-		Pages.myProfile.clickCareerServices();
+		Pages.get().myProfile.clickCareerServices();
 	}
 
 	// ================= PROFESSIONAL =================
 
 	@When("user clicks Professional Details edit button")
 	public void clickProfessionalEdit() {
-		Pages.careerServicePage.clickProfessionalDetailsEdit();
+		Pages.get().careerServicePage.clickProfessionalDetailsEdit();
 	}
 
 	@When("user reads professional details from excel")
@@ -90,17 +90,17 @@ public class CareerServicePage {
 	@When("user enters professional details from excel")
 	public void enterProfessionalData() {
 
-		Pages.professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
+		Pages.get().professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
 	}
 
 	// ================= NEXT BUTTON =================
 
 	@When("user clicks Next button")
 	public void clickNext() {
-		util.waitForElementClickable(base.driver,
-		        Pages.professionalDetailsPage.getNextButton(), 10);
+		util.waitForElementClickable(base.getDriver(),
+		        Pages.get().professionalDetailsPage.getNextButton(), 10);
 
-		Pages.professionalDetailsPage.getNextButton().click();
+		Pages.get().professionalDetailsPage.getNextButton().click();
 	}
 
 	// ================= CAREER INTERESTS =================
@@ -121,7 +121,7 @@ public class CareerServicePage {
 	@When("user enters career interests data from excel")
 	public void enterCareerData() {
 
-		Pages.careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
+		Pages.get().careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
 	}
 
 	// ================= OTHER DETAILS =================
@@ -140,15 +140,15 @@ public class CareerServicePage {
 	@When("user enters other details from excel")
 	public void enterOtherDetails() {
 
-		Pages.otherDetailsPage.fillOtherDetails(degree, institute, month, year);
+		Pages.get().otherDetailsPage.fillOtherDetails(degree, institute, month, year);
 	}
 
 	@When("user clicks Save button")
 	public void clickSave() {
-		util.waitForElementClickable(base.driver,
-		        Pages.otherDetailsPage.getSaveButton(), 10);
+		util.waitForElementClickable(base.getDriver(),
+		        Pages.get().otherDetailsPage.getSaveButton(), 10);
 
-		Pages.otherDetailsPage.getSaveButton().click();
+		Pages.get().otherDetailsPage.getSaveButton().click();
 	}
 
 	// ================= FINAL VALIDATION =================
@@ -156,14 +156,14 @@ public class CareerServicePage {
 	@Then("all career service details should be saved successfully")
 	public void validateSaved() {
 
-		Assert.assertTrue(Pages.careerServicePage.getCompanyName().isDisplayed(), "Data not saved");
+		Assert.assertTrue(Pages.get().careerServicePage.getCompanyName().isDisplayed(), "Data not saved");
 	}
 
 	@Then("updated career service details should be displayed correctly")
 	public void validateAllData() {
 
 		Assert.assertTrue(
-				Pages.careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, skills, job, location,
+				Pages.get().careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, skills, job, location,
 						relocate ? "Yes" : "No", employment, ctc, preferredLocation, degree),
 				"Career Service Data Mismatch");
 	}

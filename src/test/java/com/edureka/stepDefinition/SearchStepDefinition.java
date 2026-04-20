@@ -31,30 +31,30 @@ public class SearchStepDefinition extends AllFunctionality {
     @Given("user is ready on homepage for search module")
     public void user_is_ready_on_homepage_for_search_module() {
         initPropertiesUtility("./src/main/resources/edureka.properties");
-        base.driver.get(getPropertyData("url"));
-        Pages.loadAllPages(base.driver);
+        base.getDriver().get(getPropertyData("url"));
+        Pages.get().loadAllPages(base.getDriver());
 
         Assert.assertTrue(
-                Pages.shp.isSearchTriggerDisplayed(),
+                Pages.get().shp.isSearchTriggerDisplayed(),
                 "Search bar is not visible on homepage");
     }
 
     @Then("search bar should be visible for search module")
     public void search_bar_should_be_visible_for_search_module() {
         Assert.assertTrue(
-                Pages.shp.isSearchTriggerDisplayed(),
+                Pages.get().shp.isSearchTriggerDisplayed(),
                 "Search bar is not visible");
     }
 
     @When("user clicks the search bar for search module")
     public void user_clicks_the_search_bar_for_search_module() {
-        Pages.shp.clickSearchTrigger();
+        Pages.get().shp.clickSearchTrigger();
     }
 
     @Then("search panel should open for search module")
     public void search_panel_should_open_for_search_module() {
         Assert.assertTrue(
-                Pages.shp.isSearchPanelDisplayed(),
+                Pages.get().shp.isSearchPanelDisplayed(),
                 "Search panel did not open");
     }
 
@@ -69,7 +69,7 @@ public class SearchStepDefinition extends AllFunctionality {
             throw new RuntimeException("Excel validKeyword is NULL or EMPTY");
         }
 
-        Pages.shp.enterKeyword(keyword);
+        Pages.get().shp.enterKeyword(keyword);
     }
 
     @When("user enters invalid keyword from excel sheet {string} row {int}")
@@ -81,7 +81,7 @@ public class SearchStepDefinition extends AllFunctionality {
             throw new RuntimeException("Excel invalidKeyword is NULL or EMPTY");
         }
 
-        Pages.shp.enterKeyword(keyword);
+        Pages.get().shp.enterKeyword(keyword);
     }
 
     @When("user enters special keyword from excel sheet {string} row {int}")
@@ -93,12 +93,12 @@ public class SearchStepDefinition extends AllFunctionality {
             throw new RuntimeException("Excel specialKeyword is NULL or EMPTY");
         }
 
-        Pages.shp.enterKeyword(keyword);
+        Pages.get().shp.enterKeyword(keyword);
     }
 
     @When("user presses Enter in search for search module")
     public void user_presses_enter_in_search_for_search_module() {
-        Pages.shp.pressEnter();
+        Pages.get().shp.pressEnter();
     }
 
     // ================= SEARCH RESULTS =================
@@ -106,7 +106,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @Then("relevant search results should be displayed for search module")
     public void relevant_search_results_should_be_displayed_for_search_module() {
         Assert.assertTrue(
-                Pages.srp.areResultsDisplayed(),
+                Pages.get().srp.areResultsDisplayed(),
                 "Relevant search results are not displayed");
     }
 
@@ -125,16 +125,16 @@ public class SearchStepDefinition extends AllFunctionality {
                 throw new RuntimeException("DataTable keyword is NULL or EMPTY");
             }
 
-            Pages.shp.clickSearchTrigger();
-            Pages.shp.enterKeyword(keyword);
-            Pages.shp.pressEnter();
+            Pages.get().shp.clickSearchTrigger();
+            Pages.get().shp.enterKeyword(keyword);
+            Pages.get().shp.pressEnter();
 
             Assert.assertTrue(
-                    Pages.srp.areResultsDisplayed(),
+                    Pages.get().srp.areResultsDisplayed(),
                     "Results not displayed for keyword: " + keyword);
 
-            base.driver.get(getPropertyData("url"));
-            Pages.loadAllPages(base.driver);
+            base.getDriver().get(getPropertyData("url"));
+            // Pages.get().loadAllPages(base.getDriver());
         }
     }
 
@@ -147,7 +147,7 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @When("user stores first search result title for search module")
     public void user_stores_first_search_result_title_for_search_module() {
-        firstResultTitle = Pages.srp.getFirstResultTitle();
+        firstResultTitle = Pages.get().srp.getFirstResultTitle();
 
         if (firstResultTitle == null || firstResultTitle.trim().isEmpty()) {
             throw new RuntimeException("First result title is NULL or EMPTY");
@@ -156,16 +156,16 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @When("user clicks first search result for search module")
     public void user_clicks_first_search_result_for_search_module() {
-        Pages.srp.clickFirstResult();
+        Pages.get().srp.clickFirstResult();
     }
 
     @Then("opened course page title should match stored result title for search module")
     public void opened_course_page_title_should_match_stored_result_title_for_search_module() {
-        String currentTitle = base.driver.getTitle().toLowerCase();
+        String currentTitle = base.getDriver().getTitle().toLowerCase();
 
         Assert.assertTrue(
                 currentTitle.contains(firstResultTitle.toLowerCase())
-                        || base.driver.getCurrentUrl().contains("course"),
+                        || base.getDriver().getCurrentUrl().contains("course"),
                 "Opened course page title does not match stored result title");
     }
 
@@ -174,7 +174,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @Then("default search page should open for search module")
     public void default_search_page_should_open_for_search_module() {
         Assert.assertTrue(
-                base.driver.getCurrentUrl().contains("search"),
+                base.getDriver().getCurrentUrl().contains("search"),
                 "Default search page did not open");
     }
 
@@ -183,14 +183,14 @@ public class SearchStepDefinition extends AllFunctionality {
     @Then("system should not crash for search module")
     public void system_should_not_crash_for_search_module() {
         Assert.assertTrue(
-                base.driver.getTitle() != null && !base.driver.getTitle().isEmpty(),
+                base.getDriver().getTitle() != null && !base.getDriver().getTitle().isEmpty(),
                 "System crashed");
     }
 
     @Then("callback form should be displayed for search module")
     public void callback_form_should_be_displayed_for_search_module() {
         Assert.assertTrue(
-                Pages.srp.isCallbackFormDisplayed(),
+                Pages.get().srp.isCallbackFormDisplayed(),
                 "Callback form is not displayed");
     }
 
@@ -201,8 +201,9 @@ public class SearchStepDefinition extends AllFunctionality {
             String sheetName, Integer rowNum) {
 
         initPropertiesUtility("./src/main/resources/edureka.properties");
-        base.driver.get(getPropertyData("url"));
-        Pages.loadAllPages(base.driver);
+        base.getDriver().get(getPropertyData("url"));
+
+        // Pages.get().loadAllPages(base.getDriver());
 
         init(sheetName);
         String invalidKeyword = getData(rowNum, 2);
@@ -211,12 +212,12 @@ public class SearchStepDefinition extends AllFunctionality {
             throw new RuntimeException("Excel invalidKeyword is NULL or EMPTY");
         }
 
-        Pages.shp.clickSearchTrigger();
-        Pages.shp.enterKeyword(invalidKeyword);
-        Pages.shp.pressEnter();
+        Pages.get().shp.clickSearchTrigger();
+        Pages.get().shp.enterKeyword(invalidKeyword);
+        Pages.get().shp.pressEnter();
 
         Assert.assertTrue(
-                Pages.srp.isCallbackFormDisplayed(),
+                Pages.get().srp.isCallbackFormDisplayed(),
                 "No-results callback form page not reached");
     }
 
@@ -233,7 +234,7 @@ public class SearchStepDefinition extends AllFunctionality {
             throw new RuntimeException("Excel validMobile is NULL or EMPTY");
         }
         
-        Pages.srp.enterMobileNumber(validMobile);
+        Pages.get().srp.enterMobileNumber(validMobile);
     }
 
     @When("user enters invalid mobile number from excel sheet {string} row {int} for search module")
@@ -246,13 +247,13 @@ public class SearchStepDefinition extends AllFunctionality {
         if (invalidMobile == null || invalidMobile.trim().isEmpty()) {
             throw new RuntimeException("Excel invalidMobile is NULL or EMPTY");
         }
-        Pages.srp.enterMobileNumber(invalidMobile);
+        Pages.get().srp.enterMobileNumber(invalidMobile);
     }
 
     @Then("system should accept valid 10 digit mobile number for search module")
     public void system_should_accept_valid_10_digit_mobile_number_for_search_module() {
         Assert.assertEquals(
-                Pages.srp.getEnteredMobileNumber().length(),
+                Pages.get().srp.getEnteredMobileNumber().length(),
                 10,
                 "Valid 10-digit mobile number not accepted properly");
     }
@@ -260,7 +261,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @Then("system should not accept more than 10 digits for search module")
     public void system_should_not_accept_more_than_10_digits_for_search_module() {
         Assert.assertTrue(
-                Pages.srp.getEnteredMobileNumber().length() <= 10,
+                Pages.get().srp.getEnteredMobileNumber().length() <= 10,
                 "Defect: system accepted more than 10 digits");
     }
 }

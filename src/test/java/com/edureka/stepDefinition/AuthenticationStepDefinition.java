@@ -29,13 +29,13 @@ public class AuthenticationStepDefinition extends AllFunctionality {
 
     @Given("User is in signup page")
     public void user_is_in_signup_page() {
-        signupPage = Pages.signUpPage;
+        signupPage = Pages.get().signUpPage;
         signupPage.openSignupPage();
     }
 
     @When("User navigates to signup page")
     public void user_navigates_to_signup_page() {
-        signupPage = Pages.signUpPage;
+        signupPage = Pages.get().signUpPage;
         signupPage.openSignupPage();
     }
 
@@ -65,7 +65,7 @@ public class AuthenticationStepDefinition extends AllFunctionality {
     @When("User enters password in login form")
     public void user_enters_password_in_login_form() {
 
-        loginPage = Pages.loginPage;
+        loginPage = Pages.get().loginPage;
 
         init("AuthData");
         String password = getData(1, 1);
@@ -87,7 +87,7 @@ public class AuthenticationStepDefinition extends AllFunctionality {
 
     @Given("User is on login page")
     public void user_is_on_login_page() {
-        loginPage = Pages.loginPage;
+        loginPage = Pages.get().loginPage;
         loginPage.openLoginPopup();
     }
 
@@ -107,6 +107,6 @@ public class AuthenticationStepDefinition extends AllFunctionality {
 
     @Then("User should be redirected to dashboard")
     public void user_redirected_dashboard() {
-        Assert.assertFalse(Base.driver.getCurrentUrl().contains("login"));
+        Assert.assertFalse(base.getDriver().getCurrentUrl().contains("login"));
     }
 }

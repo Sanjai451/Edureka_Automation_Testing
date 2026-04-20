@@ -37,12 +37,12 @@ public class BlogStepDefinition extends AllFunctionality {
 
     public BlogStepDefinition(Base base) {
         this.base = base;
-        loginPage = Pages.loginPage;
-        blogHomePage = Pages.blogHomePage;
-        blogCategoryPage = Pages.blogCategoryPage;
-        blogPostPage = Pages.blogPostPage;
-        blogVideoPage = Pages.blogVideoPage;
-        blogVideoFullScreenPage = Pages.blogVideoFullScreenPage;
+        loginPage = Pages.get().loginPage;
+        blogHomePage = Pages.get().blogHomePage;
+        blogCategoryPage = Pages.get().blogCategoryPage;
+        blogPostPage = Pages.get().blogPostPage;
+        blogVideoPage = Pages.get().blogVideoPage;
+        blogVideoFullScreenPage = Pages.get().blogVideoFullScreenPage;
 
   //read blog excel
         init("BlogData");
@@ -61,12 +61,12 @@ public class BlogStepDefinition extends AllFunctionality {
     @Given("User logs in to the edureka for viewing blogs")
     public void user_logs_in_to_the_edureka_for_viewing_blogs() {
 
-        loginPage = Pages.loginPage;
-        blogHomePage = Pages.blogHomePage;
-        blogCategoryPage = Pages.blogCategoryPage;
-        blogPostPage = Pages.blogPostPage;
-        blogVideoPage = Pages.blogVideoPage;
-        blogVideoFullScreenPage = Pages.blogVideoFullScreenPage;
+        loginPage = Pages.get().loginPage;
+        blogHomePage = Pages.get().blogHomePage;
+        blogCategoryPage = Pages.get().blogCategoryPage;
+        blogPostPage = Pages.get().blogPostPage;
+        blogVideoPage = Pages.get().blogVideoPage;
+        blogVideoFullScreenPage = Pages.get().blogVideoFullScreenPage;
 
   //read blog excel
         init("BlogData");
@@ -75,7 +75,7 @@ public class BlogStepDefinition extends AllFunctionality {
         category = getData(1, 3);
         videoTitle = getData(1, 4);
 //        comment = getDatlogin data
-        base.driver.get("https://www.edureka.co/");
+        base.getDriver().get("https://www.edureka.co/");
 
         loginPage.openLoginPopup();
 
@@ -90,17 +90,17 @@ public class BlogStepDefinition extends AllFunctionality {
 
     @When("User click blogs from navbar")
     public void user_click_blogs_from_navbar() {
-        base.driver.get("https://www.edureka.co/blog/");
+        base.getDriver().get("https://www.edureka.co/blog/");
     }
 
     @Then("blogs page need to be visible")
     public void blogs_page_need_to_be_visible() {
-        Assert.assertTrue(base.driver.getCurrentUrl().contains("blog"));
+        Assert.assertTrue(base.getDriver().getCurrentUrl().contains("blog"));
     }
 
     @And("User open the recent blog from Excel")
     public void user_open_the_recent_blog_from_excel() {
-        blogHomePage.clickOnArticles(base.driver, blogTitle1);
+        blogHomePage.clickOnArticles(base.getDriver(), blogTitle1);
     }
 
     @And("verify whether recent blog opened from Excel")
@@ -120,13 +120,13 @@ public class BlogStepDefinition extends AllFunctionality {
 
     @And("User click on category from Excel")
     public void user_click_on_category_from_excel() {
-        blogHomePage.clickOnCategory(base.driver, category);
+        blogHomePage.clickOnCategory(base.getDriver(), category);
     }
 
     @And("User open category blog from Excel")
     public void user_open_category_blog_from_excel() {
     	
-        blogHomePage.clickOnArticles(base.driver, blogTitle2);
+        blogHomePage.clickOnArticles(base.getDriver(), blogTitle2);
     }
 
     @And("verify whether category blog opened from Excel")
@@ -141,8 +141,8 @@ public class BlogStepDefinition extends AllFunctionality {
 
     @Then("User need to see videos and click video from Excel")
     public void user_need_to_see_videos_and_click_video_from_excel() {
-        Assert.assertTrue(base.driver.getCurrentUrl().contains("videos"));
-        blogVideoPage.clickOnVideo(base.driver, videoTitle);
+        Assert.assertTrue(base.getDriver().getCurrentUrl().contains("videos"));
+        blogVideoPage.clickOnVideo(base.getDriver(), videoTitle);
     }
 
     @And("verify user can view video")

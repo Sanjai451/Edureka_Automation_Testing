@@ -27,13 +27,13 @@ public class TopicOfInterest {
     // NAVIGATION
     @Given("user clicks on Topics of Interest tab")
     public void clickTopicsTab() {
-        Pages.myProfile.clickTopicsOfInterest();
+        Pages.get().myProfile.clickTopicsOfInterest();
     }
 
     // CLICK ADD NOW
     @When("user clicks Add Now button")
     public void clickAddNow() {
-        Pages.topicsOfInterestPage.clickAddNow();
+        Pages.get().topicsOfInterestPage.clickAddNow();
     }
 
     // READ FROM EXCEL
@@ -53,10 +53,10 @@ public class TopicOfInterest {
     public void selectTopicsFromExcel() {
 
 
-        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+        Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
 
-        Pages.topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+        Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
  
 
     }
@@ -64,7 +64,7 @@ public class TopicOfInterest {
     // SAVE
     @When("user clicks Save and Continue in Topics")
     public void clickSaveContinueTopics() {
-        Pages.topicsSelectionPage.clickSaveAndContinue();
+        Pages.get().topicsSelectionPage.clickSaveAndContinue();
     }
 
     // VALIDATE SAVE
@@ -72,7 +72,7 @@ public class TopicOfInterest {
     public void topicsSaved() {
 
         Assert.assertTrue(
-                Pages.topicsOfInterestPage.isAnyTopicSelected(),
+                Pages.get().topicsOfInterestPage.isAnyTopicSelected(),
                 "Topics not saved"
         );
     }
@@ -81,11 +81,11 @@ public class TopicOfInterest {
     @Then("topics should persist after page refresh")
     public void verifyPersistence() {
 
-        topicsBeforeRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
+        topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
-        base.driver.navigate().refresh();
+        base.getDriver().navigate().refresh();
 
-        String afterRefresh = Pages.topicsOfInterestPage.getAllTopicsText();
+        String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
         Assert.assertEquals(
                 afterRefresh,

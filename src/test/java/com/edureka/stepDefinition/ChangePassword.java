@@ -27,7 +27,7 @@ public class ChangePassword extends AllFunctionality {
     // CLICK TAB
     @Given("user clicks on Change Password tab")
     public void user_clicks_on_change_password_tab() {
-        Pages.myProfile.clickChangePassword();
+        Pages.get().myProfile.clickChangePassword();
     }
 
     // SCENARIO 1 (DataTable) 
@@ -41,9 +41,9 @@ public class ChangePassword extends AllFunctionality {
         newPassword = data.get(1).get(1);
         confirmPassword = data.get(2).get(1);
 
-        Pages.changePasswordPage.enterExistingPassword(existingPassword);
-        Pages.changePasswordPage.enterNewPassword(newPassword);
-        Pages.changePasswordPage.enterConfirmPassword(confirmPassword);
+        Pages.get().changePasswordPage.enterExistingPassword(existingPassword);
+        Pages.get().changePasswordPage.enterNewPassword(newPassword);
+        Pages.get().changePasswordPage.enterConfirmPassword(confirmPassword);
     }
 
     //  SCENARIO OUTLINE 
@@ -51,25 +51,25 @@ public class ChangePassword extends AllFunctionality {
     @When("user enters existing password {string}")
     public void user_enters_existing_password(String value) {
         existingPassword = value;
-        Pages.changePasswordPage.enterExistingPassword(value);
+        Pages.get().changePasswordPage.enterExistingPassword(value);
     }
 
     @When("user enters new password {string}")
     public void user_enters_new_password(String value) {
         newPassword = value;
-        Pages.changePasswordPage.enterNewPassword(value);
+        Pages.get().changePasswordPage.enterNewPassword(value);
     }
 
     @When("user enters confirm password {string}")
     public void user_enters_confirm_password(String value) {
         confirmPassword = value;
-        Pages.changePasswordPage.enterConfirmPassword(value);
+        Pages.get().changePasswordPage.enterConfirmPassword(value);
     }
 
     // SUBMIT
     @When("user clicks Submit button")
     public void user_clicks_submit_button() {
-        Pages.changePasswordPage.clickSubmit();
+        Pages.get().changePasswordPage.clickSubmit();
     }
 
     // SUCCESS MESSAGE
@@ -77,7 +77,7 @@ public class ChangePassword extends AllFunctionality {
     public void password_should_be_updated_successfully() {
 
 //        String pageSource = util.getPageSource(base.driver);
-    	String pageSource = getUrl(base.driver);
+    	String pageSource = getUrl(base.getDriver());
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains("success"),
@@ -90,7 +90,7 @@ public class ChangePassword extends AllFunctionality {
     public void should_be_displayed(String message) {
 
 //        String pageSource = util.getPageSource(base.driver);
-    	String pageSource = getUrl(base.driver);
+    	String pageSource = getUrl(base.getDriver());
 
         Assert.assertTrue(
                 pageSource.toLowerCase().contains(message.toLowerCase()),

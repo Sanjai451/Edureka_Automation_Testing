@@ -20,12 +20,12 @@ public class CorporateTrainingTest {
 	
 	@When("user navigates to {string} page")
 	public void user_navigates_to_page(String string) {
-		Pages.homePage.clickOnCorporateTraining();
+		Pages.get().homePage.clickOnCorporateTraining();
 	}
 
 	@Then("corporate training page should be displayed")
 	public void corporate_training_page_should_be_displayed() {
-		assertTrue(base.driver.getCurrentUrl().contains("corporate"));
+		assertTrue(base.getDriver().getCurrentUrl().contains("corporate"));
 	}
 
 	@When("user enters corporate training details and submit")
@@ -38,7 +38,7 @@ public class CorporateTrainingTest {
 		
 		Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
 
-		Pages.corporateTrainingPage.submitDetails(data.get("Name"),
+		Pages.get().corporateTrainingPage.submitDetails(data.get("Name"),
 	            data.get("Email"),
 	            data.get("Phone"),
 	            data.get("TrainingNeed"),
