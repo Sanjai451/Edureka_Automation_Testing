@@ -28,8 +28,15 @@ public class CommunityQuestionPage {
 
 	@FindBy(xpath = "//button[contains(text(), 'Add answer')]")
 	private WebElement postAnswerButton;
-	 
+	
 	public void addAnswerForQuestion(WebDriver driver, String answer) {
+	
+		// close pop
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(14));
+		wait.until(ExpectedConditions.visibilityOf(
+				driver.findElement(By.xpath("//button[contains(@class, 'close-subscribe-section')]"))
+				)).click();
+		
 		answerButton.click();
 		addTextToFrame(driver, answer);
 		postAnswerButton.click();
