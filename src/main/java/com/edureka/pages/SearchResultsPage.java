@@ -15,9 +15,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class SearchResultsPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public SearchResultsPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         PageFactory.initElements(driver, this);
     }
 
@@ -39,28 +41,29 @@ public class SearchResultsPage {
     @FindBy(xpath = "//input[@placeholder='Your mobile number']")
     private WebElement mobileNumberField;
 
-    public boolean areResultsDisplayed(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+    @FindBy(xpath = "//button[contains(text(),'Job Role')]")
+    private WebElement jobRoleDropdown;
 
+    @FindBy(xpath = "//h2")
+    private WebElement categoryHeading;
+
+    public boolean areResultsDisplayed() {
         try {
             wait.until(ExpectedConditions.or(
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//div[contains(@class,'giTrackElement')]")),
-                    ExpectedConditions.visibilityOfElementLocated(
-                            By.xpath("//*[contains(text(),'did not match')]"))
+                ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(@class,'giTrackElement')]")),
+                ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//*[contains(text(),'did not match')]"))
             ));
         } catch (Exception e) {
             return false;
         }
 
-        return resultList.size() > 0;
+        return resultList != null && resultList.size() > 0;
     }
 
     public String getFirstResultTitle() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        WebElement element = wait.until(ExpectedConditions.visibilityOf(firstResultTitle));
-
-        String text = element.getText();
+        String text = wait.until(ExpectedConditions.visibilityOf(firstResultTitle)).getText();
 
         if (text == null || text.trim().isEmpty()) {
             throw new RuntimeException("First result title is EMPTY");
@@ -70,28 +73,68 @@ public class SearchResultsPage {
     }
 
     public void clickFirstResult() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.elementToBeClickable(viewDetailsBtn)).click();
     }
 
     public boolean isNoResultMessageDisplayed() {
-        return noResultMessage.size() > 0;
+        return noResultMessage != null && noResultMessage.size() > 0;
     }
 
     public boolean isCallbackFormDisplayed() {
-        return callbackForm.size() > 0;
+        try {
+            return callbackForm != null && callbackForm.size() > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public void enterMobileNumber(WebDriver driver, String mobile) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+    public void enterMobileNumber(String mobile) {
 
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", mobileNumberField);
-        js.executeScript("arguments[0].value='';", mobileNumberField);
-        js.executeScript("arguments[0].click();", mobileNumberField);
-        js.executeScript("arguments[0].value=arguments[1];", mobileNumberField, mobile);
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//input[@placeholder='Your mobile number']")
+        ));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", field);
+
+        wait.until(ExpectedConditions.visibilityOf(field));
+
+        field.clear();
+        field.sendKeys(mobile);
     }
-
     public String getEnteredMobileNumber() {
-        return mobileNumberField.getAttribute("value");
+
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.xpath("//input[@placeholder='Your mobile number']")
+        ));
+
+        return field.getAttribute("value");
+    }
+
+    public void clickJobRoleDropdown() {
+        wait.until(ExpectedConditions.elementToBeClickable(jobRoleDropdown)).click();
+    }
+
+    public void selectJobRole(String role) {
+        String formattedId = "_" + role.replace(" ", "_") + "_";
+
+        WebElement element = wait.until(
+            ExpectedConditions.presenceOfElementLocated(By.id(formattedId))
+        );
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    public String getCategoryHeading() {
+        return wait.until(ExpectedConditions.visibilityOf(categoryHeading)).getText();
+    }
+
+    public boolean isJobRoleSelected(String role) {
+        String formattedId = "_" + role.replace(" ", "_") + "_";
+
+        WebElement element = wait.until(
+            ExpectedConditions.presenceOfElementLocated(By.id(formattedId))
+        );
+
+        return element.isSelected();
     }
 }

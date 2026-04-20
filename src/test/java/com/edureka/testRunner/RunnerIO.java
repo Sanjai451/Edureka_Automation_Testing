@@ -17,9 +17,15 @@ import io.cucumber.testng.CucumberOptions;
 )
 public class RunnerIO extends AbstractTestNGCucumberTests {
 
+    /**
+     * Overriding scenarios() with parallel=true tells TestNG to feed
+     * each Cucumber scenario to a separate thread from the pool.
+     * The thread count is controlled by testing.xml.
+     */
     @Override
-    @DataProvider(parallel = true)
+    @org.testng.annotations.DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }
+
 }

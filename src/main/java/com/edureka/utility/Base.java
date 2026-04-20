@@ -1,20 +1,28 @@
 package com.edureka.utility;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 public class Base {
 
-    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public void setDriver(WebDriver driver) {
-        tlDriver.set(driver);
-    }
+	 public static void initDriver() {
+	    	EdgeOptions options = new EdgeOptions();
+			options.addArguments("--inprivate");
+			options.addArguments("--disable-notifications");
+	        driver.set(new EdgeDriver(options));
+	    }
 
-    public WebDriver getDriver() {
-        return tlDriver.get();
-    }
+	    public static void quitDriver() {
+	        driver.get().quit();
+	        driver.remove();
+	    }
 
-    public void unload() {
-        tlDriver.remove();
-    }
+	    public static WebDriver getDriver() {
+	        return driver.get();
+	    }
+
+    
 }

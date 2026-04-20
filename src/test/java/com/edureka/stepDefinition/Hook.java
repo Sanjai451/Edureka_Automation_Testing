@@ -9,42 +9,43 @@ import org.openqa.selenium.edge.EdgeDriver;
 
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
+import com.edureka.utility.Pages;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
 public class Hook extends AllFunctionality {
 
-    private Base base;
+    private final Base base;
 
     public Hook(Base base) {
         this.base = base;
     }
 
+
     @Before
     public void setUp() throws IOException {
+        // Initialise a fresh WebDriver for this thread
+        base.initDriver();
 
         initPropertiesUtility("./src/main/resources/edureka.properties");
         String url = getPropertyData("url");
-        
-        ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		options.addArguments("--incognito");
-
-        WebDriver driver = new ChromeDriver(options);
-        base.setDriver(driver);
 
         setMaximizeBrowser(base.getDriver());
         implicitlyWait(base.getDriver(), 5);
 
         base.getDriver().get(url);
+
+        // Initialise page objects bound to this thread's driver
+        Pages.loadAllPages(base.getDriver());
     }
 
     @After
     public void tearDown() {
-        if (base.getDriver() != null) {
-            base.getDriver().quit();
-            base.unload();
-        }
+        // Quit the browser and remove the driver from ThreadLocal
+        Base.quitDriver();
+
+        // Remove the Pages ThreadLocal to prevent memory leaks
+        Pages.cleanUp();
     }
 }
