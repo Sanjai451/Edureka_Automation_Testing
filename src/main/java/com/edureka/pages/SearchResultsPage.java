@@ -12,7 +12,14 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.edureka.utility.Base;
+
 public class SearchResultsPage {
+	
+	Base base;
+	public SearchResultsPage(Base base) {
+		this.base = base;
+	}
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -89,6 +96,7 @@ public class SearchResultsPage {
     }
 
     public void enterMobileNumber(String mobile) {
+        JavascriptExecutor js = (JavascriptExecutor) base.getDriver();
 
         WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(
             By.xpath("//input[@placeholder='Your mobile number']")

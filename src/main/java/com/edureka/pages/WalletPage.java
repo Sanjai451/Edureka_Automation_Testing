@@ -54,6 +54,7 @@ public class WalletPage {
     public String getReferralCredits() {
         return referralCreditsAmount.getText();
     }
+    
 
     // Validation
 

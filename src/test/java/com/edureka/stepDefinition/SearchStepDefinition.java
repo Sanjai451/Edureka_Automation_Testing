@@ -116,6 +116,7 @@ public class SearchStepDefinition extends AllFunctionality {
             // ✅ Reset page each time (VERY IMPORTANT)
             Base.getDriver().get("https://www.edureka.co/");
 
+
             Pages.get().shp.clickSearchTrigger();
             Pages.get().shp.enterKeyword(keyword);
             Pages.get().shp.pressEnter();
@@ -148,6 +149,7 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @Then("opened course page title should match stored result title for search module")
     public void opened_course_page_title_should_match_stored_result_title_for_search_module() {
+
         String pageTitle = Base.getDriver().getTitle().toLowerCase();
 
         Assert.assertTrue(
@@ -155,22 +157,27 @@ public class SearchStepDefinition extends AllFunctionality {
                 || Base.getDriver().getCurrentUrl().contains("course"),
             "Opened page title does not match stored result title"
         );
+
     }
 
     @Then("default search page should open for search module")
     public void default_search_page_should_open_for_search_module() {
         Assert.assertTrue(
+        		
             Base.getDriver().getCurrentUrl().contains("search"),
             "Default search page did not open"
         );
+
     }
 
     @Then("system should not crash for search module")
     public void system_should_not_crash_for_search_module() {
+
         Assert.assertNotNull(
             Base.getDriver().getTitle(),
             "System crashed or title is null"
         );
+
     }
 
     @Then("callback form should be displayed for search module")
@@ -180,6 +187,36 @@ public class SearchStepDefinition extends AllFunctionality {
             "Callback form is not displayed"
         );
     }
+
+    // ================= CALLBACK PAGE =================
+
+    @Given("user is on no-results callback form page using excel sheet {string} row {int} for search module")
+    public void user_is_on_no_results_callback_form_page_using_excel_sheet_row_for_search_module(
+            String sheetName, Integer rowNum) {
+
+        initPropertiesUtility("./src/main/resources/edureka.properties");
+        base.getDriver().get(getPropertyData("url"));
+
+        // Pages.get().loadAllPages(base.getDriver());
+
+        init(sheetName);
+        String invalidKeyword = getData(rowNum, 2);
+
+        if (invalidKeyword == null || invalidKeyword.trim().isEmpty()) {
+            throw new RuntimeException("Excel invalidKeyword is NULL or EMPTY");
+        }
+
+        Pages.get().shp.clickSearchTrigger();
+        Pages.get().shp.enterKeyword(invalidKeyword);
+        Pages.get().shp.pressEnter();
+
+        Assert.assertTrue(
+                Pages.get().srp.isCallbackFormDisplayed(),
+                "No-results callback form page not reached");
+    }
+
+    // ================= MOBILE =================
+
 
     @When("user enters valid mobile number from excel sheet {string} row {int} for search module")
     public void user_enters_valid_mobile_number_from_excel_sheet_row_for_search_module(
@@ -192,6 +229,7 @@ public class SearchStepDefinition extends AllFunctionality {
         }
 
         Pages.get().srp.enterMobileNumber(mobile);
+
     }
 
     @When("user enters invalid mobile number from excel sheet {string} row {int} for search module")
@@ -203,17 +241,19 @@ public class SearchStepDefinition extends AllFunctionality {
         if (mobile == null || mobile.trim().isEmpty()) {
             throw new RuntimeException("Invalid mobile number is empty in excel");
         }
-
         Pages.get().srp.enterMobileNumber(mobile);
+
     }
 
     @Then("system should accept valid 10 digit mobile number for search module")
     public void system_should_accept_valid_10_digit_mobile_number_for_search_module() {
         Assert.assertEquals(
+
             Pages.get().srp.getEnteredMobileNumber().length(),
             10,
             "Valid mobile number was not accepted properly"
         );
+
     }
 
     @Then("system should not accept more than 10 digits for search module")
@@ -302,5 +342,6 @@ public class SearchStepDefinition extends AllFunctionality {
             Pages.get().srp.isJobRoleSelected(role),
             "Filter not applied correctly"
         );
+
     }
 }

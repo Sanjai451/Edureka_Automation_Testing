@@ -171,6 +171,10 @@ public class MyProfile {
 	public void clickCameraIcon() {
 		cameraIcon.click();
 	}
+	
+	public void clickMyWallet() {
+
+	}
 
 	// ================= VALUE GETTERS =================
 

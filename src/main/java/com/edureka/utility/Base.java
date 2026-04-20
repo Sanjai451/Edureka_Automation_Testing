@@ -2,6 +2,7 @@ package com.edureka.utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+
 import org.openqa.selenium.edge.EdgeOptions;
 
 public class Base {
@@ -16,8 +17,10 @@ public class Base {
 	    }
 
 	    public static void quitDriver() {
-	        driver.get().quit();
-	        driver.remove();
+	    	if (driver.get() != null) {
+	            driver.get().quit();
+	            driver.remove();
+	        }
 	    }
 
 	    public static WebDriver getDriver() {
