@@ -1,5 +1,7 @@
 package com.edureka.testRunner;
 
+import org.testng.annotations.DataProvider;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
@@ -15,9 +17,15 @@ import io.cucumber.testng.CucumberOptions;
 		monochrome = true
 		)
 public class RunnerIO extends AbstractTestNGCucumberTests {
+	 /**
+     * Overriding scenarios() with parallel=true tells TestNG to feed
+     * each Cucumber scenario to a separate thread from the pool.
+     * The thread count is controlled by testing.xml.
+     */
 	@Override
     @org.testng.annotations.DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }
+
 }

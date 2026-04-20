@@ -3,24 +3,29 @@ package com.edureka.utility;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 
+import org.openqa.selenium.edge.EdgeOptions;
+
 public class Base {
-	
-//	public static WebDriver driver;
-	private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public void initDriver() {
-        driver.set(new EdgeDriver());
-    }
+	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    public WebDriver getDriver() {
-        return driver.get();
-    }
+	 public static void initDriver() {
+	    	EdgeOptions options = new EdgeOptions();
+			options.addArguments("--inprivate");
+			options.addArguments("--disable-notifications");
+	        driver.set(new EdgeDriver(options));
+	    }
 
-    public static void quitDriver() {
-        if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove();
-        }
-    }
-	
+	    public static void quitDriver() {
+	    	if (driver.get() != null) {
+	            driver.get().quit();
+	            driver.remove();
+	        }
+	    }
+
+	    public static WebDriver getDriver() {
+	        return driver.get();
+	    }
+
+    
 }
