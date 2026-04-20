@@ -16,6 +16,9 @@ public class BlogVideoFullScreenPage {
 	@FindBy(id = "comment-submit")
 	private WebElement commentSubmitButton;
 	
+	@FindBy(xpath = "//h3[.='Recommended blogs for you']")
+	private WebElement recommentVideosTitle;
+	
 	public void addComment(String value) {
 		commentInput.sendKeys(value);
 		commentSubmitButton.click();
@@ -23,6 +26,10 @@ public class BlogVideoFullScreenPage {
 	
 	public String getVideoTitle() {
 		return title.getText();
+	}
+	
+	public String getRecommendedVideoTitle() {
+		return recommentVideosTitle.getText();
 	}
 	
 	
