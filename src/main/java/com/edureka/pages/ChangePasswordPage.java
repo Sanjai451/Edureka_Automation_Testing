@@ -42,6 +42,11 @@ public class ChangePasswordPage {
         getNewPasswordInput().clear();
         getNewPasswordInput().sendKeys(newPassword);
     }
+    
+    public void enterConfirmPassword(String newPassword) {
+        getNewPasswordInput().clear();
+        getNewPasswordInput().sendKeys(newPassword);
+    }
 
     public void clickSubmit() {
         getSubmitButton().click();

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -151,12 +152,13 @@ return title.getText();
     select.selectByVisibleText(value);
     }
 
+
     
     public void fillQueryForm(WebDriver driver, String name, String email, String phone, String companyName, String training) {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        //  Re-locate elements AFTER scroll 
+
         WebElement nameFieldFresh = wait.until(
             ExpectedConditions.visibilityOfElementLocated(By.name("first_name"))
         );
@@ -165,7 +167,7 @@ return title.getText();
         WebElement emailFieldFresh = driver.findElement(By.name("email"));
         WebElement phoneFieldFresh = driver.findElement(By.name("phone"));
         WebElement dropdownFresh = driver.findElement(By.id("taningForm.ControlSelect1"));
-//      WebElement submitFresh = driver.findElement(By.xpath("//button[.='Submit']"));
+
 
         nameFieldFresh.clear();
         nameFieldFresh.sendKeys(name);
@@ -256,7 +258,7 @@ return title.getText();
 
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        //  WAIT for popup to appear 
+
         WebElement nameFresh = wait.until(
             ExpectedConditions.visibilityOfElementLocated(
                 By.id("sampleCertificateName")
@@ -284,7 +286,6 @@ return title.getText();
         phoneFresh.clear();
         phoneFresh.sendKeys(phone);
 
-        //  Now click submit inside popup
         WebElement previewSubmit = driver.findElement(
             By.xpath("//button[contains(text(),'PREVIEW CERTIFICATE')]")
         );

@@ -6,8 +6,8 @@
       <class name="com.edureka.testRunner.RunnerIO">
         <methods>
           <include name="setUpClass"/>
+          <include name="runScenario" invocation-numbers="0 1"/>
           <include name="tearDownClass"/>
-          <include name="runScenario" invocation-numbers="6"/>
         </methods>
       </class> <!-- com.edureka.testRunner.RunnerIO -->
     </classes>

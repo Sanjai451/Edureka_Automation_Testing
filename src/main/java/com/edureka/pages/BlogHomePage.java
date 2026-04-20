@@ -33,6 +33,7 @@ public class BlogHomePage {
 	}
 	
 	public void clickOnArticles(WebDriver driver, String value) {
+		
 		driver.findElement(By.xpath("//a[text()='" + value + "']")).click();
 	}
 	
