@@ -17,7 +17,9 @@ import io.cucumber.testng.CucumberOptions;
  */
 
 @CucumberOptions(
-		features = {"./src/test/java/com/edureka/featureFile/parallelExecution.feature"},
+		features = {"./src/test/java/com/edureka/featureFile/homePageScenario.feature",
+				"./src/test/java/com/edureka/featureFile/webinar.feature"
+		},
 		glue = "com.edureka.stepDefinition",
 //		dryRun = false
 		plugin   = {
