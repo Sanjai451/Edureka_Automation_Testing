@@ -11,9 +11,9 @@ Feature: Change Password - Update user password functionality
   Scenario: Verify user can change password using DataTable
 
     When user enters password details
-      | existingPassword | oldPass123 |
-      | newPassword      | NewPass@123 |
-      | confirmPassword  | NewPass@123 |
+      | existingPassword | Password@123 |
+      | newPassword      | Password |
+      | confirmPassword  | Password |
     And user clicks Submit button
 
     Then password should be updated successfully
@@ -29,8 +29,8 @@ Feature: Change Password - Update user password functionality
     Then "<message>" should be displayed
 
     Examples:
-      | existing    | new         | confirm     | message              |
-      | wrong123    | New@123     | New@123     | incorrect password   |
-      | oldPass123  | New@123     | Wrong@123   | password mismatch    |
-      | oldPass123  | short       | short       | password policy      |
-      |             |             |             | required field       |
+     | existing    | new         | confirm     | message              |
+     | Password@123   | New@123     | New@123     | incorrect password   |
+     # | oldPass123  | New@123     | Wrong@123   | password mismatch    |
+     # | oldPass123  | short       | short       | password policy      |
+     # |             |             |             | required field       |

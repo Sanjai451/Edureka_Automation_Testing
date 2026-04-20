@@ -6,7 +6,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-		features = {"./src/test/java/com/edureka/featureFile/parallelExecution.feature"},
+		features = {"src/test/java/com/edureka/featureFile/partnerWithUs.feature"},
 		glue = "com.edureka.stepDefinition",
 //		dryRun = false
 		plugin   = {

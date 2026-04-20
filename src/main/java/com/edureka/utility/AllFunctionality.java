@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -58,6 +59,10 @@ public class AllFunctionality {
 		driver.manage().window().setPosition(new Point(x, y));
 	}
 
+	public String getPageSource(WebDriver driver) {
+		return driver.getPageSource();
+	}
+
 	/*
 	 * 
 	 * // ================= NAVIGATION =================
@@ -82,7 +87,7 @@ public class AllFunctionality {
 	public String getUrl(WebDriver driver) {
 		return driver.getCurrentUrl();
 	}
-	
+
 	// ================= TIMEOUTS =================
 
 	public void implicitlyWait(WebDriver driver, int seconds) {
@@ -100,11 +105,24 @@ public class AllFunctionality {
 	}
 
 	public void waitForElementClickable(WebDriver driver, WebElement element, int seconds) {
-		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.elementToBeClickable(element));
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
+
+		wait.until(ExpectedConditions.visibilityOf(element));
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		wait.until(d -> element.isEnabled());
 	}
 
 	public void waitForTitleContains(WebDriver driver, String title, int seconds) {
 		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.titleContains(title));
+	}
+
+	public void waitForLoaderToDisappear(WebDriver driver) {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+		wait.until(ExpectedConditions
+				.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loaderbackoverlay')]")));
 	}
 	// ================= ALERT / POPUPS =================
 
@@ -199,7 +217,7 @@ public class AllFunctionality {
 	}
 
 	// ==================== EXCEL UTILITY =========================
-	
+
 	private static final String FILE_PATH = "./src/main/resources/eureka.xlsx";
 
 	Workbook workbook;

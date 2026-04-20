@@ -1,20 +1,23 @@
 package com.edureka.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ChangePasswordPage {
+
     // Locators
 
-    @FindBy(css = "[placeholder='Enter Existing Password']")
+    @FindBy(css = "input[placeholder='Enter Existing Password']")
     private WebElement existingPasswordInput;
 
-    @FindBy(css = "[placeholder='New Password']")
+    @FindBy(css = "input[placeholder='New Password']")
     private WebElement newPasswordInput;
 
-    @FindBy(css = "[type='submit']")
+    // ✅ NEW - Confirm Password
+    @FindBy(css = "input[placeholder='Confirm New Password']")
+    private WebElement confirmPasswordInput;
+
+    @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitButton;
 
     // Getters
@@ -27,36 +30,49 @@ public class ChangePasswordPage {
         return newPasswordInput;
     }
 
+  
+    public WebElement getConfirmPasswordInput() {
+        return confirmPasswordInput;
+    }
+
     public WebElement getSubmitButton() {
         return submitButton;
     }
 
-    // Business Logic 
+    // Business methods
 
     public void enterExistingPassword(String existingPassword) {
-        getExistingPasswordInput().clear();
-        getExistingPasswordInput().sendKeys(existingPassword);
+        existingPasswordInput.clear();
+        existingPasswordInput.sendKeys(existingPassword);
     }
 
     public void enterNewPassword(String newPassword) {
-        getNewPasswordInput().clear();
-        getNewPasswordInput().sendKeys(newPassword);
+        newPasswordInput.clear();
+        newPasswordInput.sendKeys(newPassword);
     }
-    
-    public void enterConfirmPassword(String newPassword) {
-        getNewPasswordInput().clear();
-        getNewPasswordInput().sendKeys(newPassword);
+
+
+    public void enterConfirmPassword(String confirmPassword) {
+        confirmPasswordInput.clear();
+        confirmPasswordInput.sendKeys(confirmPassword);
     }
 
     public void clickSubmit() {
-        getSubmitButton().click();
+        submitButton.click();
     }
 
-    // Combined Action 
+    // Combined action
 
-    public void changePassword(String oldPassword, String newPassword) {
+    public void changePassword(String oldPassword, String newPassword, String confirmPassword) {
         enterExistingPassword(oldPassword);
         enterNewPassword(newPassword);
+        enterConfirmPassword(confirmPassword); 
         clickSubmit();
+    }
+
+    // Validation
+
+    public boolean isSubmitButtonEnabled() {
+        return submitButton.isEnabled();
     }
 }
