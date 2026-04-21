@@ -2,12 +2,15 @@ package com.edureka.utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 import org.openqa.selenium.edge.EdgeOptions;
 
 public class Base {
 
+
 	private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
 
 	 public static void initDriver() {
 	    	EdgeOptions options = new EdgeOptions();
