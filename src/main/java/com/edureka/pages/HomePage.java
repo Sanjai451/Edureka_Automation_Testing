@@ -26,19 +26,19 @@ public class HomePage {
     WebElement homeSearchBar;
     
     @FindBy(xpath = "//span[contains(@class,'user_name')]")
-    WebElement profileIcon1;
+    WebElement profileIcon;
 
     @FindBy(xpath = "//a[text()='My Profile']")
-    WebElement myProfile1;
+    WebElement myProfile;
 
     @FindBy(xpath = "//a[text()='My Orders']")
-    WebElement myOrders1;
+    WebElement myOrders;
 
     @FindBy(xpath = "//a[text()='My Wishlist']")
-    WebElement myWishlist1;
+    WebElement myWishlist;
 
     @FindBy(xpath = "//a[text()='Change Password']")
-    WebElement changePassword1;
+    WebElement changePassword;
     
     @FindBy(xpath = "//button[.='Resources']")
     WebElement resourceIcon;
@@ -109,23 +109,23 @@ public class HomePage {
 //	}
 	
 	public void openProfileMenu() {
-	    profileIcon1.click();
+	    profileIcon.click();
 	}
 
 	public void clickMyProfile() {
-	    myProfile1.click();
+	    myProfile.click();
 	}
 
 	public void clickMyOrders() {
-	    myOrders1.click();
+	    myOrders.click();
 	}
 
 	public void clickMyWishlist() {
-	    myWishlist1.click();
+	    myWishlist.click();
 	}
 
 	public void clickChangePassword() {
-	    changePassword1.click();
+	    changePassword.click();
 	}
 
     public void clickOnCategory(WebDriver driver, String value) {

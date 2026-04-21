@@ -54,67 +54,64 @@ public class Dashboard {
 		getMyProfileLink().click();
 	}
 
-	 public void clickBecomeInstructor(WebDriver driver) {
-		 try {
-		        getBecomeInstructorLink().click();
-		    } catch (Exception e) {
+	@FindBy(linkText = "Hire from Edureka")
+	private WebElement hireFromEdurekaLink;
 
-		        JavascriptExecutor js = (JavascriptExecutor) driver;
+	// 🔹 Getter
+	public WebElement getHireFromEdurekaLink() {
+		return hireFromEdurekaLink;
+	}
 
-		        js.executeScript("window.scrollBy(0,300)");
-		        js.executeScript("arguments[0].click();", getBecomeInstructorLink());
-		    }
-		 
-	    }
+	public void clickBecomeInstructor(WebDriver driver) {
+		try {
+			getBecomeInstructorLink().click();
+		} catch (Exception e) {
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			js.executeScript("window.scrollBy(0,300)");
+			js.executeScript("arguments[0].click();", getBecomeInstructorLink());
+		}
+
+	}
 
 	public void clickBecomePartner(WebDriver driver) {
-		 
-		 
-		 try {
-		        getBecomePartnerLink().click();
-		    } catch (Exception e) {
 
-		        JavascriptExecutor js = (JavascriptExecutor) driver;
+		try {
+			getBecomePartnerLink().click();
+		} catch (Exception e) {
 
-		        // Scroll a bit to avoid banner blocking
-		        js.executeScript("window.scrollBy(0,300)");
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		        // JS click fallback
-		        js.executeScript("arguments[0].click();", getBecomePartnerLink());
-		    }
+			// Scroll a bit to avoid banner blocking
+			js.executeScript("window.scrollBy(0,300)");
+
+			// JS click fallback
+			js.executeScript("arguments[0].click();", getBecomePartnerLink());
+		}
 	}
-	
-	
-	 @FindBy(linkText = "Hire from Edureka")
-	    private WebElement hireFromEdurekaLink;
 
-	    // 🔹 Getter
-	    public WebElement getHireFromEdurekaLink() {
-	        return hireFromEdurekaLink;
-	    }
+	// 🔹 Business Logic (your style)
+	public void clickHireFromEdureka(WebDriver driver) {
 
-	    // 🔹 Business Logic (your style)
-	    public void clickHireFromEdureka(WebDriver driver) {
+		try {
+			// Normal click
+			getHireFromEdurekaLink().click();
 
-	        try {
-	            // Normal click
-	            getHireFromEdurekaLink().click();
+		} catch (Exception e) {
 
-	        } catch (Exception e) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-	            JavascriptExecutor js = (JavascriptExecutor) driver;
+			// Scroll DOWN slightly
+			js.executeScript("window.scrollBy(0,300)");
 
-	            // Scroll DOWN slightly
-	            js.executeScript("window.scrollBy(0,300)");
+			// Optional: bring element to center (more stable)
+			js.executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+					getHireFromEdurekaLink());
 
-	            // Optional: bring element to center (more stable)
-	            js.executeScript(
-	                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
-	                getHireFromEdurekaLink()
-	            );
+			// JS click fallback
+			js.executeScript("arguments[0].click();", getHireFromEdurekaLink());
+		}
+	}
 
-	            // JS click fallback
-	            js.executeScript("arguments[0].click();", getHireFromEdurekaLink());
-	        }
-}
 }

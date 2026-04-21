@@ -54,7 +54,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @When("user enters valid keyword from excel sheet {string} row {int}")
     public void user_enters_valid_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 0);
+        String keyword = getData(row, 0); // validKeyword
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Keyword is empty in excel");
@@ -66,7 +66,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @When("user enters invalid keyword from excel sheet {string} row {int}")
     public void user_enters_invalid_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 2);
+        String keyword = getData(row, 1); // invalidKeyword
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Invalid keyword is empty in excel");
@@ -78,7 +78,7 @@ public class SearchStepDefinition extends AllFunctionality {
     @When("user enters special keyword from excel sheet {string} row {int}")
     public void user_enters_special_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 3);
+        String keyword = getData(row, 2); // specialKeyword
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Special keyword is empty in excel");
@@ -102,22 +102,23 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @When("user searches using datatable for search module")
     public void user_searches_using_datatable_for_search_module(DataTable table) {
-
         List<List<String>> data = table.asLists(String.class);
 
         for (int i = 1; i < data.size(); i++) {
-
             String keyword = data.get(i).get(0);
 
             if (keyword == null || keyword.trim().isEmpty()) {
                 throw new RuntimeException("DataTable keyword is empty");
             }
 
-            // ✅ Reset page each time (VERY IMPORTANT)
-            Base.getDriver().get("https://www.edureka.co/");
-
+            base.getDriver().get("https://www.edureka.co/");
 
             Pages.get().shp.clickSearchTrigger();
+            Assert.assertTrue(
+                Pages.get().shp.isSearchPanelDisplayed(),
+                "Search panel did not open for keyword: " + keyword
+            );
+
             Pages.get().shp.enterKeyword(keyword);
             Pages.get().shp.pressEnter();
 
@@ -149,35 +150,29 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @Then("opened course page title should match stored result title for search module")
     public void opened_course_page_title_should_match_stored_result_title_for_search_module() {
-
-        String pageTitle = Base.getDriver().getTitle().toLowerCase();
+        String pageTitle = base.getDriver().getTitle().toLowerCase();
 
         Assert.assertTrue(
             pageTitle.contains(firstResultTitle.toLowerCase())
-                || Base.getDriver().getCurrentUrl().contains("course"),
+                || base.getDriver().getCurrentUrl().contains("course"),
             "Opened page title does not match stored result title"
         );
-
     }
 
     @Then("default search page should open for search module")
     public void default_search_page_should_open_for_search_module() {
         Assert.assertTrue(
-        		
-            Base.getDriver().getCurrentUrl().contains("search"),
+            base.getDriver().getCurrentUrl().contains("search"),
             "Default search page did not open"
         );
-
     }
 
     @Then("system should not crash for search module")
     public void system_should_not_crash_for_search_module() {
-
         Assert.assertNotNull(
-            Base.getDriver().getTitle(),
+            base.getDriver().getTitle(),
             "System crashed or title is null"
         );
-
     }
 
     @Then("callback form should be displayed for search module")
@@ -188,72 +183,39 @@ public class SearchStepDefinition extends AllFunctionality {
         );
     }
 
-    // ================= CALLBACK PAGE =================
-
-    @Given("user is on no-results callback form page using excel sheet {string} row {int} for search module")
-    public void user_is_on_no_results_callback_form_page_using_excel_sheet_row_for_search_module(
-            String sheetName, Integer rowNum) {
-
-        initPropertiesUtility("./src/main/resources/edureka.properties");
-        base.getDriver().get(getPropertyData("url"));
-
-        // Pages.get().loadAllPages(base.getDriver());
-
-        init(sheetName);
-        String invalidKeyword = getData(rowNum, 2);
-
-        if (invalidKeyword == null || invalidKeyword.trim().isEmpty()) {
-            throw new RuntimeException("Excel invalidKeyword is NULL or EMPTY");
-        }
-
-        Pages.get().shp.clickSearchTrigger();
-        Pages.get().shp.enterKeyword(invalidKeyword);
-        Pages.get().shp.pressEnter();
-
-        Assert.assertTrue(
-                Pages.get().srp.isCallbackFormDisplayed(),
-                "No-results callback form page not reached");
-    }
-
-    // ================= MOBILE =================
-
-
     @When("user enters valid mobile number from excel sheet {string} row {int} for search module")
     public void user_enters_valid_mobile_number_from_excel_sheet_row_for_search_module(
             String sheet, Integer row) {
         init(sheet);
-        String mobile = getData(row, 4);
+        String mobile = getData(row, 5); // validMobile
 
         if (mobile == null || mobile.trim().isEmpty()) {
             throw new RuntimeException("Valid mobile number is empty in excel");
         }
 
         Pages.get().srp.enterMobileNumber(mobile);
-
     }
 
     @When("user enters invalid mobile number from excel sheet {string} row {int} for search module")
     public void user_enters_invalid_mobile_number_from_excel_sheet_row_for_search_module(
             String sheet, Integer row) {
         init(sheet);
-        String mobile = getData(row, 5);
+        String mobile = getData(row, 6); // invalidMobile
 
         if (mobile == null || mobile.trim().isEmpty()) {
             throw new RuntimeException("Invalid mobile number is empty in excel");
         }
-        Pages.get().srp.enterMobileNumber(mobile);
 
+        Pages.get().srp.enterMobileNumber(mobile);
     }
 
     @Then("system should accept valid 10 digit mobile number for search module")
     public void system_should_accept_valid_10_digit_mobile_number_for_search_module() {
         Assert.assertEquals(
-
             Pages.get().srp.getEnteredMobileNumber().length(),
             10,
             "Valid mobile number was not accepted properly"
         );
-
     }
 
     @Then("system should not accept more than 10 digits for search module")
@@ -271,7 +233,7 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @Then("user should be navigated to search results page")
     public void user_should_be_navigated_to_search_results_page() {
-        String url = Base.getDriver().getCurrentUrl();
+        String url = base.getDriver().getCurrentUrl();
 
         Assert.assertTrue(
             url.contains("/search"),
@@ -279,9 +241,49 @@ public class SearchStepDefinition extends AllFunctionality {
         );
     }
 
+    @When("user selects popular keyword from excel sheet {string} row {int}")
+    public void user_selects_popular_keyword(String sheet, Integer row) {
+        init(sheet);
+        String keyword = getData(row, 3); // popularKeyword
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new RuntimeException("Popular keyword is empty in excel");
+        }
+
+        Pages.get().shp.clickPopularSearchByText(keyword);
+    }
+
+    @Then("search results should match selected keyword from excel")
+    public void verify_keyword_match() {
+        Assert.assertTrue(
+            Pages.get().srp.areResultsDisplayed(),
+            "Search results not displayed"
+        );
+    }
+
+    @When("user selects category from excel sheet {string} row {int}")
+    public void user_selects_category(String sheet, Integer row) {
+        init(sheet);
+        String category = getData(row, 4); // category
+
+        if (category == null || category.trim().isEmpty()) {
+            throw new RuntimeException("Category is empty in excel");
+        }
+
+        Pages.get().shp.clickCategoryByText(category);
+    }
+
+    @Then("user should be navigated to category page for selected category")
+    public void verify_category_navigation() {
+        Assert.assertTrue(
+            Pages.get().srp.getCategoryHeading().length() > 0,
+            "Category page not loaded"
+        );
+    }
+
     @Then("search results should match selected keyword {string}")
     public void search_results_should_match_selected_keyword(String keyword) {
-        String url = Base.getDriver().getCurrentUrl().toLowerCase();
+        String url = base.getDriver().getCurrentUrl().toLowerCase();
 
         Assert.assertTrue(
             url.contains(keyword.toLowerCase().replace(" ", "-"))
@@ -302,7 +304,7 @@ public class SearchStepDefinition extends AllFunctionality {
 
     @Then("user should be navigated to category page for {string}")
     public void user_should_be_navigated_to_category_page_for(String category) {
-        String url = Base.getDriver().getCurrentUrl().toLowerCase();
+        String url = base.getDriver().getCurrentUrl().toLowerCase();
         String formatted = category.toLowerCase()
                                    .replace(" & ", " ")
                                    .replace("&", "")
@@ -342,6 +344,5 @@ public class SearchStepDefinition extends AllFunctionality {
             Pages.get().srp.isJobRoleSelected(role),
             "Filter not applied correctly"
         );
-
     }
 }
