@@ -2,6 +2,7 @@ package com.edureka.utility;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 
 public class Base {
 	
@@ -9,7 +10,11 @@ public class Base {
 	private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     public void initDriver() {
-        driver.set(new EdgeDriver());
+    	EdgeOptions options = new EdgeOptions();
+		options.addArguments("--inprivate");
+		options.addArguments("--disable-notifications");
+        driver.set(new EdgeDriver(options));
+    
     }
 
     public WebDriver getDriver() {

@@ -49,7 +49,7 @@ public class CareerServicePage {
 		// Enter Password
 		WebElement password = base.getDriver().findElement(By.id("loginPassword"));
 		password.clear();
-		password.sendKeys("Password");
+		password.sendKeys("Password@123");
 
 		// Click LOGIN button
 		base.getDriver().findElement(By.xpath("//button[text()='LOG IN']")).click();

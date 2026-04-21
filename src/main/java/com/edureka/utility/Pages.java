@@ -27,6 +27,7 @@ import com.edureka.pages.MasterProgram;
 import com.edureka.pages.MyProfile;
 import com.edureka.pages.OrderPage;
 import com.edureka.pages.OtherDetailsPage;
+import com.edureka.pages.PostJobPage;
 import com.edureka.pages.ProfessionalDetailsPage;
 import com.edureka.pages.SearchHomePage;
 import com.edureka.pages.SearchResultsPage;
@@ -91,6 +92,9 @@ public class Pages {
 	public AllCoursePage allCoursePage;
 	public MasterProgram masterProgram;
 	public TrainingCourse trainingCourse;
+	
+	//postjob
+	public PostJobPage postJobPage;
 
 	// ── Private constructor — only created via loadAllPages ───────────────────
 	private Pages(WebDriver driver) {
@@ -107,7 +111,7 @@ public class Pages {
 
 		// Search
 		shp = PageFactory.initElements(driver, SearchHomePage.class);
-//		srp = PageFactory.initElements(driver, SearchResultsPage.class);
+	srp = PageFactory.initElements(driver, SearchResultsPage.class);
 
 		// Auth
 		loginPage = PageFactory.initElements(driver, LoginPage.class);
@@ -140,6 +144,10 @@ public class Pages {
 		allCoursePage = PageFactory.initElements(driver, AllCoursePage.class);
 		masterProgram = PageFactory.initElements(driver, MasterProgram.class);
 		trainingCourse = PageFactory.initElements(driver, TrainingCourse.class);
+		
+		//PostJob
+		postJobPage = PageFactory.initElements(driver, PostJobPage.class);
+		
 	}
 
 	/**

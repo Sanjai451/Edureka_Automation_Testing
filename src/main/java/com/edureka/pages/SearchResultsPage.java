@@ -1,24 +1,32 @@
 package com.edureka.pages;
 
+import java.time.Duration;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.edureka.utility.Base;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResultsPage {
-	
-	Base base;
-	public SearchResultsPage(Base base) {
-		this.base = base;
-	}
 
-    @FindBy(xpath = "//div[contains(@class,'card giTrackElement')]")
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    public SearchResultsPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        PageFactory.initElements(driver, this);
+    }
+
+    @FindBy(xpath = "//div[contains(@class,'giTrackElement')]")
     private List<WebElement> resultList;
 
-    @FindBy(xpath = "(//div[contains(@class,'card giTrackElement')]//h3)[1]")
+    @FindBy(xpath = "(//div[contains(@class,'giTrackElement')]//h3)[1]")
     private WebElement firstResultTitle;
 
     @FindBy(xpath = "(//span[contains(text(),'View Details')])[1]")
@@ -30,15 +38,31 @@ public class SearchResultsPage {
     @FindBy(xpath = "//*[contains(text(),'Get a call back')]")
     private List<WebElement> callbackForm;
 
-    @FindBy(xpath = "//input[@placeholder='Your mobile number']")
-    private WebElement mobileNumberField;
+    private By mobileNumberBy = By.xpath("//input[@placeholder='Your mobile number']");
+
+    @FindBy(xpath = "//button[contains(text(),'Job Role')]")
+    private WebElement jobRoleDropdown;
+
+    @FindBy(xpath = "//h2")
+    private WebElement categoryHeading;
 
     public boolean areResultsDisplayed() {
-        return resultList.size() > 0;
+        try {
+            wait.until(ExpectedConditions.or(
+                ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(@class,'giTrackElement')]")),
+                ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//*[contains(text(),'did not match')]"))
+            ));
+        } catch (Exception e) {
+            return false;
+        }
+
+        return resultList != null && resultList.size() > 0;
     }
 
     public String getFirstResultTitle() {
-        String text = firstResultTitle.getText();
+        String text = wait.until(ExpectedConditions.visibilityOf(firstResultTitle)).getText();
 
         if (text == null || text.trim().isEmpty()) {
             throw new RuntimeException("First result title is EMPTY");
@@ -48,31 +72,90 @@ public class SearchResultsPage {
     }
 
     public void clickFirstResult() {
-        viewDetailsBtn.click();
+        wait.until(ExpectedConditions.elementToBeClickable(viewDetailsBtn)).click();
     }
 
     public boolean isNoResultMessageDisplayed() {
-        return noResultMessage.size() > 0;
+        return noResultMessage != null && noResultMessage.size() > 0;
     }
 
     public boolean isCallbackFormDisplayed() {
-        return callbackForm.size() > 0;
-    }
-
-    public WebElement getMobileNumberField() {
-        return mobileNumberField;
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[contains(text(),'Get a call back')]")
+            ));
+            return callbackForm != null && callbackForm.size() > 0;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void enterMobileNumber(String mobile) {
-        JavascriptExecutor js = (JavascriptExecutor) base.getDriver();
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(mobileNumberBy));
 
-        js.executeScript("arguments[0].scrollIntoView({block:'center'});", mobileNumberField);
-        js.executeScript("arguments[0].value='';", mobileNumberField);
-        js.executeScript("arguments[0].click();", mobileNumberField);
-        js.executeScript("arguments[0].value=arguments[1];", mobileNumberField, mobile);
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", field
+        );
+
+        wait.until(ExpectedConditions.visibilityOf(field));
+        field.clear();
+        field.sendKeys(mobile);
     }
 
     public String getEnteredMobileNumber() {
-        return mobileNumberField.getAttribute("value");
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(mobileNumberBy));
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", field
+        );
+
+        wait.until(ExpectedConditions.visibilityOf(field));
+        return field.getAttribute("value");
+    }
+
+    public void clickJobRoleDropdown() {
+        WebElement dropdown = wait.until(
+            ExpectedConditions.elementToBeClickable(jobRoleDropdown)
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].click();", dropdown
+        );
+    }
+
+    public void selectJobRole(String role) {
+        WebElement label = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//label[normalize-space()='" + role + "']")
+            )
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", label
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].click();", label
+        );
+    }
+
+    public String getCategoryHeading() {
+        return wait.until(ExpectedConditions.visibilityOf(categoryHeading)).getText();
+    }
+
+    public boolean isJobRoleSelected(String role) {
+        WebElement label = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//label[normalize-space()='" + role + "']")
+            )
+        );
+
+        String inputId = label.getAttribute("for");
+
+        WebElement input = wait.until(
+            ExpectedConditions.presenceOfElementLocated(By.id(inputId))
+        );
+
+        return input.isSelected();
     }
 }
