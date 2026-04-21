@@ -12,10 +12,10 @@ public class Dashboard {
 
 	@FindBy(linkText = "My Profile")
 	private WebElement myProfileLink;
-	
+
 	@FindBy(linkText = "Become an Instructor")
 	private WebElement becomeInstructorLink;
-	
+
 	@FindBy(linkText = "Become a Partner")
 	private WebElement becomePartnerLink;
 
@@ -53,21 +53,20 @@ public class Dashboard {
 		getProfileIcon().click();
 		getMyProfileLink().click();
 	}
-	
 
-		 public void clickBecomeInstructor(WebDriver driver) {
-			 try {
-			        getBecomeInstructorLink().click();
-			    } catch (Exception e) {
+	 public void clickBecomeInstructor(WebDriver driver) {
+		 try {
+		        getBecomeInstructorLink().click();
+		    } catch (Exception e) {
 
-			        JavascriptExecutor js = (JavascriptExecutor) driver;
+		        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-			        js.executeScript("window.scrollBy(0,300)");
-			        js.executeScript("arguments[0].click();", getBecomeInstructorLink());
-			    }
-			 
+		        js.executeScript("window.scrollBy(0,300)");
+		        js.executeScript("arguments[0].click();", getBecomeInstructorLink());
 		    }
-	
+		 
+	    }
+
 	public void clickBecomePartner(WebDriver driver) {
 		 
 		 
@@ -84,4 +83,38 @@ public class Dashboard {
 		        js.executeScript("arguments[0].click();", getBecomePartnerLink());
 		    }
 	}
+	
+	
+	 @FindBy(linkText = "Hire from Edureka")
+	    private WebElement hireFromEdurekaLink;
+
+	    // 🔹 Getter
+	    public WebElement getHireFromEdurekaLink() {
+	        return hireFromEdurekaLink;
+	    }
+
+	    // 🔹 Business Logic (your style)
+	    public void clickHireFromEdureka(WebDriver driver) {
+
+	        try {
+	            // Normal click
+	            getHireFromEdurekaLink().click();
+
+	        } catch (Exception e) {
+
+	            JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	            // Scroll DOWN slightly
+	            js.executeScript("window.scrollBy(0,300)");
+
+	            // Optional: bring element to center (more stable)
+	            js.executeScript(
+	                "arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+	                getHireFromEdurekaLink()
+	            );
+
+	            // JS click fallback
+	            js.executeScript("arguments[0].click();", getHireFromEdurekaLink());
+	        }
+}
 }

@@ -7,22 +7,28 @@ import java.util.List;
 
 import org.testng.Assert;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
+import com.edureka.utility.ExtentReportManager;
 import com.edureka.utility.Pages;
 
 public class MyOrderAndInvoices extends AllFunctionality {
 
-    private Base base;
+	 private Base base;
+	    private ExtentTest logs;
 
-    public MyOrderAndInvoices(Base base) {
-        this.base = base;
-    }
+	    public MyOrderAndInvoices(Base base) {
+	        this.base = base;
+	        logs = ExtentReportManager.getTest();
+	    }
 
     // NAVIGATION
     @Given("user clicks on My Orders and Invoices")
     public void user_clicks_on_my_orders_and_invoices() {
         Pages.get().myProfile.clickMyOrders();
+        logs.log(Status.PASS, "Clicked on 'My Orders and Invoices' section");
     }
 
     // NO COURSES MESSAGE
@@ -33,6 +39,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
                 Pages.get().ordersPage.isNoCoursesMessageDisplayed(),
                 "No courses message not displayed"
         );
+        logs.log(Status.PASS, "'No Courses' message displayed successfully");
     }
 
     @Then("message should indicate no enrolled courses")
@@ -44,6 +51,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
                 message.toLowerCase().contains("not enrolled"),
                 "Incorrect no courses message"
         );
+        logs.log(Status.PASS, "Correct 'no enrolled courses' message verified");
     }
 
     // CLICK BUTTON
@@ -51,6 +59,7 @@ public class MyOrderAndInvoices extends AllFunctionality {
     @When("user clicks Browse All Courses button")
     public void user_clicks_browse_all_courses_button() {
         Pages.get().ordersPage.clickBrowseCourses();
+        logs.log(Status.PASS, "Clicked 'Browse All Courses' button");
     }
 
     // REDIRECTION
@@ -69,5 +78,6 @@ public class MyOrderAndInvoices extends AllFunctionality {
                 currentUrl.contains(expectedUrlPart),
                 "Redirection failed. Expected URL to contain: " + expectedUrlPart
         );
+        logs.log(Status.PASS, "User successfully redirected to expected page");
     }
 }
