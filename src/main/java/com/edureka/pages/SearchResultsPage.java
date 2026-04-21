@@ -12,14 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.edureka.utility.Base;
-
 public class SearchResultsPage {
-	
-	Base base;
-	public SearchResultsPage(Base base) {
-		this.base = base;
-	}
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -45,8 +38,7 @@ public class SearchResultsPage {
     @FindBy(xpath = "//*[contains(text(),'Get a call back')]")
     private List<WebElement> callbackForm;
 
-    @FindBy(xpath = "//input[@placeholder='Your mobile number']")
-    private WebElement mobileNumberField;
+    private By mobileNumberBy = By.xpath("//input[@placeholder='Your mobile number']");
 
     @FindBy(xpath = "//button[contains(text(),'Job Role')]")
     private WebElement jobRoleDropdown;
@@ -89,6 +81,9 @@ public class SearchResultsPage {
 
     public boolean isCallbackFormDisplayed() {
         try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[contains(text(),'Get a call back')]")
+            ));
             return callbackForm != null && callbackForm.size() > 0;
         } catch (Exception e) {
             return false;
@@ -96,40 +91,52 @@ public class SearchResultsPage {
     }
 
     public void enterMobileNumber(String mobile) {
-        JavascriptExecutor js = (JavascriptExecutor) base.getDriver();
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(mobileNumberBy));
 
-        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(
-            By.xpath("//input[@placeholder='Your mobile number']")
-        ));
-
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", field);
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", field
+        );
 
         wait.until(ExpectedConditions.visibilityOf(field));
-
         field.clear();
         field.sendKeys(mobile);
     }
+
     public String getEnteredMobileNumber() {
+        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(mobileNumberBy));
 
-        WebElement field = wait.until(ExpectedConditions.presenceOfElementLocated(
-            By.xpath("//input[@placeholder='Your mobile number']")
-        ));
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", field
+        );
 
+        wait.until(ExpectedConditions.visibilityOf(field));
         return field.getAttribute("value");
     }
 
     public void clickJobRoleDropdown() {
-        wait.until(ExpectedConditions.elementToBeClickable(jobRoleDropdown)).click();
+        WebElement dropdown = wait.until(
+            ExpectedConditions.elementToBeClickable(jobRoleDropdown)
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].click();", dropdown
+        );
     }
 
     public void selectJobRole(String role) {
-        String formattedId = "_" + role.replace(" ", "_") + "_";
-
-        WebElement element = wait.until(
-            ExpectedConditions.presenceOfElementLocated(By.id(formattedId))
+        WebElement label = wait.until(
+            ExpectedConditions.elementToBeClickable(
+                By.xpath("//label[normalize-space()='" + role + "']")
+            )
         );
 
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});", label
+        );
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].click();", label
+        );
     }
 
     public String getCategoryHeading() {
@@ -137,12 +144,18 @@ public class SearchResultsPage {
     }
 
     public boolean isJobRoleSelected(String role) {
-        String formattedId = "_" + role.replace(" ", "_") + "_";
-
-        WebElement element = wait.until(
-            ExpectedConditions.presenceOfElementLocated(By.id(formattedId))
+        WebElement label = wait.until(
+            ExpectedConditions.presenceOfElementLocated(
+                By.xpath("//label[normalize-space()='" + role + "']")
+            )
         );
 
-        return element.isSelected();
+        String inputId = label.getAttribute("for");
+
+        WebElement input = wait.until(
+            ExpectedConditions.presenceOfElementLocated(By.id(inputId))
+        );
+
+        return input.isSelected();
     }
 }

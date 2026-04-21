@@ -14,10 +14,10 @@ public class UserDetailsPage {
 	private WebElement designationInput;
 
 	// Dropdown Elements
-	@FindBy(xpath = "//span[contains(text(),'IT-Hardware')]/ancestor::button")
+	@FindBy(xpath = "(//button[contains(@class,'ngx-dropdown-button')])[2]")
 	private WebElement industryDropdown;
 
-	@FindBy(xpath = "//span[contains(text(),'0-2 years')]/ancestor::button")
+	@FindBy(xpath = "(//button[contains(@class,'ngx-dropdown-button')])[1]")
 	private WebElement experienceDropdown;
 
 	@FindBy(xpath = "//label[contains(text(),'Select Current TimeZone')]/following::button[1]")

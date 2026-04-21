@@ -7,28 +7,25 @@ import org.openqa.selenium.support.FindBy;
 
 public class TopicsOfInterestPage {
 
-    //  BUTTONS 
+    // Buttons
 
-    // Edit Button
     @FindBy(xpath = "//span[contains(text(),'Topics of Interest')]/following::button[contains(text(),'EDIT')]")
     private WebElement editButton;
 
-    // Add Now Button
     @FindBy(xpath = "//button[contains(text(),'Add Now')]")
     private WebElement addNowButton;
 
-    // SECTION 
+    // Section
 
     @FindBy(xpath = "//span[contains(text(),'Topics of Interest')]")
     private WebElement topicsSection;
 
-    //  SELECTED TOPICS
+    // Selected topics
 
-    // All selected topics
     @FindBy(xpath = "//ul[contains(@class,'toi-list')]//label")
     private List<WebElement> selectedTopics;
 
-    //  GETTERS 
+    // Getters
 
     public WebElement getEditButton() {
         return editButton;
@@ -46,32 +43,29 @@ public class TopicsOfInterestPage {
         return selectedTopics;
     }
 
-    //  BUSINESS METHODS 
+    // Business methods
 
     public void clickEditButton() {
-        editButton.click();
+        getEditButton().click();
     }
 
     public void clickAddNow() {
-        addNowButton.click();
+        getAddNowButton().click();
     }
 
-    //  VALIDATION METHODS
+    // Validation methods
 
-    //  Verify section displayed
     public boolean isTopicsSectionDisplayed() {
-        return topicsSection.isDisplayed();
+        return getTopicsSection().isDisplayed();
     }
 
-    //  Verify at least one topic selected
     public boolean isAnyTopicSelected() {
-        return selectedTopics.size() > 0;
+        return getSelectedTopics().size() > 0;
     }
 
-    // Verify single topic
     public boolean verifyTopicSelected(String expectedTopic) {
 
-        for (WebElement topic : selectedTopics) {
+        for (WebElement topic : getSelectedTopics()) {
             if (topic.getText().trim().equalsIgnoreCase(expectedTopic)) {
                 return true;
             }
@@ -79,13 +73,12 @@ public class TopicsOfInterestPage {
         return false;
     }
 
-    // Verify multiple topics
     public boolean verifyMultipleTopics(List<String> expectedTopics) {
 
         for (String expected : expectedTopics) {
             boolean found = false;
 
-            for (WebElement topic : selectedTopics) {
+            for (WebElement topic : getSelectedTopics()) {
                 if (topic.getText().trim().equalsIgnoreCase(expected)) {
                     found = true;
                     break;
@@ -99,12 +92,11 @@ public class TopicsOfInterestPage {
         return true;
     }
 
-    // Get all topics text 
     public String getAllTopicsText() {
 
         StringBuilder topicsText = new StringBuilder();
 
-        for (WebElement topic : selectedTopics) {
+        for (WebElement topic : getSelectedTopics()) {
             topicsText.append(topic.getText()).append(", ");
         }
 

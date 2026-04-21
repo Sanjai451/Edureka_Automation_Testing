@@ -7,11 +7,10 @@ import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class Personalize {
+public class Personalize extends AllFunctionality {
 
     private Base base;
-    AllFunctionality util = new AllFunctionality();
-
+    
     public Personalize(Base base) {
         this.base = base;
     }
@@ -46,18 +45,18 @@ public class Personalize {
     @When("user reads personal details from excel")
     public void read_user_details() {
 
-        util.init("Personalize");
+    	init("Personalize");
 
-        name = util.getData(1, 0);
-        designation = util.getData(1, 1);
-        industry = util.getData(1, 2);
-        experience = util.getData(1, 3);
-        timezone = util.getData(1, 4);
-        prefTimezone = util.getData(1, 5);
-        weekFrom = util.getData(1, 6);
-        weekTo = util.getData(1, 7);
-        weekendFrom = util.getData(1, 8);
-        weekendTo = util.getData(1, 9);
+    	name = getData(1, 0);
+    	designation = getData(1, 1);
+    	industry = getData(1, 2);
+    	experience = getData(1, 3);
+    	timezone = getData(1, 4);
+    	prefTimezone = getData(1, 5);
+    	weekFrom = getData(1, 6);
+    	weekTo = getData(1, 7);
+    	weekendFrom = getData(1, 8);
+    	weekendTo = getData(1, 9);
     }
 
     @When("user fills all user details from excel")
@@ -114,8 +113,8 @@ public class Personalize {
 
     @When("user reads learning goal from excel")
     public void read_learning_goal() {
-        util.init("LearningGoals");
-        learningGoal = util.getData(1, 0);
+        init("LearningGoals");
+        learningGoal = getData(1, 0);
     }
 
     @When("user selects learning goal from excel")
@@ -133,15 +132,13 @@ public class Personalize {
     @When("user reads study plan data from excel")
     public void read_study_plan() {
 
-        util.init("StudyPlan");
-
-        day1 = util.getData(1, 0);
-        from1 = util.getData(1, 1);
-        to1 = util.getData(1, 2);
-
-        day2 = util.getData(2, 0);
-        from2 = util.getData(2, 1);
-        to2 = util.getData(2, 2);
+    	init("StudyPlan");
+    	day1 = getData(1, 0);
+    	from1 = getData(1, 1);
+    	to1 = getData(1, 2);
+    	day2 = getData(2, 0);
+    	from2 = getData(2, 1);
+    	to2 = getData(2, 2);
     }
 
     @When("user fills study plan from excel")
@@ -190,8 +187,8 @@ public class Personalize {
 
     @When("user reads invalid designation from excel")
     public void read_invalid_designation() {
-        util.init("InvalidData");
-        invalidDesignation = util.getData(1, 0);
+        init("InvalidData");
+        invalidDesignation = getData(1, 0);
     }
 
     @When("user enters invalid designation from excel")

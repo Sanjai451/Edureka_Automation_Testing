@@ -62,6 +62,7 @@ public class HomePageTest extends AllFunctionality{
 		String currPageURL = getUrl(base.getDriver());
 		System.out.println("redirected URL : " + currPageURL);
 		assertTrue(currPageURL.contains(string));
+		assertTrue(false);
 	}
 	
 	@When("the user clicks on {string} in the navigation under community")

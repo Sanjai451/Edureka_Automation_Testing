@@ -13,8 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchHomePage {
-	
-	
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -25,17 +23,33 @@ public class SearchHomePage {
         PageFactory.initElements(driver, this);
     }
 
+  
     @FindBy(xpath = "//div[contains(@class,'navbar_search_click_bx')]")
     private WebElement searchTrigger;
 
+    private By searchInputBy = By.xpath("//input[contains(@id,'search') or contains(@placeholder,'Search')]");
+
     @FindBy(xpath = "//input[@name='search']")
     private WebElement searchInput;
+
 
     public boolean isSearchTriggerDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(searchTrigger)).isDisplayed();
     }
 
     public void clickSearchTrigger() {
+
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(searchTrigger));
+        element.click();
+    }
+
+    public boolean isSearchPanelDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy)).isDisplayed();
+    }
+
+    public void enterKeyword(String keyword) {
+        WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy));
+
 
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(searchTrigger));
 
@@ -48,29 +62,27 @@ public class SearchHomePage {
         ));
     }
 
-    public boolean isSearchPanelDisplayed() {
 
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//div[@role='dialog' and contains(@class,'show')]")
-        ));
-
-        return wait.until(ExpectedConditions.visibilityOf(searchInput)).isDisplayed();
-    }
-
-    public void enterKeyword(String keyword) {
-        WebElement input = wait.until(ExpectedConditions.visibilityOf(searchInput));
-        input.clear();
-        input.sendKeys(keyword);
-    }
+//    public void enterKeyword(String keyword) {
+//        WebElement input = wait.until(ExpectedConditions.visibilityOf(searchInput));
+//        input.clear();
+//        input.sendKeys(keyword);
+//    }
 
     public String getEnteredKeyword() {
-        return wait.until(ExpectedConditions.visibilityOf(searchInput)).getAttribute("value");
+    	
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy))
+                   .getAttribute("value");
     }
 
     public void pressEnter() {
-        wait.until(ExpectedConditions.visibilityOf(searchInput)).sendKeys(Keys.ENTER);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy))
+            .sendKeys(Keys.ENTER);
     }
+
+//    public void pressEnter() {
+//        wait.until(ExpectedConditions.visibilityOf(searchInput)).sendKeys(Keys.ENTER);
+//    }
 
     public void clickPopularSearchByText(String keyword) {
         WebElement popular = wait.until(
