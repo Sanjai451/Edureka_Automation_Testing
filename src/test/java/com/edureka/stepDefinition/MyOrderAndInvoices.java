@@ -7,10 +7,11 @@ import java.util.List;
 
 import org.testng.Assert;
 
+import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class MyOrderAndInvoices {
+public class MyOrderAndInvoices extends AllFunctionality {
 
     private Base base;
 

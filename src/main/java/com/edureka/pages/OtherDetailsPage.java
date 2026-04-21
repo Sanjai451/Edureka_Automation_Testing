@@ -1,22 +1,20 @@
 package com.edureka.pages;
 
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class OtherDetailsPage {
 
     // ================= ADD BUTTONS =================
 
-    @FindBy(xpath = "//span[contains(text(),'Add Another Degree')]/ancestor::button")
+    @FindBy(xpath = "//span[text()='Add Another Degree']/ancestor::button")
     private WebElement addDegreeBtn;
 
-    @FindBy(xpath = "//span[contains(text(),'Add Another Certification')]/ancestor::button")
+    @FindBy(xpath = "//span[text()='Add Another Certification']/ancestor::button")
     private WebElement addCertificationBtn;
 
-
-    // ================= DEGREE FIELDS =================
+    // ================= DEGREE =================
 
     @FindBy(id = "degree-name")
     private WebElement degreeInput;
@@ -24,25 +22,49 @@ public class OtherDetailsPage {
     @FindBy(id = "company-name")
     private WebElement instituteInput;
 
+    // ================= DEGREE TIME =================
 
-    // ================= TIME PERIOD =================
+    @FindBy(name = "start_month")
+    private WebElement startMonth;
 
-    // Month dropdown
-    @FindBy(xpath = "//select[@formcontrolname='start_month']")
-    private WebElement startMonthDropdown;
+    @FindBy(xpath = "(//select[@formcontrolname='start_year'])[1]")
+    private WebElement startYear;
+    @FindBy(xpath= "(//select[@formcontrolname='end_month'])[1]")
+    private WebElement endMonth;
 
-    // Year dropdown
-    @FindBy(xpath = "//select[@formcontrolname='start_year']")
-    private WebElement startYearDropdown;
+    @FindBy(xpath= "(//select[@formcontrolname='end_year'])[1]")
+    private WebElement endYear;
 
+    @FindBy(xpath = "//label[contains(text(),'highest educational qualification')]/preceding::input[1]")
+    private WebElement highestQualificationRadio;
 
-    // ================= SAVE BUTTON =================
+    // ================= CERTIFICATION =================
+
+    @FindBy(id = "certificate-name")
+    private WebElement certificationName;
+
+    @FindBy(id = "institute-name")
+    private WebElement certificationInstitute;
+
+    @FindBy(xpath = "(//select[@formcontrolname='start_month'])[2]")
+    private WebElement certStartMonth;
+
+    @FindBy(xpath = "(//select[@formcontrolname='start_year'])[2]")
+    private WebElement certStartYear;
+
+    @FindBy(xpath = "(//select[@formcontrolname='end_month'])[2]")
+    private WebElement certEndMonth;
+
+    @FindBy(xpath = "(//select[@formcontrolname='end_year'])[2]")
+    private WebElement certEndYear;
+
+    // ================= SAVE =================
 
     @FindBy(xpath = "//button[@type='submit' and contains(text(),'Save')]")
     private WebElement saveButton;
-
-
-    // ================= GETTERS =================
+    
+    
+ // ================= GETTERS =================
 
     public WebElement getAddDegreeBtn() {
         return addDegreeBtn;
@@ -60,62 +82,95 @@ public class OtherDetailsPage {
         return instituteInput;
     }
 
-    public WebElement getStartMonthDropdown() {
-        return startMonthDropdown;
+    public WebElement getStartMonth() {
+        return startMonth;
     }
 
-    public WebElement getStartYearDropdown() {
-        return startYearDropdown;
+    public WebElement getStartYear() {
+        return startYear;
+    }
+
+    public WebElement getEndMonth() {
+        return endMonth;
+    }
+
+    public WebElement getEndYear() {
+        return endYear;
+    }
+
+    public WebElement getHighestQualificationRadio() {
+        return highestQualificationRadio;
+    }
+
+    public WebElement getCertificationName() {
+        return certificationName;
+    }
+
+    public WebElement getCertificationInstitute() {
+        return certificationInstitute;
+    }
+
+    public WebElement getCertStartMonth() {
+        return certStartMonth;
+    }
+
+    public WebElement getCertStartYear() {
+        return certStartYear;
+    }
+
+    public WebElement getCertEndMonth() {
+        return certEndMonth;
+    }
+
+    public WebElement getCertEndYear() {
+        return certEndYear;
     }
 
     public WebElement getSaveButton() {
         return saveButton;
     }
 
-
     // ================= ACTION METHODS =================
 
-    public void clickAddDegree() {
+    public void fillDegree(String degree, String institute,
+                           String smonth, String syear,
+                           String emonth, String eyear) {
+
         addDegreeBtn.click();
-    }
 
-    public void clickAddCertification() {
-        addCertificationBtn.click();
-    }
-
-    public void enterDegree(String degree) {
         degreeInput.clear();
         degreeInput.sendKeys(degree);
-    }
 
-    public void enterInstitute(String institute) {
         instituteInput.clear();
         instituteInput.sendKeys(institute);
+
+        new Select(startMonth).selectByVisibleText(smonth);
+        new Select(startYear).selectByVisibleText(syear);
+        new Select(endMonth).selectByVisibleText(emonth);
+        new Select(endYear).selectByVisibleText(eyear);
+
+        highestQualificationRadio.click();
     }
 
-    public void selectStartMonth(String month) {
-        startMonthDropdown.sendKeys(month); // or use Select class
-    }
+    public void fillCertification(String name, String institute,
+                                  String smonth, String syear,
+                                  String emonth, String eyear) {
 
-    public void selectStartYear(String year) {
-        startYearDropdown.sendKeys(year);
+        addCertificationBtn.click();
+
+        certificationName.clear();
+        certificationName.sendKeys(name);
+
+        certificationInstitute.clear();
+        certificationInstitute.sendKeys(institute);
+
+        new Select(certStartMonth).selectByVisibleText(smonth);
+        new Select(certStartYear).selectByVisibleText(syear);
+        new Select(certEndMonth).selectByVisibleText(emonth);
+        new Select(certEndYear).selectByVisibleText(eyear);
     }
 
     public void clickSave() {
         saveButton.click();
-    }
-
-
-    // ================= COMBINED METHOD =================
-
-    public void fillOtherDetails(String degree, String institute, String month, String year) {
-
-        clickAddDegree();
-
-        enterDegree(degree);
-        enterInstitute(institute);
-
-        selectStartMonth(month);
-        selectStartYear(year);
     }
 }

@@ -3,6 +3,7 @@ package com.edureka.pages;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,16 +23,22 @@ public class SearchHomePage {
         PageFactory.initElements(driver, this);
     }
 
+  
     @FindBy(xpath = "//div[contains(@class,'navbar_search_click_bx')]")
     private WebElement searchTrigger;
 
     private By searchInputBy = By.xpath("//input[contains(@id,'search') or contains(@placeholder,'Search')]");
+
+    @FindBy(xpath = "//input[@name='search']")
+    private WebElement searchInput;
+
 
     public boolean isSearchTriggerDisplayed() {
         return wait.until(ExpectedConditions.visibilityOf(searchTrigger)).isDisplayed();
     }
 
     public void clickSearchTrigger() {
+
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(searchTrigger));
         element.click();
     }
@@ -42,11 +49,28 @@ public class SearchHomePage {
 
     public void enterKeyword(String keyword) {
         WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy));
-        input.clear();
-        input.sendKeys(keyword);
+
+
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(searchTrigger));
+
+        // Use JS click (avoids overlay issue)
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+        // Wait for input to appear
+        wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//input[@name='search']")
+        ));
     }
 
+
+//    public void enterKeyword(String keyword) {
+//        WebElement input = wait.until(ExpectedConditions.visibilityOf(searchInput));
+//        input.clear();
+//        input.sendKeys(keyword);
+//    }
+
     public String getEnteredKeyword() {
+    	
         return wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy))
                    .getAttribute("value");
     }
@@ -55,6 +79,10 @@ public class SearchHomePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchInputBy))
             .sendKeys(Keys.ENTER);
     }
+
+//    public void pressEnter() {
+//        wait.until(ExpectedConditions.visibilityOf(searchInput)).sendKeys(Keys.ENTER);
+//    }
 
     public void clickPopularSearchByText(String keyword) {
         WebElement popular = wait.until(

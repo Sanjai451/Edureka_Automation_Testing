@@ -1,9 +1,5 @@
 Feature: Search functionality in Edureka
 
-
-
-
-
  #  BASIC SEARCH FLOW 
 
   Scenario: Verify search bar visibility, panel opening, and valid search flow
@@ -19,7 +15,9 @@ Feature: Search functionality in Edureka
     Then opened course page title should match stored result title for search module
 
 
+
   #PARTIAL + CASE INSENSITIVE
+
 
   Scenario: Verify partial and case insensitive search using datatable
     Given user is ready on homepage for search module
@@ -29,6 +27,7 @@ Feature: Search functionality in Edureka
       | AWS     |
       | aws     |
     Then datatable search should complete for search module
+
 
 
   Scenario Outline: Verify Filter By Job Role functionality
@@ -74,7 +73,6 @@ Feature: Search functionality in Edureka
     Then system should accept valid 10 digit mobile number for search module
     When user enters invalid mobile number from excel sheet "SearchData" row 1 for search module
     Then system should not accept more than 10 digits for search module
-    
     
     
     
