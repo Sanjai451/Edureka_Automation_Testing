@@ -6,10 +6,10 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-
-		features = {"./src/test/java/com/edureka/featureFile/PostJob.feature"},
-
-
+		features = {
+				"src/test/java/com/edureka/featureFile/Topics of Interest.feature",
+				"src/test/java/com/edureka/featureFile/Career Services.feature"
+				},
 		glue = "com.edureka.stepDefinition",
 //		dryRun = false
 		plugin   = {
