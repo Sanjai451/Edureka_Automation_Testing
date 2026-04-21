@@ -62,19 +62,21 @@ public class Hook extends AllFunctionality {
         if (scenario.isFailed()) {
             // ── Take screenshot and attach to Extent report ──
             String base64Screenshot = ScreenshotUtil.takeScreenshotAsBase64(Base.getDriver());
+            
             test.fail("Scenario FAILED: " + scenario.getName(),
                     MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
 
             // ── Also embed in Cucumber HTML report ──
             byte[] screenshot = ((org.openqa.selenium.TakesScreenshot) Base.getDriver())
                     .getScreenshotAs(org.openqa.selenium.OutputType.BYTES);
+            
             scenario.attach(screenshot, "image/png", "Failure Screenshot");
 
         } else {
             test.pass("Scenario PASSED: " + scenario.getName());
         }
 
-        Base.quitDriver();
+//        Base.quitDriver();
         Pages.cleanUp();
         
 	}

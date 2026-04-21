@@ -1,15 +1,21 @@
 package com.edureka.stepDefinition;
 
-import java.awt.Window;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
+import com.edureka.utility.ExtentReportManager;
 import com.edureka.utility.Pages;
 
 import io.cucumber.java.en.Given;
@@ -17,32 +23,69 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class WebinarTest extends AllFunctionality {
-	Base base;
-	String homePageHandle;
+	private Base base;
+	private String homePageHandle;
+	private ExtentTest logs;
+	private WebDriverWait wait;
+	
 	public WebinarTest(Base base) {
 		this.base = base;
+		logs = ExtentReportManager.getTest();
+		this.wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));
 	}
 	
 	
 	@Given("user is on the Edureka homepage")
 	public void user_is_on_the_edureka_homepage() {
-		System.out.println("Current Page : " + getUrl(base.getDriver()));
-		homePageHandle = base.getDriver().getWindowHandle();
+//		System.out.println("Current Page : " + getUrl(base.getDriver()));
+//		homePageHandle = base.getDriver().getWindowHandle();
+//		logs.log(Status.INFO,"User is on edureka home page");
+		WebDriver driver = base.getDriver();
+
+        // Store current window handle for later tab switching
+        homePageHandle = driver.getWindowHandle();
+
+        // Assert user is on homepage using URL
+        wait.until(driver1 -> getUrl(driver1).contains("edureka"));
+        Assert.assertTrue(getUrl(driver).contains("edureka"),
+                "User is not on Edureka homepage");
+
+        logs.log(Status.INFO, "User is on Edureka homepage");
 	}
 
 	@When("user clicks on {string} from navigation menu")
 	public void user_clicks_on_from_navigation_menu(String string) {
-		Pages.get().homePage.clickOnWebinarFromNavbar();
+//		Pages.get().homePage.clickOnWebinarFromNavbar();
+//		logs.log(Status.INFO,"Navigated to Webinar Page");
+		// Wait for navigation element to be clickable
+        wait.until(ExpectedConditions.elementToBeClickable(
+                Pages.get().homePage.getWebinarNavElement()));
+
+        Pages.get().homePage.clickOnWebinarFromNavbar();
+
+        logs.log(Status.INFO, "Clicked on Webinar from navigation menu");
 	}
 
 	@Then("user should be redirected to webinars page")
 	public void user_should_be_redirected_to_webinars_page() {
-		System.out.println("Current Page :" + getUrl(base.getDriver()));
+//		System.out.println("Current Page :" + getUrl(base.getDriver()));
+//		logs.log(Status.INFO,"Redirected to Webinar Page");
+		
+		 // Wait until URL changes to webinar page
+        wait.until(driver -> getUrl(driver).contains("webinars"));
+
+        Assert.assertTrue(getUrl(base.getDriver()).contains("webinars"),
+                "User not redirected to webinars page");
+
+        logs.log(Status.PASS, "User successfully redirected to webinars page");
 	}
 
 	@Then("webinars page should load successfully")
 	public void webinars_page_should_load_successfully() {
-		System.out.println("Current Page :" + getUrl(base.getDriver()));
+		wait.until(driver -> getUrl(driver).contains("webinar"));
+		
+		System.out.println("87 Current Page :" + getUrl(base.getDriver()));
+		logs.log(Status.INFO,"Webinar Page loaded successfully");
 	}
 
 	@Then("all upcoming webinars should be displayed")
@@ -51,8 +94,10 @@ public class WebinarTest extends AllFunctionality {
 		if(Pages.get().webinarHomePage.getUpcomingWebinarsTitles().size() > 0) {
 			System.out.println("All upcoming webinar : ");
 			Pages.get().webinarHomePage.printAllUpcomingWebinarTitles();
+			logs.log(Status.INFO,"Webinars available");
 		}else {
 			System.out.println("No upcoming webinars available at the time");
+			logs.log(Status.INFO,"No upcoming webinar available at this time");
 		}
 		
 	}
@@ -65,6 +110,7 @@ public class WebinarTest extends AllFunctionality {
 		}
 		else {
 			System.out.println("No webinars available at the time");
+			logs.log(Status.INFO,"No webinar available at this time");
 		}
 	}
 
@@ -74,9 +120,11 @@ public class WebinarTest extends AllFunctionality {
 		if(Pages.get().webinarHomePage.getAllWebinarsCategory().size() > 1) {
 			System.out.println("Navigating to category : " + category);
 			Pages.get().webinarHomePage.clickOnWebinarCategory(base.getDriver(), category);
+			logs.log(Status.INFO,"Navigate to webinar with category : " + category);
 		}
 		else {
 			System.out.println("No webinars available at the time");
+			logs.log(Status.INFO,"No webinar available at this time");
 		}
 		
 	}
@@ -88,6 +136,7 @@ public class WebinarTest extends AllFunctionality {
 		
 		if(base.getDriver().getWindowHandles().size() < 2) {
 			System.out.println("Only one tab available : Unable to switch");
+			logs.log(Status.INFO,"Unable to switch tab");
 			return;
 		}
 		
@@ -97,6 +146,7 @@ public class WebinarTest extends AllFunctionality {
 		for(String p : handles) {
 			if(! p.equals(homePageHandle)) {
 				base.getDriver().switchTo().window(p);
+				logs.log(Status.INFO,"Control switched to new tab");
 				break;
 			}
 		}
@@ -113,6 +163,7 @@ public class WebinarTest extends AllFunctionality {
 		
 		if(base.getDriver().getWindowHandles().size() < 2) {
 			System.out.println("Filling failed : No webinar present at the page at this time + " + new Date());
+			logs.log(Status.WARNING,"No webinar present at the page at this time");
 			return;
 		}
 		//
@@ -129,11 +180,13 @@ public class WebinarTest extends AllFunctionality {
 
 	    // Pass to Page Object
 	    Pages.get().webinarCategoryPage.fillDetailAndSubmit(email, phone, experience);
+	    logs.log(Status.PASS,"Data submitted at webinar registration");
 	}
 
 
 	@Then("registration form or login page should be displayed")
 	public void registration_form_or_login_page_should_be_displayed() {
 		System.out.println("Current URL : " + getUrl(base.getDriver()));
+		logs.log(Status.PASS, "Registration/Login page displayed successfully");
 	}
 }

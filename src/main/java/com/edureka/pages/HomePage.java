@@ -161,6 +161,10 @@ public class HomePage {
     	resourceIcon.click();
     	communityFromNavbar.click();
     }
+	
+	public WebElement getWebinarNavElement() {
+		return resourceIcon;
+	}
     
     public void clickOnWebinarFromNavbar() {
     	resourceIcon.click();
