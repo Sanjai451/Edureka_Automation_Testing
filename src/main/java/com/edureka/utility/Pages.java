@@ -1,8 +1,13 @@
+
 package com.edureka.utility;
+
+
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import com.edureka.pages.HomePage;
+import com.edureka.pages.AddInstructorPage;
 import com.edureka.pages.AllCoursePage;
 import com.edureka.pages.BlogCategoryPage;
 import com.edureka.pages.BlogHomePage;
@@ -27,6 +32,7 @@ import com.edureka.pages.MasterProgram;
 import com.edureka.pages.MyProfile;
 import com.edureka.pages.OrderPage;
 import com.edureka.pages.OtherDetailsPage;
+import com.edureka.pages.PartnerWithUsPage;
 import com.edureka.pages.ProfessionalDetailsPage;
 import com.edureka.pages.SearchHomePage;
 import com.edureka.pages.SearchResultsPage;
@@ -86,6 +92,8 @@ public class Pages {
 	public LearningGoalsPage learningGoalsPage;
 	public StudyPlanPage studyPlanPage;
 	public OrderPage ordersPage;
+	public AddInstructorPage addInstructorPage;
+	public PartnerWithUsPage partnerWithUsPage;
 
 	// Courses
 	public AllCoursePage allCoursePage;
@@ -135,6 +143,8 @@ public class Pages {
 		learningGoalsPage = PageFactory.initElements(driver, LearningGoalsPage.class);
 		studyPlanPage = PageFactory.initElements(driver, StudyPlanPage.class);
 		ordersPage = PageFactory.initElements(driver, OrderPage.class);
+		addInstructorPage = PageFactory.initElements(driver, AddInstructorPage.class);
+		partnerWithUsPage = PageFactory.initElements(driver, PartnerWithUsPage.class);
 
 		// Courses
 		allCoursePage = PageFactory.initElements(driver, AllCoursePage.class);

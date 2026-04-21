@@ -1,9 +1,13 @@
 package com.edureka.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BlogCategoryPage {
 	
@@ -17,7 +21,9 @@ public class BlogCategoryPage {
 	private WebElement currentPage;
 
 	public void clickOnArticles(WebDriver driver, String value) {
-		driver.findElement(By.xpath("//a[.='" + value + "']")).click();
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait.until(ExpectedConditions.elementToBeClickable(
+				By.xpath("//a[contains(.,'" + value + "')]"))).click();
 	}
 	
 	public void goToNthPage(WebDriver driver, String value) {

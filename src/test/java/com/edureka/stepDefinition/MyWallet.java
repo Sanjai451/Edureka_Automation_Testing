@@ -3,10 +3,11 @@ package com.edureka.stepDefinition;
 import io.cucumber.java.en.*;
 import org.testng.Assert;
 
+import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class MyWallet {
+public class MyWallet extends AllFunctionality{
 
     private Base base;
 

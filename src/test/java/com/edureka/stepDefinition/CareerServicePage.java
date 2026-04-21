@@ -10,21 +10,21 @@ import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class CareerServicePage {
+public class CareerServicePage extends AllFunctionality {
 
 	private Base base;
-	AllFunctionality util = new AllFunctionality();
 
 	public CareerServicePage(Base base) {
 		this.base = base;
 	}
 
-	// ================= DATA =================
+	// DATA
 
 	String company, linkedin, skills, jobLevel, industry, resume;
 	String job, employment, location, ctc, preferredLocation;
 	boolean relocate;
-	String degree, institute, month, year;
+	String degree, institute, smonth, syear, emonth, eyear;
+	String certName, certInstitute;
 
 	@Given("user launches the browser")
 	public void launchBrowser() {
@@ -49,7 +49,7 @@ public class CareerServicePage {
 		// Enter Password
 		WebElement password = base.getDriver().findElement(By.id("loginPassword"));
 		password.clear();
-		password.sendKeys("Password");
+		password.sendKeys("Password@123");
 
 		// Click LOGIN button
 		base.getDriver().findElement(By.xpath("//button[text()='LOG IN']")).click();
@@ -60,14 +60,14 @@ public class CareerServicePage {
 		Pages.get().dashboard.navigateToMyProfile();
 	}
 
-	// ================= NAVIGATION =================
+	// NAVIGATION
 
 	@Given("user clicks on Career Services tab")
 	public void clickCareerServices() {
 		Pages.get().myProfile.clickCareerServices();
 	}
 
-	// ================= PROFESSIONAL =================
+	// PROFESSIONAL
 
 	@When("user clicks Professional Details edit button")
 	public void clickProfessionalEdit() {
@@ -77,14 +77,14 @@ public class CareerServicePage {
 	@When("user reads professional details from excel")
 	public void readProfessionalExcel() {
 
-		util.init("Professional");
+		init("Professional");
 
-		company = util.getData(1, 0);
-		linkedin = util.getData(1, 1);
-		skills = util.getData(1, 2);
-		jobLevel = util.getData(1, 3);
-		industry = util.getData(1, 4);
-		resume = util.getData(1, 5);
+		company = getData(1, 0);
+		linkedin = getData(1, 1);
+		skills = getData(1, 2);
+		jobLevel = getData(1, 3);
+		industry = getData(1, 4);
+		resume = getData(1, 5);
 	}
 
 	@When("user enters professional details from excel")
@@ -93,65 +93,74 @@ public class CareerServicePage {
 		Pages.get().professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
 	}
 
-	// ================= NEXT BUTTON =================
+	// NEXT BUTTON
 
 	@When("user clicks Next button")
 	public void clickNext() {
-		util.waitForElementClickable(base.getDriver(),
-		        Pages.get().professionalDetailsPage.getNextButton(), 10);
+		waitForElementClickable(base.getDriver(), Pages.get().professionalDetailsPage.getNextButton(), 10);
 
 		Pages.get().professionalDetailsPage.getNextButton().click();
+		waitForLoaderToDisappear(base.getDriver());
 	}
 
-	// ================= CAREER INTERESTS =================
+	// CAREER INTERESTS
 
 	@When("user reads career interests data from excel")
 	public void readCareerExcel() {
 
-		util.init("Career");
+		init("Career");
 
-		job = util.getData(1, 0);
-		employment = util.getData(1, 1);
-		location = util.getData(1, 2);
-		ctc = util.getData(1, 3);
-		relocate = Boolean.parseBoolean(util.getData(1, 4));
-		preferredLocation = util.getData(1, 5);
+		job = getData(1, 0);
+		employment = getData(1, 1);
+		location = getData(1, 2);
+		ctc = getData(1, 3);
+		relocate = Boolean.parseBoolean(getData(1, 4));
+		preferredLocation = getData(1, 5);
 	}
 
 	@When("user enters career interests data from excel")
 	public void enterCareerData() {
 
+		waitForLoaderToDisappear(base.getDriver()); // ADD THIS
+
 		Pages.get().careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
+
 	}
 
-	// ================= OTHER DETAILS =================
+	// OTHER DETAILS
 
 	@When("user reads other details data from excel")
 	public void readOtherExcel() {
 
-		util.init("OtherDetails");
+		init("OtherDetails");
 
-		degree = util.getData(1, 0);
-		institute = util.getData(1, 1);
-		month = util.getData(1, 2);
-		year = util.getData(1, 3);
+		degree = getData(1, 0);
+		institute = getData(1, 1);
+
+		smonth = getData(1, 2);
+		syear = getData(1, 3);
+		emonth = getData(1, 4);
+		eyear = getData(1, 5);
+
+		certName = getData(1, 6);
+		certInstitute = getData(1, 7);
 	}
 
 	@When("user enters other details from excel")
 	public void enterOtherDetails() {
 
-		Pages.get().otherDetailsPage.fillOtherDetails(degree, institute, month, year);
+		Pages.get().otherDetailsPage.fillDegree(degree, institute, smonth, syear, emonth, eyear);
+
+		Pages.get().otherDetailsPage.fillCertification(certName, certInstitute, smonth, syear, emonth, eyear);
 	}
 
 	@When("user clicks Save button")
 	public void clickSave() {
-		util.waitForElementClickable(base.getDriver(),
-		        Pages.get().otherDetailsPage.getSaveButton(), 10);
+
+		waitForElementClickable(base.getDriver(), Pages.get().otherDetailsPage.getSaveButton(), 10);
 
 		Pages.get().otherDetailsPage.getSaveButton().click();
 	}
-
-	// ================= FINAL VALIDATION =================
 
 	@Then("all career service details should be saved successfully")
 	public void validateSaved() {
@@ -159,12 +168,13 @@ public class CareerServicePage {
 		Assert.assertTrue(Pages.get().careerServicePage.getCompanyName().isDisplayed(), "Data not saved");
 	}
 
+	
 	@Then("updated career service details should be displayed correctly")
 	public void validateAllData() {
-
+		Pages.get().myProfile.getCareerServicesTab().click();
 		Assert.assertTrue(
-				Pages.get().careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, skills, job, location,
-						relocate ? "Yes" : "No", employment, ctc, preferredLocation, degree),
+				Pages.get().careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, job, location,
+						relocate ? "Yes" : "No", employment, ctc, preferredLocation, institute),
 				"Career Service Data Mismatch");
 	}
 }

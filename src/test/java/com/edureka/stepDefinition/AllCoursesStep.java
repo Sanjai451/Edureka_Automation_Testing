@@ -21,131 +21,124 @@ import io.cucumber.java.en.When;
 
 public class AllCoursesStep extends AllFunctionality {
 
-    private Base base;
+	private Base base;
 
-    public AllCoursesStep(Base base) {
-        this.base = base;
-    }
+	public AllCoursesStep(Base base) {
+		this.base = base;
+	}
 
-    // ================= SCENARIO 1 =================
+	@Given("user is on homepage")
+	public void user_is_on_homepage() {
 
-    @Given("user is on homepage")
-    public void user_is_on_homepage() {
+	}
 
-        
-    }
+	@When("user clicks on {string}")
+	public void user_clicks_on(String value) {
 
-    @When("user clicks on {string}")
-    public void user_clicks_on(String value) {
+		if (value.equalsIgnoreCase("All Courses")) {
 
-        if (value.equalsIgnoreCase("All Courses")) {
-            Pages.get().homePage.clickAllCourses();
-        } else {
-            Pages.get().allCoursePage.clickOnCategory(base.getDriver(), value);
-        }
-    }
+			Pages.get().homePage.clickAllCourses();
+		} else {
+			Pages.get().allCoursePage.clickOnCategory(base.getDriver(), value);
 
-    @Then("all courses page should be displayed")
-    public void all_courses_page_should_be_displayed() {
-    	
-        WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+		}
+	}
 
-        wait.until(ExpectedConditions.urlContains("all-courses"));
+	@Then("all courses page should be displayed")
+	public void all_courses_page_should_be_displayed() {
 
-        Assert.assertTrue(
-                base.getDriver().getCurrentUrl().toLowerCase().contains("all-courses")
-        );
-    }
-    @Then("course list should be visible")
-    public void course_list_should_be_visible() {
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
 
-        WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.urlContains("all-courses"));
 
-        // Wait for ANY course section container to load
-        List<WebElement> courses = wait.until(
-                ExpectedConditions.presenceOfAllElementsLocatedBy(
-                        By.xpath("//li[contains(@class, 'category_slide_detail')]")
-                )
-        );
+		Assert.assertTrue(
 
-        System.out.println("Course count: " + courses.size());
+				base.getDriver().getCurrentUrl().toLowerCase().contains("all-courses")
 
-        
-    }
+		);
+	}
 
-    @When("user selects course {string}")
-    public void user_selects_course(String courseName) {
-        Pages.get().allCoursePage.clickOnCourse(base.getDriver(), courseName);
-    }
+	@Then("course list should be visible")
+	public void course_list_should_be_visible() {
 
-    @Then("user should be navigated to course page")
-    public void user_should_be_navigated_to_course_page() {
-    	
-    	// should navigate to course page
-        
-    }
-    @When("user fills certificate details")
-    public void user_fills_certificate_details() {
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(20));
 
-        Pages.get().trainingCourse.fillDetailForGettingCert(
-            base.getDriver(),
-            "Test User",
-            "testuser@gmail.com",
-            "9876543210"
-        );
-    }
-    @Then("certificate success message should be displayed")
-    public void certificate_success_message_should_be_displayed() {
+		// Wait for ANY course section container to load
+		List<WebElement> courses = wait.until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(By.xpath("//li[contains(@class, 'category_slide_detail')]")));
 
-        WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+		System.out.println("Course count: " + courses.size());
 
-        WebElement successMsg = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//h4[.='Certificate sent to your inbox']")
-            )
-        );
+	}
 
-        Assert.assertTrue(successMsg.isDisplayed(), "Certificate message not displayed");
-    }
-    
-    @When("user clicks on preview certificate button")
-    public void user_clicks_on_preview_certificate_button() {
-        Pages.get().trainingCourse.clickPreviewCertificate(base.getDriver());
-    }
-    
-    @When("user scrolls to preview certificate section")
-    public void user_scrolls_to_preview_certificate_section() {
-        Pages.get().trainingCourse.scrollToPreviewCertificate(base.getDriver());
-    }
-    
-    @When("user fills training form details")
-    public void user_fills_training_form_details() {
+	@When("user selects course {string}")
+	public void user_selects_course(String courseName) {
 
-        Pages.get().trainingCourse.fillQueryForm(
-        	base.getDriver(),
-            "Test User",
-            "testuser123@gmail.com",
-            "9876543210",
-            "ABC Pvt Ltd",
-            "For Corporate"
-        );
-    }
-    
-    @Then("form should be submitted successfully")
-    public void form_should_be_submitted_successfully() {
+		Pages.get().allCoursePage.clickOnCourse(base.getDriver(), courseName);
 
-        // simple validation (adjust based on actual app behavior)
+	}
+
+	@Then("user should be navigated to course page")
+	public void user_should_be_navigated_to_course_page() {
+
+		// should navigate to course page
+
+	}
+
+	@When("user fills certificate details")
+	public void user_fills_certificate_details() {
+
+		Pages.get().trainingCourse.fillDetailForGettingCert(base.getDriver(), "Test User", "testuser@gmail.com",
+				"9876543210");
+	}
+
+	@Then("certificate success message should be displayed")
+	public void certificate_success_message_should_be_displayed() {
+
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+
+		WebElement successMsg = wait.until(
+				ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[.='Certificate sent to your inbox']")));
+
+		Assert.assertTrue(successMsg.isDisplayed(), "Certificate message not displayed");
+	}
+
+	@When("user clicks on preview certificate button")
+	public void user_clicks_on_preview_certificate_button() {
+
+		Pages.get().trainingCourse.clickPreviewCertificate(base.getDriver());
+
+	}
+
+	@When("user scrolls to preview certificate section")
+	public void user_scrolls_to_preview_certificate_section() {
+
+		Pages.get().trainingCourse.scrollToPreviewCertificate(base.getDriver());
+
+	}
+
+	@When("user fills training form details")
+	public void user_fills_training_form_details() {
+
+		Pages.get().trainingCourse.fillQueryForm(base.getDriver(),
+
+				"Test User", "testuser123@gmail.com", "9876543210", "ABC Pvt Ltd", "For Corporate");
+	}
+
+	@Then("form should be submitted successfully")
+	public void form_should_be_submitted_successfully() {
+
+		// simple validation (adjust based on actual app behavior)
 //        Assert.assertTrue(
-//            base.getDriver().getPageSource().toLowerCase().contains("thank") ||
-//            base.getDriver().getPageSource().toLowerCase().contains("success"),
+
 //            "Form submission failed"
 //        );
-    	System.out.println("After form submission");
-    }
-    @Then("course title should be displayed correctly")
+		System.out.println("After form submission");
+	}
+
+	@Then("course title should be displayed correctly")
     public void course_title_should_be_displayed_correctly() {
 
-//        String title = Pages.get()trainingCourse.getCourseTitle();
         
 //        System.out.println("Title : " + title);
 
@@ -153,126 +146,128 @@ public class AllCoursesStep extends AllFunctionality {
 //        Assert.assertFalse(title.trim().isEmpty(), "Course title is empty");
     }
 
-    @Then("URL should contain {string}")
-    public void url_should_contain(String keyword) {
+	@Then("URL should contain {string}")
+	public void url_should_contain(String keyword) {
 
-        WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.urlContains(keyword));
+		wait.until(ExpectedConditions.urlContains(keyword));
 
-        Assert.assertTrue(
-                base.getDriver().getCurrentUrl().toLowerCase().contains(keyword.toLowerCase())
-        );
-    }
+		Assert.assertTrue(
 
-    
-    @Then("user needs to click on enroll button")
-    public void user_needs_to_click_on_enroll_button() {
-    	Pages.get().trainingCourse.enrollNow(base.getDriver(), "sample23244@efail.com", "9078675645");
-    }
+				base.getDriver().getCurrentUrl().toLowerCase().contains(keyword.toLowerCase())
 
-    @Then("verify user is on payment page")
-    public void check_enroll() {
-//    	assertTrue(getUrl(base.getDriver()).contains("payment"));
-    	
-    	WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));
+		);
+	}
 
-        // Wait until URL contains 'payment'
-        boolean isOnPaymentPage = wait.until(
-            ExpectedConditions.urlContains("payment")
-        );
+	@Then("user needs to click on enroll button")
+	public void user_needs_to_click_on_enroll_button() {
 
-        assertTrue(isOnPaymentPage, "User not navigated to payment page");
-    }
-    
-    @When("user adds course to wishlist")
-    public void user_adds_course_to_wishlist() {
-        try {
-            Pages.get().masterProgram.addToWishlist();
-            System.out.println("Added to wishlist");
-        } catch (Exception e) {
-            System.out.println("Wishlist click failed (expected if not available)");
-        }
-    }
-    
-    @When("user scrolls to training form")
-    public void user_scrolls_to_training_form() {
-        Pages.get().trainingCourse.scrollToQueryForm(base.getDriver());
-    }
+		Pages.get().trainingCourse.enrollNow(base.getDriver(), "sample23244@efail.com", "9078675645");
 
-    @When("user clicks browser back")
-    public void user_clicks_browser_back() {
-        base.getDriver().navigate().back();
-    }
+	}
 
-    @Then("user should return to All Courses page")
-    public void user_should_return_to_all_courses_page() {
+	@Then("verify user is on payment page")
+	public void check_enroll() {
 
-        WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));
 
-        wait.until(ExpectedConditions.urlContains("all-courses"));
+		// Wait until URL contains 'payment'
+		boolean isOnPaymentPage = wait.until(ExpectedConditions.urlContains("payment"));
 
-        Assert.assertTrue(
-                base.getDriver().getCurrentUrl().toLowerCase().contains("all-courses")
-        );
-    }
+		assertTrue(isOnPaymentPage, "User not navigated to payment page");
+	}
 
-    @Then("all course cards should be clickable")
-    public void all_course_cards_should_be_clickable() {
+	@When("user adds course to wishlist")
+	public void user_adds_course_to_wishlist() {
+		try {
 
-        List<WebElement> courses = base.getDriver().findElements(
-                By.xpath("//a[contains(@href,'/course')]")
-        );
+			Pages.get().masterProgram.addToWishlist();
+			System.out.println("Added to wishlist");
+		} catch (Exception e) {
+			System.out.println("Wishlist click failed (expected if not available)");
+		}
+	}
 
-        Assert.assertTrue(courses.size() > 0, "Course cards not clickable/visible");
-    }
+	@When("user scrolls to training form")
+	public void user_scrolls_to_training_form() {
 
-    // ================= SCENARIO 2 =================
+		Pages.get().trainingCourse.scrollToQueryForm(base.getDriver());
 
-    @Given("user is on All Courses page")
-    public void user_is_on_all_courses_page() {
-        base.getDriver().get("https://www.edureka.co/all-courses");
-    }
+	}
 
-    @When("user clicks on invalid course {string}")
-    public void user_clicks_on_invalid_course(String course) {
+	@When("user clicks browser back")
+	public void user_clicks_browser_back() {
+		base.getDriver().navigate().back();
 
-        boolean clicked = true;
+	}
 
-        try {
-            Pages.get().allCoursePage.clickOnCourse(base.getDriver(), course);
-        } catch (Exception e) {
-            clicked = false;
-            System.out.println("Invalid course handled correctly");
-        }
+	@Then("user should return to All Courses page")
+	public void user_should_return_to_all_courses_page() {
 
-    }
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
 
-    @Then("error page or message should be displayed")
-    public void error_page_or_message_should_be_displayed() {
+		wait.until(ExpectedConditions.urlContains("all-courses"));
 
-    }
+		Assert.assertTrue(base.getDriver().getCurrentUrl().toLowerCase().contains("all-courses"));
+	}
 
-    // ================= SCENARIO 3 =================
+	@Then("all course cards should be clickable")
+	public void all_course_cards_should_be_clickable() {
 
-    @Given("user is on course page")
-    public void user_is_on_course_page() {
-        base.getDriver().get("https://www.edureka.co/data-science-certification-courses");
-    }
+		List<WebElement> courses = base.getDriver().findElements(
 
-    @Then("course should not appear in wishlist")
-    public void course_should_not_appear_in_wishlist() {
+				By.xpath("//a[contains(@href,'/course')]"));
+
+		Assert.assertTrue(courses.size() > 0, "Course cards not clickable/visible");
+	}
+
+	// ================= SCENARIO 2 =================
+
+	@Given("user is on All Courses page")
+	public void user_is_on_all_courses_page() {
+		base.getDriver().get("https://www.edureka.co/all-courses");
+
+	}
+
+	@When("user clicks on invalid course {string}")
+	public void user_clicks_on_invalid_course(String course) {
+
+		boolean clicked = true;
+
+		try {
+
+			Pages.get().allCoursePage.clickOnCourse(base.getDriver(), course);
+
+		} catch (Exception e) {
+			clicked = false;
+			System.out.println("Invalid course handled correctly");
+		}
+
+	}
+
+	@Then("error page or message should be displayed")
+	public void error_page_or_message_should_be_displayed() {
+
+	}
+
+	// ================= SCENARIO 3 =================
+
+	@Given("user is on course page")
+	public void user_is_on_course_page() {
+		base.getDriver().get("https://www.edureka.co/data-science-certification-courses");
+
+	}
+
+	@Then("course should not appear in wishlist")
+	public void course_should_not_appear_in_wishlist() {
 //        Assert.assertFalse(base.isWishlistAdded);
-    }
+	}
 
-    // ================= GENERIC =================
+	@Then("{string} message should be displayed")
+	public void message_should_be_displayed(String message) {
 
-    @Then("{string} message should be displayed")
-    public void message_should_be_displayed(String message) {
-
-        Assert.assertTrue(
-                base.getDriver().getPageSource().toLowerCase().contains(message.toLowerCase()),
-                "Expected message not found"
-        );
-    }
+		Assert.assertTrue(base.getDriver().getPageSource().toLowerCase().contains(message.toLowerCase()),
+				"Expected message not found");
+	}
 }

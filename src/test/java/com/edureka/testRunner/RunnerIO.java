@@ -17,8 +17,10 @@ import io.cucumber.testng.CucumberOptions;
  */
 
 @CucumberOptions(
-		features = {"./src/test/java/com/edureka/featureFile/homePageScenario.feature",
-				"./src/test/java/com/edureka/featureFile/webinar.feature"
+		features = {
+//				"./src/test/java/com/edureka/featureFile/webinar.feature",
+//				"./src/test/java/com/edureka/featureFile/homePageCorporateTraining.feature",
+				"./src/test/java/com/edureka/featureFile/communityQuestion.feature"
 		},
 		glue = "com.edureka.stepDefinition",
 //		dryRun = false
@@ -30,9 +32,15 @@ import io.cucumber.testng.CucumberOptions;
 		monochrome = true
 		)
 public class RunnerIO extends AbstractTestNGCucumberTests {
+	 /**
+     * Overriding scenarios() with parallel=true tells TestNG to feed
+     * each Cucumber scenario to a separate thread from the pool.
+     * The thread count is controlled by testing.xml.
+     */
 	@Override
     @org.testng.annotations.DataProvider(parallel = true)
     public Object[][] scenarios() {
         return super.scenarios();
     }
+
 }
