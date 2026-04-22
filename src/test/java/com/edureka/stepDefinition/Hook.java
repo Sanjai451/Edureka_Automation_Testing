@@ -18,21 +18,37 @@ import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 
+/**
+ * Hook class for Cucumber test lifecycle management.
+ * Handles setup and teardown for each scenario, including browser initialization and reporting.
+ */
 public class Hook extends AllFunctionality {
 	
 	private Base base;
 	
+	/**
+	 * Constructor for Hook.
+	 * Initializes the Base instance for WebDriver management.
+	 * @param base the Base instance
+	 */
 	public Hook(Base base) {
 		this.base = base;
 	}
 	
+	/**
+	 * Setup method executed before each Cucumber scenario.
+	 * Initializes properties, browser, navigates to URL, and sets up reporting.
+	 * @param scenario the current Cucumber scenario
+	 * @throws IOException if properties file cannot be loaded
+	 */
 	@Before
 	public void setUp(Scenario scenario) throws IOException {
-//		base.driver = new EdgeDriver();
-		base.initDriver();
 		
 		initPropertiesUtility("./src/main/resources/edureka.properties");
 		String URL = getPropertyData("url");
+		String BROWSWER = getPropertyData("broswer");
+		base.initDriver(BROWSWER);
+		
 //		String USERNAME = getPropertyData("username");
 //		String PASSWORD = getPropertyData("password");
 		
@@ -51,6 +67,11 @@ public class Hook extends AllFunctionality {
 		
 	}
 	
+	/**
+	 * Teardown method executed after each Cucumber scenario.
+	 * Captures screenshots on failure, logs results to Extent report, and cleans up resources.
+	 * @param scenario the current Cucumber scenario
+	 */
 	@After
 	 public void tearDown(Scenario scenario){
 		
@@ -73,7 +94,7 @@ public class Hook extends AllFunctionality {
             test.pass("Scenario PASSED: " + scenario.getName());
         }
 
-//        Base.quitDriver();
+        Base.quitDriver();
         Pages.cleanUp();
         
 	}

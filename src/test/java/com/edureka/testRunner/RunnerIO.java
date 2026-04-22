@@ -18,16 +18,19 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 		features = {
-//				"./src/test/java/com/edureka/featureFile/webinar.feature",
+				"./src/test/java/com/edureka/featureFile/webinar.feature",
 //				"./src/test/java/com/edureka/featureFile/homePageCorporateTraining.feature",
-				"./src/test/java/com/edureka/featureFile/communityQuestion.feature"
+//				"./src/test/java/com/edureka/featureFile/communityQuestion.feature",
+//				"./src/test/java/com/edureka/featureFile/homePageScenario.feature"
 		},
 		glue = "com.edureka.stepDefinition",
-//		dryRun = false
-		plugin = { "pretty", "html:target/cucumber-report.html", "json:target/cucumber.json",
-				"com.edureka.utility.StepAutoLogger" },
-
-		monochrome = true)
+		plugin   = {
+		        "pretty",
+		        "html:target/cucumber-report.html",
+		        "json:target/cucumber.json"
+		    },
+		monochrome = true
+		)
 public class RunnerIO extends AbstractTestNGCucumberTests {
 	/**
 	 * Overriding scenarios() with parallel=true tells TestNG to feed each Cucumber
@@ -35,9 +38,9 @@ public class RunnerIO extends AbstractTestNGCucumberTests {
 	 * by testing.xml.
 	 */
 	@Override
-	@org.testng.annotations.DataProvider(parallel = true)
-	public Object[][] scenarios() {
-		return super.scenarios();
-	}
+    @org.testng.annotations.DataProvider(parallel = false)
+    public Object[][] scenarios() {
+        return super.scenarios();
+    }
 
 }

@@ -42,13 +42,14 @@ public class AllCoursesStep extends AllFunctionality {
     	Pages.get().loginPage.enterPassword("Jayasree@11");
     	Pages.get().loginPage.clickLogin();
     	
-    	try {Thread.sleep(4000);} catch (Exception e) {}
+//    	try {Thread.sleep(4000);} catch (Exception e) {}
     }
     
 
     @When("user clicks on {string}")
     public void user_clicks_on(String value) {
-//    	try {Thread.sleep(4000);} catch (Exception e) {}
+    	
+    	
     	    	
         if (value.equalsIgnoreCase("All Courses")) {
             Pages.get().homePage.clickAllCourses();

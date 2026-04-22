@@ -15,10 +15,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(driver, this);
     }
     
@@ -154,6 +156,13 @@ public class HomePage {
 	}
 	
 	public void clickAllCourses() {
+		By loaderLocator = By.cssSelector("[class*='loader_loader_div']");
+
+        // Wait until loader is invisible or removed from DOM
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loaderLocator));
+    	
+    	System.out.println("Loader disappeared");
+    	
 		allCourses.click();
 	}
 	
