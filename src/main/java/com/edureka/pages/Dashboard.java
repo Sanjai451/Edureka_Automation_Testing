@@ -62,7 +62,7 @@ public class Dashboard {
 		return hireFromEdurekaLink;
 	}
 
-	public void clickBecomeInstructor(WebDriver driver) {
+	 public void clickBecomeInstructor(WebDriver driver) {
 		try {
 			getBecomeInstructorLink().click();
 		} catch (Exception e) {

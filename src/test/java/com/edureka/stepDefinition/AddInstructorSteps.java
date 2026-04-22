@@ -22,11 +22,11 @@ import com.edureka.utility.Pages;
 public class AddInstructorSteps extends AllFunctionality {
 
 	private Base base;
-	private ExtentTest logs;
+	
 
 	public AddInstructorSteps(Base base) {
 		this.base = base;
-		logs = ExtentReportManager.getTest();
+		
 	}
 
 	// Navigation
@@ -34,7 +34,7 @@ public class AddInstructorSteps extends AllFunctionality {
 	@Given("user clicks Become an Instructor link")
 	public void user_clicks_become_instructor_link() {
 		Pages.get().dashboard.clickBecomeInstructor(base.getDriver());
-		logs.log(Status.PASS, "Clicked on 'Become an Instructor' link");
+		
 	}
 
 	// Form Filling
@@ -42,50 +42,49 @@ public class AddInstructorSteps extends AllFunctionality {
 	@When("user enters first name {string}")
 	public void user_enters_first_name(String firstName) {
 		Pages.get().addInstructorPage.enterFirstName(firstName);
-		logs.log(Status.PASS, "Entered First Name: " + firstName);
+		
 	}
 
 	@When("user enters last name {string}")
 	public void user_enters_last_name(String lastName) {
 		Pages.get().addInstructorPage.enterLastName(lastName);
-		logs.log(Status.PASS, "Entered Last Name: " + lastName);
+		
 	}
 
 	@When("user enters mobile {string}")
 	public void user_enters_mobile(String mobile) {
 		Pages.get().addInstructorPage.enterMobile(mobile);
-		logs.log(Status.PASS, "Entered Mobile Number: " + mobile);
-
+		
 	}
 
 	@When("user enters email {string}")
 	public void user_enters_email(String email) {
 		Pages.get().addInstructorPage.enterEmail(email);
-		logs.log(Status.PASS, "Entered Email: " + email);
+		
 	}
 
 	@When("user enters course name {string}")
 	public void user_enters_course_name(String course) {
 		Pages.get().addInstructorPage.enterCourseName(course);
-		logs.log(Status.PASS, "Entered Course Name: " + course);
+		
 	}
 
 	@When("user enters linkedin {string}")
 	public void user_enters_linkedin(String linkedin) {
 		Pages.get().addInstructorPage.enterLinkedIn(linkedin);
-		logs.log(Status.PASS, "Entered LinkedIn Profile: " + linkedin);
+		
 	}
 
 	@When("user enters about course {string}")
 	public void user_enters_about_course(String aboutCourse) {
 		Pages.get().addInstructorPage.enterAboutCourse(aboutCourse);
-		logs.log(Status.PASS, "Entered About Course Description");
+		
 	}
 
 	@When("user enters about yourself {string}")
 	public void user_enters_about_yourself(String aboutYourself) {
 		Pages.get().addInstructorPage.enterAboutYourself(aboutYourself);
-		logs.log(Status.PASS, "Entered About Yourself PASSrmation");
+		
 	}
 
 	// Submit
@@ -106,7 +105,6 @@ public class AddInstructorSteps extends AllFunctionality {
 			// Step 3: Highlight (optional)
 			((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", captcha);
 
-			logs.log(Status.PASS, "Waiting for user to complete CAPTCHA manually...");
 
 			// Step 4: Wait until user clicks manually
 			wait.until(ExpectedConditions.attributeToBe(By.id("recaptcha-anchor"), "aria-checked", "true"));
@@ -115,12 +113,11 @@ public class AddInstructorSteps extends AllFunctionality {
 			driver.switchTo().defaultContent();
 
 		} catch (Exception e) {
-			logs.log(Status.WARNING, "CAPTCHA not found or skipped");
 			driver.switchTo().defaultContent();
 		}
 
 		Pages.get().addInstructorPage.clickSubmit(base.getDriver());
-		logs.log(Status.PASS, "Clicked on Submit button");
+		
 
 	}
 
@@ -135,6 +132,6 @@ public class AddInstructorSteps extends AllFunctionality {
 		// Example validation (modify based on actual app behavior)
 		Assert.assertTrue(currentUrl.contains("instructor") || currentUrl.contains("success"),
 				"Instructor form submission failed");
-		logs.log(Status.PASS, "Instructor form submitted successfully");
+	
 	}
 }

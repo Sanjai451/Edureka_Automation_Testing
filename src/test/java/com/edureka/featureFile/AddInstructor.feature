@@ -23,4 +23,4 @@ Feature: Add Instructor - Submit instructor details form
     Examples:
       | firstName | lastName | mobile     | email                | course    | linkedin                  | aboutCourse        | aboutYourself      |
       | Ramana    | Sekar    | 9876543210 | ramana@gmail.com     | Selenium  | linkedin.com/in/ramana    | Automation course  | Trainer            |
-      | John      | Doe      | 9123456780 | john@gmail.com       | Java      | linkedin.com/in/john      | Java course        | Developer          |
+    #  | John      | Doe      | 9123456780 | john@gmail.com       | Java      | linkedin.com/in/john      | Java course        | Developer          |

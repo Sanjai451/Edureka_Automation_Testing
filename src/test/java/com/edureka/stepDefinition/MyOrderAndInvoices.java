@@ -2,82 +2,60 @@ package com.edureka.stepDefinition;
 
 import io.cucumber.java.en.*;
 import io.cucumber.datatable.DataTable;
-
 import java.util.List;
-
 import org.testng.Assert;
-
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
-import com.edureka.utility.ExtentReportManager;
 import com.edureka.utility.Pages;
 
 public class MyOrderAndInvoices extends AllFunctionality {
 
-	 private Base base;
-	    private ExtentTest logs;
+	private Base base;
 
-	    public MyOrderAndInvoices(Base base) {
-	        this.base = base;
-	        logs = ExtentReportManager.getTest();
-	    }
+	// Constructor to initialize base
+	public MyOrderAndInvoices(Base base) {
+		this.base = base;
+	}
 
-    // NAVIGATION
-    @Given("user clicks on My Orders and Invoices")
-    public void user_clicks_on_my_orders_and_invoices() {
-        Pages.get().myProfile.clickMyOrders();
-        logs.log(Status.PASS, "Clicked on 'My Orders and Invoices' section");
-    }
+	// Step to navigate to My Orders and Invoices
+	@Given("user clicks on My Orders and Invoices")
+	public void user_clicks_on_my_orders_and_invoices() {
+		Pages.get().myProfile.clickMyOrders();
+	}
 
-    // NO COURSES MESSAGE
+	// Step to validate no courses message is displayed
+	@Then("no courses message should be displayed")
+	public void no_courses_message_should_be_displayed() {
+		Assert.assertTrue(Pages.get().ordersPage.isNoCoursesMessageDisplayed(), "No courses message not displayed");
+	}
 
-    @Then("no courses message should be displayed")
-    public void no_courses_message_should_be_displayed() {
-        Assert.assertTrue(
-                Pages.get().ordersPage.isNoCoursesMessageDisplayed(),
-                "No courses message not displayed"
-        );
-        logs.log(Status.PASS, "'No Courses' message displayed successfully");
-    }
+	// Step to validate message content
+	@Then("message should indicate no enrolled courses")
+	public void message_should_indicate_no_enrolled_courses() {
 
-    @Then("message should indicate no enrolled courses")
-    public void message_should_indicate_no_enrolled_courses() {
+		String message = Pages.get().ordersPage.getNoCoursesMessageText();
 
-        String message = Pages.get().ordersPage.getNoCoursesMessageText();
+		Assert.assertTrue(message.toLowerCase().contains("not enrolled"), "Incorrect no courses message");
+	}
 
-        Assert.assertTrue(
-                message.toLowerCase().contains("not enrolled"),
-                "Incorrect no courses message"
-        );
-        logs.log(Status.PASS, "Correct 'no enrolled courses' message verified");
-    }
+	// Step to click browse all courses button
+	@When("user clicks Browse All Courses button")
+	public void user_clicks_browse_all_courses_button() {
+		Pages.get().ordersPage.clickBrowseCourses();
+	}
 
-    // CLICK BUTTON
+	// Step to validate redirection to courses page
+	@Then("user validates redirection")
+	public void user_validates_redirection(DataTable dataTable) {
 
-    @When("user clicks Browse All Courses button")
-    public void user_clicks_browse_all_courses_button() {
-        Pages.get().ordersPage.clickBrowseCourses();
-        logs.log(Status.PASS, "Clicked 'Browse All Courses' button");
-    }
+		List<List<String>> data = dataTable.asLists();
+		String expectedUrlPart = data.get(1).get(0);
 
-    // REDIRECTION
+		String currentUrl = base.getDriver().getCurrentUrl();
 
-    @Then("user validates redirection")
-    public void user_validates_redirection(DataTable dataTable) {
+		System.out.println("Current URL: " + currentUrl);
 
-        List<List<String>> data = dataTable.asLists();
-        String expectedUrlPart = data.get(1).get(0);
-
-        String currentUrl = base.getDriver().getCurrentUrl();
-
-        System.out.println("Current URL: " + currentUrl);
-
-        Assert.assertTrue(
-                currentUrl.contains(expectedUrlPart),
-                "Redirection failed. Expected URL to contain: " + expectedUrlPart
-        );
-        logs.log(Status.PASS, "User successfully redirected to expected page");
-    }
+		Assert.assertTrue(currentUrl.contains(expectedUrlPart),
+				"Redirection failed. Expected URL to contain: " + expectedUrlPart);
+	}
 }
