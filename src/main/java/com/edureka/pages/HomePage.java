@@ -16,11 +16,7 @@ public class HomePage {
 
     WebDriver driver;
     WebDriverWait wait;
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> main
     // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
