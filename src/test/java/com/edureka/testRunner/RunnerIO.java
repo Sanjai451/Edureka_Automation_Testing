@@ -7,7 +7,7 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
 
-		features = {"./src/test/java/com/edureka/featureFile/PostJob.feature"},
+		features = {"./src/test/java/com/edureka/featureFile/AllCourses.feature"},
 
 
 		glue = "com.edureka.stepDefinition",
@@ -26,7 +26,7 @@ public class RunnerIO extends AbstractTestNGCucumberTests {
      * The thread count is controlled by testing.xml.
      */
 	@Override
-    @org.testng.annotations.DataProvider(parallel = true)
+    @org.testng.annotations.DataProvider(parallel = false)
     public Object[][] scenarios() {
         return super.scenarios();
     }

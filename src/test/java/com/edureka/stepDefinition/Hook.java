@@ -74,7 +74,7 @@ public class Hook extends AllFunctionality {
             test.pass("Scenario PASSED: " + scenario.getName());
         }
 
-        Base.quitDriver();
+//        Base.quitDriver();
         Pages.cleanUp();
         
 	}
