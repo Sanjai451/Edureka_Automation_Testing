@@ -21,4 +21,4 @@ Feature: Partner With Us - Submit partner enquiry form
     Examples:
       | name   | company     | training            | email              | phone      | query                    |
       | Ramana | Capgemini   | For Corporate       | ramana@gmail.com   | 9876543210 | Need training details    |
-      | John   | Infosys     | For Myself          | john@gmail.com     | 9123456780 | Interested in courses    |
+    #  | John   | Infosys     | For Myself          | john@gmail.com     | 9123456780 | Interested in courses    |

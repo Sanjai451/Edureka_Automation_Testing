@@ -13,78 +13,76 @@ import com.edureka.utility.Pages;
 
 public class TopicOfInterest extends AllFunctionality {
 
-    private Base base;
+	private Base base;
 
-    public TopicOfInterest(Base base) {
-        this.base = base;
-    }
+	// Constructor to initialize base
+	public TopicOfInterest(Base base) {
+		this.base = base;
+	}
 
-   
-    List<String> topicsFromExcel = new ArrayList<>();
-    String topicsBeforeRefresh;
+	// List to store topics from excel
+	List<String> topicsFromExcel = new ArrayList<>();
 
-    // NAVIGATION
-    @Given("user clicks on Topics of Interest tab")
-    public void clickTopicsTab() {
-        Pages.get().myProfile.clickTopicsOfInterest();
-    }
+	// Variable to store topics before refresh
+	String topicsBeforeRefresh;
 
-    // CLICK ADD NOW
-    @When("user clicks Add Now button")
-    public void clickAddNow() {
-        Pages.get().topicsOfInterestPage.clickAddNow();
-    }
+	// Step to click topics of interest tab
+	@Given("user clicks on Topics of Interest tab")
+	public void clickTopicsTab() {
+		Pages.get().myProfile.clickTopicsOfInterest();
+	}
 
-    // READ FROM EXCEL
-    @When("user reads topics from excel")
-    public void readTopicsExcel() {
+	// Step to click add now button
+	@When("user clicks Add Now button")
+	public void clickAddNow() {
+		Pages.get().topicsOfInterestPage.clickAddNow();
+	}
 
-    	init("Topics");
-    	topicsFromExcel.clear();
-    	topicsFromExcel.add(getData(1, 0));
-    	topicsFromExcel.add(getData(1, 1));
-    	topicsFromExcel.add(getData(1, 2));
-    }
+	// Step to read topics from excel
+	@When("user reads topics from excel")
+	public void readTopicsExcel() {
 
-    // SELECT TOPICS
-    @When("user selects topics from excel")
-    public void selectTopicsFromExcel() {
+		init("Topics");
+		topicsFromExcel.clear();
+		topicsFromExcel.add(getData(1, 0));
+		topicsFromExcel.add(getData(1, 1));
+		topicsFromExcel.add(getData(1, 2));
+	}
 
-    	boolean result = Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+	// Step to select topics
+	@When("user selects topics from excel")
+	public void selectTopicsFromExcel() {
 
-        Assert.assertTrue(result, "One or more topics not found");
-    }
+		boolean result = Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
-    // SAVE
-    @When("user clicks Save and Continue in Topics")
-    public void clickSaveContinueTopics() {
-        Pages.get().topicsSelectionPage.clickSaveAndContinue();
-    }
+		Assert.assertTrue(result, "One or more topics not found");
+	}
 
-    // VALIDATE SAVE
-    @Then("topics should be saved successfully")
-    public void topicsSaved() {
+	// Step to click save and continue
+	@When("user clicks Save and Continue in Topics")
+	public void clickSaveContinueTopics() {
+		Pages.get().topicsSelectionPage.clickSaveAndContinue();
+	}
 
-        Assert.assertTrue(
-                Pages.get().topicsOfInterestPage.isAnyTopicSelected(),
-                "Topics not saved"
-        );
-    }
+	// Step to validate topics saved
+	@Then("topics should be saved successfully")
+	public void topicsSaved() {
 
-    // VALIDATE PERSISTENCE
-    @Then("topics should persist after page refresh")
-    public void verifyPersistence() {
+		boolean isSaved = Pages.get().topicsOfInterestPage.isAnyTopicSelected();
 
-        topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
+		Assert.assertTrue(isSaved, "Topics not saved");
+	}
 
-        base.getDriver().navigate().refresh();
+	// Step to validate topics persistence after refresh
+	@Then("topics should persist after page refresh")
+	public void verifyPersistence() {
 
-        String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
+		topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
-        Assert.assertEquals(
-                afterRefresh,
-                topicsBeforeRefresh,
-                "Topics not persisted after refresh"
-        );
-    }
+		base.getDriver().navigate().refresh();
+
+		String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
+
+		Assert.assertEquals(afterRefresh, topicsBeforeRefresh, "Topics not persisted after refresh");
+	}
 }

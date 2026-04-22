@@ -5,6 +5,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+/**
+ * Utility class for managing ExtentReports in test automation.
+ * This class provides a singleton instance of ExtentReports, configures the Spark reporter,
+ * and handles thread-safe test logging for parallel test execution.
+ */
 public class ExtentReportManager {
 
     private static ExtentReports extent;

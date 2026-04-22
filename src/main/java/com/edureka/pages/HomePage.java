@@ -15,30 +15,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage {
 
     WebDriver driver;
+    WebDriverWait wait;
 
     // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
     
     @FindBy(xpath = "//input[@placeholder='Search courses']")
     WebElement homeSearchBar;
     
     @FindBy(xpath = "//span[contains(@class,'user_name')]")
-    WebElement profileIcon1;
+    WebElement profileIcon;
 
     @FindBy(xpath = "//a[text()='My Profile']")
-    WebElement myProfile1;
+    WebElement myProfile;
 
     @FindBy(xpath = "//a[text()='My Orders']")
-    WebElement myOrders1;
+    WebElement myOrders;
 
     @FindBy(xpath = "//a[text()='My Wishlist']")
-    WebElement myWishlist1;
+    WebElement myWishlist;
 
     @FindBy(xpath = "//a[text()='Change Password']")
-    WebElement changePassword1;
+    WebElement changePassword;
     
     @FindBy(xpath = "//button[.='Resources']")
     WebElement resourceIcon;
@@ -109,23 +112,23 @@ public class HomePage {
 //	}
 	
 	public void openProfileMenu() {
-	    profileIcon1.click();
+	    profileIcon.click();
 	}
 
 	public void clickMyProfile() {
-	    myProfile1.click();
+	    myProfile.click();
 	}
 
 	public void clickMyOrders() {
-	    myOrders1.click();
+	    myOrders.click();
 	}
 
 	public void clickMyWishlist() {
-	    myWishlist1.click();
+	    myWishlist.click();
 	}
 
 	public void clickChangePassword() {
-	    changePassword1.click();
+	    changePassword.click();
 	}
 
     public void clickOnCategory(WebDriver driver, String value) {
@@ -154,6 +157,13 @@ public class HomePage {
 	}
 	
 	public void clickAllCourses() {
+		By loaderLocator = By.cssSelector("[class*='loader_loader_div']");
+
+        // Wait until loader is invisible or removed from DOM
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loaderLocator));
+    	
+    	System.out.println("Loader disappeared");
+    	
 		allCourses.click();
 	}
 	
@@ -161,6 +171,10 @@ public class HomePage {
     	resourceIcon.click();
     	communityFromNavbar.click();
     }
+	
+	public WebElement getWebinarNavElement() {
+		return resourceIcon;
+	}
     
     public void clickOnWebinarFromNavbar() {
     	resourceIcon.click();

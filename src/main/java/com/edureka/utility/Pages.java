@@ -27,12 +27,17 @@ import com.edureka.pages.HomePage;
 import com.edureka.pages.LearningGoalsPage;
 import com.edureka.pages.WebinarCategoryPage;
 import com.edureka.pages.WebinarHomePage;
+import com.edureka.pages.Wishlist;
 import com.edureka.pages.LoginPage;
 import com.edureka.pages.MasterProgram;
 import com.edureka.pages.MyProfile;
 import com.edureka.pages.OrderPage;
 import com.edureka.pages.OtherDetailsPage;
+
+import com.edureka.pages.PostJobPage;
+
 import com.edureka.pages.PartnerWithUsPage;
+
 import com.edureka.pages.ProfessionalDetailsPage;
 import com.edureka.pages.SearchHomePage;
 import com.edureka.pages.SearchResultsPage;
@@ -99,6 +104,11 @@ public class Pages {
 	public AllCoursePage allCoursePage;
 	public MasterProgram masterProgram;
 	public TrainingCourse trainingCourse;
+	public Wishlist wishlist;
+	
+	
+	//postjob
+	public PostJobPage postJobPage;
 
 	// ── Private constructor — only created via loadAllPages ───────────────────
 	private Pages(WebDriver driver) {
@@ -150,6 +160,11 @@ public class Pages {
 		allCoursePage = PageFactory.initElements(driver, AllCoursePage.class);
 		masterProgram = PageFactory.initElements(driver, MasterProgram.class);
 		trainingCourse = PageFactory.initElements(driver, TrainingCourse.class);
+		wishlist = PageFactory.initElements(driver, Wishlist.class);
+		
+		//PostJob
+		postJobPage = PageFactory.initElements(driver, PostJobPage.class);
+		
 	}
 
 	/**
