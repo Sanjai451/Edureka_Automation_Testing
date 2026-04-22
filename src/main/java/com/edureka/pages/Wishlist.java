@@ -14,38 +14,42 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Wishlist {
 	WebDriverWait wait;
 	WebDriver driver;
-	
+
 	public Wishlist(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
-	
+
 	@FindBy(id = "dropdown-user_drop")
 	private WebElement profileDropDown;
-	
+
 	@FindBy(xpath = "//a[.='My Wishlist']")
 	private WebElement wishList;
-	
+
 	@FindBy(xpath = "//span[contains(., 'not match any courses')]")
 	private WebElement notFound;
-	
+
+	// Click on profile dropdown
 	public void clickProfileDropDown() {
 		WebElement element = wait.until(
 		        ExpectedConditions.presenceOfElementLocated(By.id("dropdown-user_drop"))
 		    );
 		    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
 //		profileDropDown.click();
 	}
-	
+
+	// Click on Wishlist option
 	public void clickWishList() {
-		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(
-			    By.cssSelector("a[href*='favourite']")
-			));
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		WebElement element = wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='favourite']")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
 //		wishList.click();
 	}
-	
+
+	// Get message when wishlist is empty or course not found
 	public String getMessage() {
 		wait.until(ExpectedConditions.visibilityOf(notFound));
 		return notFound.getText();

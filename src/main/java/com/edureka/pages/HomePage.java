@@ -16,12 +16,17 @@ public class HomePage {
 
     WebDriver driver;
     WebDriverWait wait;
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> main
     // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
     
     @FindBy(xpath = "//input[@placeholder='Search courses']")

@@ -23,6 +23,7 @@ public class TrainingCourse {
 		PageFactory.initElements(driver, this);
 	}
 
+	// Generic method to fill basic form
 	public void fillForm(String name, String email, String phone, String city) {
 		nameField.sendKeys(name);
 		emailField.sendKeys(email);
@@ -122,11 +123,14 @@ public class TrainingCourse {
 		previewVideoBtn.click();
 	}
 
+	// Main enroll method
 	public void enrollNow(WebDriver driver, String email, String phone) {
 		enrollButton.click();
+		System.out.println("Email : " + email + " Phone : " + phone);
 		fillDetailsInPopup(driver, email, phone);
 	}
 
+	// Fill details inside enroll popup
 	public void fillDetailsInPopup(WebDriver driver, String email, String phone) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
@@ -145,11 +149,13 @@ public class TrainingCourse {
 		enrollBtn.click();
 	}
 
+	// Select dropdown value
 	public void selectDropDown(String value) {
 		Select select = new Select(selectField);
 		select.selectByVisibleText(value);
 	}
 
+	// Fill query form with scrolling and JS click
 	public void fillQueryForm(WebDriver driver, String name, String email, String phone, String companyName,
 			String training) {
 
@@ -184,7 +190,7 @@ public class TrainingCourse {
 		// re-locate fresh element (avoid stale)
 		WebElement submitFresh = driver.findElement(By.xpath("//button[.='Submit']"));
 
-		// scroll to center (important)
+		// scroll to center
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", submitFresh);
 
 		// small wait for UI stabilization
@@ -203,12 +209,14 @@ public class TrainingCourse {
 		js.executeScript("arguments[0].scrollIntoView({block: 'center'});", nameField);
 	}
 
+	// Scroll to certificate section
 	public void scrollToPreviewCertificate(WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		js.executeScript("arguments[0].scrollIntoView({block:'center'});", getSampleCertificateButton);
 	}
 
+	// Fill certificate form
 	public void fillDetailForGettingCert(String name, String email, String phone) {
 
 		previewCert.click();
@@ -224,6 +232,7 @@ public class TrainingCourse {
 		}
 	}
 
+	// Click preview certificate using JS
 	public void clickPreviewCertificate(WebDriver driver) {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -272,6 +281,7 @@ public class TrainingCourse {
 		js.executeScript("arguments[0].click();", previewSubmit);
 	}
 
+	// Safe click method
 	public void safeClick(WebElement element) {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
