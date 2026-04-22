@@ -23,6 +23,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Utility class providing common Selenium WebDriver operations and helper methods.
+ * This class includes functionalities for window management, waits, alerts, properties handling,
+ * Excel data reading, and general Java utilities. It serves as a centralized location for
+ * reusable methods across test automation scripts.
+ */
 public class AllFunctionality {
 	Properties properties;
 
@@ -104,6 +110,13 @@ public class AllFunctionality {
 		new WebDriverWait(driver, Duration.ofSeconds(seconds)).until(ExpectedConditions.visibilityOf(element));
 	}
 
+	/**
+	 * Waits for an element to be visible, clickable, and enabled.
+	 * This method combines multiple wait conditions to ensure the element is fully ready for interaction.
+	 * @param driver the WebDriver instance
+	 * @param element the WebElement to wait for
+	 * @param seconds the maximum time to wait in seconds
+	 */
 	public void waitForElementClickable(WebDriver driver, WebElement element, int seconds) {
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
@@ -218,7 +231,7 @@ public class AllFunctionality {
 
 	// ==================== EXCEL UTILITY =========================
 
-	private static final String FILE_PATH = "./src/main/resources/eureka_updated.xlsx";
+	private static final String FILE_PATH = "./src/main/resources/edureka.xlsx";
 
 	Workbook workbook;
 	Sheet sheet;

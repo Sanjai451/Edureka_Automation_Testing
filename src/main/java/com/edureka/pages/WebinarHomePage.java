@@ -11,6 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Page Object Model class for the Webinar Home Page of the Edureka website.
+ * This class encapsulates all the web elements and actions related to the webinar home page,
+ * including navigation links, webinar categories, upcoming webinars, and footer elements.
+ */
 public class WebinarHomePage {
 	
 	WebDriver driver;
@@ -20,6 +25,12 @@ public class WebinarHomePage {
     // CONSTRUCTOR
     // ─────────────────────────────────────────────────
 	
+	/**
+	 * Constructor for WebinarHomePage.
+	 * Initializes the WebDriver and WebDriverWait instances.
+	 * PageFactory is commented out, so elements are not initialized automatically.
+	 * @param driver the WebDriver instance to be used for interacting with the page
+	 */
 	public WebinarHomePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -113,34 +124,63 @@ public class WebinarHomePage {
     @FindBy(linkText = "Legal & Privacy")
     private WebElement legalPrivacyLink;
     
+    /**
+     * Gets the title of the current page.
+     * @return the page title as a String
+     */
     public String getPageTitle() {
         return driver.getTitle();
     }
     
+    /**
+     * Gets the list of web elements for the "Upcoming Webinars" title.
+     * @return List of WebElement representing the upcoming webinar title
+     */
     public List<WebElement> getUpcomingWebinarsTitles(){
     	return upComingWebinarTitle;
     }
     
+    /**
+     * Prints all upcoming webinar titles to the console.
+     * Waits for the elements to be visible before printing.
+     */
     public void printAllUpcomingWebinarTitles() {
         wait.until(ExpectedConditions.visibilityOfAllElements(upcomingWebinarTitles));
         upcomingWebinarTitles.stream()
             .forEach(e -> System.out.println(e.getText().trim()));
     }
     
+    /**
+     * Prints all category titles to the console.
+     * Waits for the elements to be visible before printing.
+     */
     public void printAllCategoryTitles() {
         wait.until(ExpectedConditions.visibilityOfAllElements(allCategories));
         allCategories.stream()
             .forEach(e -> System.out.println(e.getText().trim()));
     }
     
+    /**
+     * Gets the list of all webinar category elements.
+     * @return List of WebElement representing all webinar categories
+     */
     public List<WebElement> getAllWebinarsCategory() {
     	return allCategories;
     }
     
+    /**
+     * Clicks on a webinar category based on the provided value.
+     * @param driver the WebDriver instance
+     * @param value the text value of the category to click
+     */
     public void clickOnWebinarCategory(WebDriver driver, String value) {
     	driver.findElement(By.xpath("//div[@class='wl_title']//h3[contains(text(),'" + value + "')]")).click();
     }
     
+    /**
+     * Prints all trending certification course links in the footer to the console.
+     * Waits for the elements to be visible before printing.
+     */
     public void printFooterTrendingCertCourses() {
         wait.until(ExpectedConditions.visibilityOfAllElements(footerTrendingCertLinks));
         

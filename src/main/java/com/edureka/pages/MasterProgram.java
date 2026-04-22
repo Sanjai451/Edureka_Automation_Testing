@@ -47,11 +47,16 @@ public class MasterProgram {
 //    	// wait until loader disappears
 //    	wait.until(ExpectedConditions.invisibilityOfElementLocated(loader));
     	
-    	try {
-			Thread.sleep(5000);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+//    	try {
+//			Thread.sleep(5000);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+    	
+    	By loaderLocator = By.cssSelector("[class*='loader_loader_div']");
+
+        // Wait until loader is invisible or removed from DOM
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loaderLocator));
     	
     	System.out.println("Loader disappeared");
     	

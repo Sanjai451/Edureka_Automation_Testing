@@ -17,11 +17,21 @@ import com.edureka.utility.Pages;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+/**
+ * Test step definitions for Corporate Training-related scenarios.
+ * This class contains Cucumber steps for navigating to corporate training page,
+ * filling out the contact form, and verifying submission.
+ */
 public class CorporateTrainingTest {
 	private Base base;
 	private ExtentTest logs;
 	private WebDriverWait wait;
 	
+	/**
+	 * Constructor for CorporateTrainingTest.
+	 * Initializes base, logs, and wait using the provided Base instance.
+	 * @param base the Base instance for WebDriver access
+	 */
 	public CorporateTrainingTest(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
@@ -32,7 +42,6 @@ public class CorporateTrainingTest {
 	public void user_navigates_to_page(String string) {
 		Pages.get().homePage.clickOnCorporateTraining();
 
-		logs.log(Status.INFO,"Navigated to " + string + " Page");
 	}
 
 	@Then("corporate training page should be displayed")
@@ -44,16 +53,15 @@ public class CorporateTrainingTest {
         assertTrue(driver.getCurrentUrl().contains("corporate"),
                 "Corporate Training page is not displayed");
 
-        logs.log(Status.PASS, "Corporate Training page displayed successfully");
 	}
 
+	/**
+	 * Step definition for entering corporate training details and submitting the form.
+	 * Extracts data from DataTable and passes to the page object for form filling.
+	 * @param dataTable the Cucumber DataTable containing form data
+	 */
 	@When("user enters corporate training details and submit")
 	public void user_enters_corporate_training_details_and_submit(io.cucumber.datatable.DataTable dataTable) {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		// Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		// Double, Byte, Short, Long, BigInteger or BigDecimal.
 		
 		Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
 
@@ -64,7 +72,6 @@ public class CorporateTrainingTest {
 	            data.get("Company"),
 	            data.get("Query"));
 		
-		logs.log(Status.INFO,"Corportate Training details submitted");
 	    
 	}
 

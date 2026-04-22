@@ -22,12 +22,22 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+/**
+ * Test step definitions for Webinar-related scenarios.
+ * This class contains Cucumber step implementations for navigating to webinars,
+ * validating pages, and filling registration forms.
+ */
 public class WebinarTest extends AllFunctionality {
 	private Base base;
 	private String homePageHandle;
 	private ExtentTest logs;
 	private WebDriverWait wait;
 	
+	/**
+	 * Constructor for WebinarTest.
+	 * Initializes the base, logs, and wait objects.
+	 * @param base the Base instance for WebDriver access
+	 */
 	public WebinarTest(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
@@ -35,11 +45,15 @@ public class WebinarTest extends AllFunctionality {
 	}
 	
 	
+	/**
+	 * Step definition for ensuring the user is on the Edureka homepage.
+	 * Stores the home page handle and verifies the URL.
+	 */
 	@Given("user is on the Edureka homepage")
 	public void user_is_on_the_edureka_homepage() {
 //		System.out.println("Current Page : " + getUrl(base.getDriver()));
 //		homePageHandle = base.getDriver().getWindowHandle();
-//		logs.log(Status.INFO,"User is on edureka home page");
+//		logs.log(Status.PASS,"User is on edureka home page");
 		WebDriver driver = base.getDriver();
 
         // Store current window handle for later tab switching
@@ -50,26 +64,28 @@ public class WebinarTest extends AllFunctionality {
         Assert.assertTrue(getUrl(driver).contains("edureka"),
                 "User is not on Edureka homepage");
 
-        logs.log(Status.INFO, "User is on Edureka homepage");
 	}
 
+	/**
+	 * Step definition for clicking on the webinar navigation menu item.
+	 * Waits for the element to be clickable before clicking.
+	 */
 	@When("user clicks on {string} from navigation menu")
 	public void user_clicks_on_from_navigation_menu(String string) {
 //		Pages.get().homePage.clickOnWebinarFromNavbar();
-//		logs.log(Status.INFO,"Navigated to Webinar Page");
+//		logs.log(Status.PASS,"Navigated to Webinar Page");
 		// Wait for navigation element to be clickable
         wait.until(ExpectedConditions.elementToBeClickable(
                 Pages.get().homePage.getWebinarNavElement()));
 
         Pages.get().homePage.clickOnWebinarFromNavbar();
 
-        logs.log(Status.INFO, "Clicked on Webinar from navigation menu");
 	}
 
 	@Then("user should be redirected to webinars page")
 	public void user_should_be_redirected_to_webinars_page() {
 //		System.out.println("Current Page :" + getUrl(base.getDriver()));
-//		logs.log(Status.INFO,"Redirected to Webinar Page");
+//		logs.log(Status.PASS,"Redirected to Webinar Page");
 		
 		 // Wait until URL changes to webinar page
         wait.until(driver -> getUrl(driver).contains("webinars"));
@@ -77,7 +93,6 @@ public class WebinarTest extends AllFunctionality {
         Assert.assertTrue(getUrl(base.getDriver()).contains("webinars"),
                 "User not redirected to webinars page");
 
-        logs.log(Status.PASS, "User successfully redirected to webinars page");
 	}
 
 	@Then("webinars page should load successfully")
@@ -85,7 +100,6 @@ public class WebinarTest extends AllFunctionality {
 		wait.until(driver -> getUrl(driver).contains("webinar"));
 		
 		System.out.println("87 Current Page :" + getUrl(base.getDriver()));
-		logs.log(Status.INFO,"Webinar Page loaded successfully");
 	}
 
 	@Then("all upcoming webinars should be displayed")
@@ -94,10 +108,8 @@ public class WebinarTest extends AllFunctionality {
 		if(Pages.get().webinarHomePage.getUpcomingWebinarsTitles().size() > 0) {
 			System.out.println("All upcoming webinar : ");
 			Pages.get().webinarHomePage.printAllUpcomingWebinarTitles();
-			logs.log(Status.INFO,"Webinars available");
 		}else {
 			System.out.println("No upcoming webinars available at the time");
-			logs.log(Status.INFO,"No upcoming webinar available at this time");
 		}
 		
 	}
@@ -110,7 +122,6 @@ public class WebinarTest extends AllFunctionality {
 		}
 		else {
 			System.out.println("No webinars available at the time");
-			logs.log(Status.INFO,"No webinar available at this time");
 		}
 	}
 
@@ -120,11 +131,9 @@ public class WebinarTest extends AllFunctionality {
 		if(Pages.get().webinarHomePage.getAllWebinarsCategory().size() > 1) {
 			System.out.println("Navigating to category : " + category);
 			Pages.get().webinarHomePage.clickOnWebinarCategory(base.getDriver(), category);
-			logs.log(Status.INFO,"Navigate to webinar with category : " + category);
 		}
 		else {
 			System.out.println("No webinars available at the time");
-			logs.log(Status.INFO,"No webinar available at this time");
 		}
 		
 	}
@@ -136,7 +145,7 @@ public class WebinarTest extends AllFunctionality {
 		
 		if(base.getDriver().getWindowHandles().size() < 2) {
 			System.out.println("Only one tab available : Unable to switch");
-			logs.log(Status.INFO,"Unable to switch tab");
+			logs.log(Status.PASS,"Unable to switch tab");
 			return;
 		}
 		
@@ -146,27 +155,26 @@ public class WebinarTest extends AllFunctionality {
 		for(String p : handles) {
 			if(! p.equals(homePageHandle)) {
 				base.getDriver().switchTo().window(p);
-				logs.log(Status.INFO,"Control switched to new tab");
 				break;
 			}
 		}
 	}
 	
 
+	/**
+	 * Step definition for filling the registration form using data from a DataTable.
+	 * Extracts email, phone, and experience from the first row and submits the form.
+	 * @param dataTable the Cucumber DataTable containing form data
+	 */
 	@Then("fill the details in registration form")
 	public void fill_the_details_in_registration_form(io.cucumber.datatable.DataTable dataTable) {
-		// Write code here that turns the phrase above into concrete actions
-		// For automatic transformation, change DataTable to one of
-		// E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-		// Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-		// Double, Byte, Short, Long, BigInteger or) BigDecimal.
 		
 		if(base.getDriver().getWindowHandles().size() < 2) {
 			System.out.println("Filling failed : No webinar present at the page at this time + " + new Date());
 			logs.log(Status.WARNING,"No webinar present at the page at this time");
 			return;
 		}
-		//
+		
 		// For other transformations you can register a DataTableType.
 		List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 
@@ -180,13 +188,11 @@ public class WebinarTest extends AllFunctionality {
 
 	    // Pass to Page Object
 	    Pages.get().webinarCategoryPage.fillDetailAndSubmit(email, phone, experience);
-	    logs.log(Status.PASS,"Data submitted at webinar registration");
 	}
 
 
 	@Then("registration form or login page should be displayed")
 	public void registration_form_or_login_page_should_be_displayed() {
 		System.out.println("Current URL : " + getUrl(base.getDriver()));
-		logs.log(Status.PASS, "Registration/Login page displayed successfully");
 	}
 }
