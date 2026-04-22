@@ -2,6 +2,8 @@ package com.edureka.stepDefinition;
 
 import org.testng.Assert;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.edureka.pages.BlogCategoryPage;
 import com.edureka.pages.BlogHomePage;
 import com.edureka.pages.BlogPostPage;
@@ -10,6 +12,7 @@ import com.edureka.pages.BlogVideoPage;
 import com.edureka.pages.LoginPage;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
+import com.edureka.utility.ExtentReportManager;
 import com.edureka.utility.Pages;
 
 import io.cucumber.java.en.And;
@@ -34,6 +37,7 @@ public class BlogStepDefinition extends AllFunctionality {
     private String category;
     private String videoTitle;
     private String comment;
+    
 
     public BlogStepDefinition(Base base) {
         this.base = base;
@@ -51,6 +55,7 @@ public class BlogStepDefinition extends AllFunctionality {
         blogTitle2 = getData(1, 2);
         videoTitle = getData(1, 3);
         comment = getData(1, 4);
+        
 
 //        init("AuthData");
 //        String email = getData(1, 0);
@@ -92,36 +97,48 @@ public class BlogStepDefinition extends AllFunctionality {
         loginPage.enterEmail(email);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
+        
     }
 
     @When("User click blogs from navbar")
     public void user_click_blogs_from_navbar() {
         base.getDriver().get("https://www.edureka.co/blog/");
+        
     }
 
     @Then("blogs page need to be visible")
     public void blogs_page_need_to_be_visible() {
         Assert.assertTrue(base.getDriver().getCurrentUrl().contains("blog"));
+        
     }
 
     @And("User open the recent blog from Excel")
     public void user_open_the_recent_blog_from_excel() {
         blogHomePage.clickOnArticles(base.getDriver(), blogTitle1);
+        
     }
 
     @And("verify whether recent blog opened from Excel")
     public void verify_whether_recent_blog_opened_from_excel() {
         Assert.assertTrue(blogPostPage.getBlogTitle().contains(blogTitle1));
+        
     }
 
     @And("click on bookmark button")
     public void click_on_bookmark_button() {
         blogPostPage.addBookMark();
+        
+        boolean isBookmarked = blogPostPage.isBookMarked();
+        
+        if (!isBookmarked) {
+        	Assert.fail("Bookmark not added");
+        }
     }
 
     @And("if not added print the warning message")
     public void if_not_added_print_the_warning_message() {
         System.out.println("Bookmark may not be added. Verify warning message manually.");
+        
     }
 
     @And("User click on category from Excel")
@@ -133,6 +150,7 @@ public class BlogStepDefinition extends AllFunctionality {
     public void user_open_category_blog_from_excel() {
 
         blogHomePage.clickOnArticles(base.getDriver(), blogTitle2);
+        
 
     }
 
@@ -144,6 +162,7 @@ public class BlogStepDefinition extends AllFunctionality {
     @And("User click on video icon")
     public void user_click_on_video_icon() {
         blogHomePage.clickOnVideo();
+        
     }
 
     @Then("User need to see videos and click video from Excel")
@@ -155,6 +174,7 @@ public class BlogStepDefinition extends AllFunctionality {
     @And("verify user can view video")
     public void verify_user_can_view_video() {
     	System.out.println("Video page");
+    	
 //        Assert.assertTrue(blogVideoFullScreenPage.getVideoTitle().trim().length() > 0);
     }
 
@@ -172,5 +192,7 @@ public class BlogStepDefinition extends AllFunctionality {
     public void verify_user_can_see_recommended_blogs_and_first_recommended_blog() {
         System.out.println("Recommended blogs section is expected to be visible.");
         System.out.println("Recommended : " + blogVideoFullScreenPage.getRecommendedVideoTitle());
+        
+        
     }
 }

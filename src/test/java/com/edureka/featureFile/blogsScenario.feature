@@ -23,6 +23,7 @@ Scenario: Verify blog page loads from category
     And verify user can view video
     And add comments for video from Excel
     And verify the comment is visible under comment section
+   
 
 Scenario: Verify user can view recommended blogs
     When User click blogs from navbar
@@ -30,15 +31,17 @@ Scenario: Verify user can view recommended blogs
     Then User need to see videos and click video from Excel
     And verify user can view video
     And verify user can see recommended blogs and first recommended blog
-
-#NEG
-  Scenario: Verify blogs can be bookmarked
+ 
+ Scenario: Verify blogs can be bookmarked
     When User click blogs from navbar
     And blogs page need to be visible
     And User open the recent blog from Excel
     Then verify whether recent blog opened from Excel
     And click on bookmark button
-    And if not added print the warning message
+    And if not added print the warning message   
+    
+
+
 
 
 

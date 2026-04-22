@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class BlogPostPage {
-
+//web element for Blog page
 	@FindBy(tagName = "h1")
 	private WebElement title;
 	
@@ -13,6 +13,13 @@ public class BlogPostPage {
 	
 	@FindBy(css = "[rel='author']")
 	private WebElement authorName;
+	
+	@FindBy(css = ".bookmark-it.active")
+	private WebElement bookmarkActiveIcon;
+	
+	public boolean isBookMarked() {
+	    return bookmarkActiveIcon.isDisplayed(); // or class contains active
+	}
 	
 	public String getBlogTitle() {
 		return title.getText();

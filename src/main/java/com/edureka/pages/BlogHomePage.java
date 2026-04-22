@@ -9,6 +9,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Page Object class for Blog Home page.
+ * Provides methods to interact with blog home elements like categories, articles, and navigation.
+ */
+
 public class BlogHomePage {
 	
 	@FindBy(css = "[href='https://www.edureka.co/blog/videos/']")

@@ -115,11 +115,11 @@ public class Pages {
 
 		// Search
 		shp = PageFactory.initElements(driver, SearchHomePage.class);
-//		srp = PageFactory.initElements(driver, SearchResultsPage.class);
+	srp = PageFactory.initElements(driver, SearchResultsPage.class);
 
 		// Auth
 		loginPage = PageFactory.initElements(driver, LoginPage.class);
-//		signUpPage = PageFactory.initElements(driver, SignUpPage.class);
+	  signUpPage = PageFactory.initElements(driver, SignUpPage.class);
 
 		// Blogs
 		blogHomePage = PageFactory.initElements(driver, BlogHomePage.class);

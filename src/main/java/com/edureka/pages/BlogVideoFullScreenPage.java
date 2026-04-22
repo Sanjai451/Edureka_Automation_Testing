@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Page Object class for Blog Video Full Screen page.
+ * Provides methods to interact with video elements, comments, and recommended blogs.
+ */
 public class BlogVideoFullScreenPage {
 	
 	@FindBy(xpath = "//span[contains(@class, 'category-title')]")

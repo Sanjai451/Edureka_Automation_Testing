@@ -9,14 +9,25 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.edureka.utility.ExtentReportManager;
+
+/**
+ * Page Object class for Blog Category page.
+ * Provides methods to interact with blog category elements like pagination and article links.
+ */
 public class BlogCategoryPage {
+	
+	// WebElement for the Next page button 
 	
 	@FindBy(xpath = "//a[@title='Next']")
 	private WebElement nextPage;
 	
+	// WebElement for the Previous page button
 	@FindBy(xpath = "//a[@title='Previous']")
 	private WebElement previousPage;
 	
+	// WebElement for the Current page button
 	@FindBy(xpath = "//li[contains(@class, 'active') and contains(@class, 'page-item')]//a")
 	private WebElement currentPage;
 
