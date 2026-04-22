@@ -2,14 +2,9 @@ package com.edureka.stepDefinition;
 
 import java.io.IOException;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.ExtentReportManager;
@@ -18,7 +13,9 @@ import com.edureka.utility.ScreenshotUtil;
 
 import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 
 public class Hook extends AllFunctionality {
@@ -79,6 +76,29 @@ public class Hook extends AllFunctionality {
 //        Base.quitDriver();
         Pages.cleanUp();
         
+	}
+	private String currentStepName = "";
+	
+	@BeforeStep
+	public void beforeStep(Scenario scenario) {
+	    // Cucumber doesn't expose step text directly, so we read it from the scenario's
+	    // last line in the event model. We store the scenario name as fallback.
+	    currentStepName = scenario.getName();
+	}
+	
+	@AfterStep
+	public void afterStep(Scenario scenario) {
+	    ExtentTest test = ExtentReportManager.getTest();
+	    if (test == null) return;
+
+	    if (scenario.isFailed()) {
+	        // Only log step-level failure here if test hasn't been fully failed yet
+	        String base64Screenshot = ScreenshotUtil.takeScreenshotAsBase64(Base.getDriver());
+	        test.log(Status.FAIL, "Step FAILED in: " + scenario.getName(),
+	                MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
+	    } else {
+	        test.log(Status.PASS, "Step PASSED");
+	    }
 	}
 	
 

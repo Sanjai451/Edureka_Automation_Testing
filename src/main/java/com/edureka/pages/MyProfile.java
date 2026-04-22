@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MyProfile {
 
-	// ================= NAVIGATION =================
+	// Navigation tabs
 
 	@FindBy(linkText = "Personalize")
 	private WebElement personalizeTab;
@@ -29,7 +29,7 @@ public class MyProfile {
 	@FindBy(linkText = "My Wallet")
 	private WebElement myWalletTab;
 
-	// ================= EDIT BUTTONS =================
+	// Edit buttons
 
 	@FindBy(xpath = "//h4[contains(text(),'User Details')]/ancestor::div[contains(@class,'details-heading')]//a")
 	private WebElement userDetailsEdit;
@@ -40,7 +40,7 @@ public class MyProfile {
 	@FindBy(xpath = "//h4[contains(text(),'Study Plan')]/ancestor::div[contains(@class,'details-heading')]//a")
 	private WebElement studyPlanEdit;
 
-	// ================= USER DETAILS VALUES =================
+	// User details values
 
 	@FindBy(xpath = "//span[text()='Name']/following-sibling::span")
 	private WebElement nameValue;
@@ -54,8 +54,7 @@ public class MyProfile {
 	@FindBy(xpath = "//span[text()='Current TimeZone']/following-sibling::span")
 	private WebElement currentTimezoneValue;
 
-
-	// ================= PREFERRED TIME =================
+	// Preferred time values
 
 	@FindBy(xpath = "//span[text()='Timezone']/following-sibling::span")
 	private WebElement preferredTimezoneValue;
@@ -66,12 +65,12 @@ public class MyProfile {
 	@FindBy(xpath = "//span[text()='Weekends']/following-sibling::span")
 	private WebElement weekendsValue;
 
-	// ================= LEARNING GOALS =================
+	// Learning goals list
 
 	@FindBy(xpath = "//h4[contains(text(),'Learning Goals')]/following::span[contains(@class,'skill')]")
 	private List<WebElement> learningGoalsList;
 
-	// ================= REMINDER BUDDY =================
+	// Reminder buddy details
 
 	@FindBy(xpath = "//span[text()='Partner's Name']/following-sibling::span")
 	private WebElement partnerName;
@@ -82,7 +81,7 @@ public class MyProfile {
 	@FindBy(xpath = "//span[text()='Partner's Email']/following-sibling::span")
 	private WebElement partnerEmail;
 
-	// ================= STUDY PLAN =================
+	// Study plan details
 
 	@FindBy(xpath = "//strong[text()='Day 1']/..")
 	private WebElement studyDay;
@@ -90,7 +89,7 @@ public class MyProfile {
 	@FindBy(xpath = "//h4[contains(text(),'Study Plan')]/following::span[contains(text(),'AM') or contains(text(),'PM')]")
 	private WebElement studyTime;
 
-	// ================= PROFILE IMAGE =================
+	// Profile image upload elements
 
 	@FindBy(css = "i.icon-camera")
 	private WebElement cameraIcon;
@@ -100,13 +99,17 @@ public class MyProfile {
 
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement uploadBtn;
+
 	@FindBy(xpath = "//span[text()='Designation']/following-sibling::span")
 	private WebElement designationValue;
-	// ================= GETTERS =================
+
+	// Constructor to initialize elements
 
 	public MyProfile(WebDriver driver) {
 		PageFactory.initElements(driver, this);
 	}
+
+	// Getter methods
 
 	public WebElement getPersonalizeTab() {
 		return personalizeTab;
@@ -144,7 +147,7 @@ public class MyProfile {
 		return studyPlanEdit;
 	}
 
-	// ================= BUSINESS METHODS =================
+	// Navigation methods
 
 	public void clickPersonalize() {
 		getPersonalizeTab().click();
@@ -167,7 +170,7 @@ public class MyProfile {
 	}
 
 	public void clickMyWallet() {
-		getMyWalletTab().click(); // ✅ using getter
+		getMyWalletTab().click();
 	}
 
 	public void clickUserDetailsEdit() {
@@ -182,6 +185,8 @@ public class MyProfile {
 		getStudyPlanEdit().click();
 	}
 
+	// Profile image upload
+
 	public void uploadProfileImage(String filePath) {
 		uploadInput.sendKeys(filePath);
 		uploadBtn.click();
@@ -191,7 +196,7 @@ public class MyProfile {
 		cameraIcon.click();
 	}
 
-	// ================= VALUE GETTERS =================
+	// Value getters
 
 	public String getName() {
 		return nameValue.getText().trim();
@@ -245,7 +250,7 @@ public class MyProfile {
 		return learningGoalsList;
 	}
 
-	// ================= VALIDATIONS =================
+	// Validation methods
 
 	public boolean verifyUserDetails(String name, String mobile, String email, String timezone) {
 		return getName().equalsIgnoreCase(name) && getMobile().contains(mobile) && getEmail().equalsIgnoreCase(email)

@@ -7,109 +7,82 @@ import java.util.List;
 
 import org.testng.Assert;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
-import com.edureka.utility.ExtentReportManager;
 
 public class TopicOfInterest extends AllFunctionality {
 
-    private Base base;
-    private ExtentTest logs;
+	private Base base;
 
-    public TopicOfInterest(Base base) {
-        this.base = base;
-        logs = ExtentReportManager.getTest();
-    }
+	// Constructor to initialize base
+	public TopicOfInterest(Base base) {
+		this.base = base;
+	}
 
-    List<String> topicsFromExcel = new ArrayList<>();
-    String topicsBeforeRefresh;
+	// List to store topics from excel
+	List<String> topicsFromExcel = new ArrayList<>();
 
-    // NAVIGATION
-    @Given("user clicks on Topics of Interest tab")
-    public void clickTopicsTab() {
-        Pages.get().myProfile.clickTopicsOfInterest();
-        logs.log(Status.PASS, "Clicked on Topics of Interest tab");
-    }
+	// Variable to store topics before refresh
+	String topicsBeforeRefresh;
 
-    // CLICK ADD NOW
-    @When("user clicks Add Now button")
-    public void clickAddNow() {
-        Pages.get().topicsOfInterestPage.clickAddNow();
-        logs.log(Status.PASS, "Clicked Add Now button");
-    }
+	// Step to click topics of interest tab
+	@Given("user clicks on Topics of Interest tab")
+	public void clickTopicsTab() {
+		Pages.get().myProfile.clickTopicsOfInterest();
+	}
 
-    // READ FROM EXCEL
-    @When("user reads topics from excel")
-    public void readTopicsExcel() {
+	// Step to click add now button
+	@When("user clicks Add Now button")
+	public void clickAddNow() {
+		Pages.get().topicsOfInterestPage.clickAddNow();
+	}
 
-        init("Topics");
-        topicsFromExcel.clear();
-        topicsFromExcel.add(getData(1, 0));
-        topicsFromExcel.add(getData(1, 1));
-        topicsFromExcel.add(getData(1, 2));
+	// Step to read topics from excel
+	@When("user reads topics from excel")
+	public void readTopicsExcel() {
 
-        logs.log(Status.PASS, "Read Topics from Excel: " + topicsFromExcel);
-    }
+		init("Topics");
+		topicsFromExcel.clear();
+		topicsFromExcel.add(getData(1, 0));
+		topicsFromExcel.add(getData(1, 1));
+		topicsFromExcel.add(getData(1, 2));
+	}
 
-    // SELECT TOPICS
-    @When("user selects topics from excel")
-    public void selectTopicsFromExcel() {
+	// Step to select topics
+	@When("user selects topics from excel")
+	public void selectTopicsFromExcel() {
 
-        boolean result = Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
+		boolean result = Pages.get().topicsSelectionPage.selectMultipleTopics(topicsFromExcel);
 
-        logs.log(Status.PASS, "Selecting Topics: " + topicsFromExcel);
+		Assert.assertTrue(result, "One or more topics not found");
+	}
 
-        Assert.assertTrue(result, "One or more topics not found");
+	// Step to click save and continue
+	@When("user clicks Save and Continue in Topics")
+	public void clickSaveContinueTopics() {
+		Pages.get().topicsSelectionPage.clickSaveAndContinue();
+	}
 
-        logs.log(Status.PASS, "All topics selected successfully");
-    }
+	// Step to validate topics saved
+	@Then("topics should be saved successfully")
+	public void topicsSaved() {
 
-    // SAVE
-    @When("user clicks Save and Continue in Topics")
-    public void clickSaveContinueTopics() {
-        Pages.get().topicsSelectionPage.clickSaveAndContinue();
-        logs.log(Status.PASS, "Clicked Save and Continue in Topics");
-    }
+		boolean isSaved = Pages.get().topicsOfInterestPage.isAnyTopicSelected();
 
-    // VALIDATE SAVE
-    @Then("topics should be saved successfully")
-    public void topicsSaved() {
+		Assert.assertTrue(isSaved, "Topics not saved");
+	}
 
-        boolean isSaved = Pages.get().topicsOfInterestPage.isAnyTopicSelected();
+	// Step to validate topics persistence after refresh
+	@Then("topics should persist after page refresh")
+	public void verifyPersistence() {
 
-        logs.log(Status.PASS, "Validating topics are saved");
+		topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
-        Assert.assertTrue(
-                isSaved,
-                "Topics not saved"
-        );
+		base.getDriver().navigate().refresh();
 
-        logs.log(Status.PASS, "Topics saved successfully");
-    }
+		String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
 
-    // VALIDATE PERSISTENCE
-    @Then("topics should persist after page refresh")
-    public void verifyPersistence() {
-
-        topicsBeforeRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
-
-        logs.log(Status.PASS, "Topics before refresh: " + topicsBeforeRefresh);
-
-        base.getDriver().navigate().refresh();
-
-        String afterRefresh = Pages.get().topicsOfInterestPage.getAllTopicsText();
-
-        logs.log(Status.PASS, "Topics after refresh: " + afterRefresh);
-
-        Assert.assertEquals(
-                afterRefresh,
-                topicsBeforeRefresh,
-                "Topics not persisted after refresh"
-        );
-
-        logs.log(Status.PASS, "Topics persisted successfully after refresh");
-    }
+		Assert.assertEquals(afterRefresh, topicsBeforeRefresh, "Topics not persisted after refresh");
+	}
 }
