@@ -199,11 +199,10 @@ public class TrainingCourse {
 		} catch (Exception e) {
 		}
 
-		// JS click to avoid click interception issues
+		// JS click (bypass interactability issue)
 		js.executeScript("arguments[0].click();", submitFresh);
 	}
 
-	// Scroll to query form section
 	public void scrollToQueryForm(WebDriver driver) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 

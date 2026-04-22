@@ -62,30 +62,7 @@ public class Dashboard {
 		return hireFromEdurekaLink;
 	}
 
-	// 🔹 Business Logic (your style)
-	public void clickHireFromEdureka(WebDriver driver) {
-
-		try {
-			// Normal click
-			getHireFromEdurekaLink().click();
-
-		} catch (Exception e) {
-
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-
-			// Scroll DOWN slightly
-			js.executeScript("window.scrollBy(0,300)");
-
-			// Optional: bring element to center (more stable)
-			js.executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
-					getHireFromEdurekaLink());
-
-			// JS click fallback
-			js.executeScript("arguments[0].click();", getHireFromEdurekaLink());
-		}
-	}
-
-	public void clickBecomeInstructor(WebDriver driver) {
+	 public void clickBecomeInstructor(WebDriver driver) {
 		try {
 			getBecomeInstructorLink().click();
 		} catch (Exception e) {
@@ -113,4 +90,28 @@ public class Dashboard {
 			js.executeScript("arguments[0].click();", getBecomePartnerLink());
 		}
 	}
+
+	// 🔹 Business Logic (your style)
+	public void clickHireFromEdureka(WebDriver driver) {
+
+		try {
+			// Normal click
+			getHireFromEdurekaLink().click();
+
+		} catch (Exception e) {
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			// Scroll DOWN slightly
+			js.executeScript("window.scrollBy(0,300)");
+
+			// Optional: bring element to center (more stable)
+			js.executeScript("arguments[0].scrollIntoView({block:'center', inline:'nearest'});",
+					getHireFromEdurekaLink());
+
+			// JS click fallback
+			js.executeScript("arguments[0].click();", getHireFromEdurekaLink());
+		}
+	}
+
 }

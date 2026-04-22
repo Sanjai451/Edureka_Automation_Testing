@@ -13,48 +13,53 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+/**
+ * Step Definition class for Search Module
+ * Handles all Cucumber steps related to search functionality
+ */
 public class SearchStepDefinition extends AllFunctionality {
-
+	
+	// Base class for WebDriver access
     private final Base base;
+    
+ // Used to store first search result for validation across steps
     private String firstResultTitle;
 
+    /**
+     * Constructor Injection (Dependency Injection using PicoContainer)
+     */
     public SearchStepDefinition(Base base) {
         this.base = base;
     }
 
+    
     @Given("user is ready on homepage for search module")
     public void user_is_ready_on_homepage_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().shp.isSearchTriggerDisplayed(),
-            "Search bar not visible"
-        );
+        Assert.assertTrue(Pages.get().shp.isSearchTriggerDisplayed(), "Search bar not visible");
     }
 
+    
     @Then("search bar should be visible for search module")
     public void search_bar_should_be_visible_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().shp.isSearchTriggerDisplayed(),
-            "Search bar is not visible"
-        );
+        Assert.assertTrue(Pages.get().shp.isSearchTriggerDisplayed(), "Search bar is not visible");
     }
 
+    
     @When("user clicks the search bar for search module")
     public void user_clicks_the_search_bar_for_search_module() {
         Pages.get().shp.clickSearchTrigger();
     }
 
+    
     @Then("search panel should open for search module")
     public void search_panel_should_open_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().shp.isSearchPanelDisplayed(),
-            "Search panel did not open"
-        );
+        Assert.assertTrue(Pages.get().shp.isSearchPanelDisplayed(), "Search panel did not open");
     }
 
     @When("user enters valid keyword from excel sheet {string} row {int}")
     public void user_enters_valid_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 0); // validKeyword
+        String keyword = getData(row, 0);
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Keyword is empty in excel");
@@ -63,10 +68,11 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().shp.enterKeyword(keyword);
     }
 
+   
     @When("user enters invalid keyword from excel sheet {string} row {int}")
     public void user_enters_invalid_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 1); // invalidKeyword
+        String keyword = getData(row, 1);
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Invalid keyword is empty in excel");
@@ -75,10 +81,11 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().shp.enterKeyword(keyword);
     }
 
+    
     @When("user enters special keyword from excel sheet {string} row {int}")
     public void user_enters_special_keyword_from_excel_sheet_row(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 2); // specialKeyword
+        String keyword = getData(row, 2);
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Special keyword is empty in excel");
@@ -87,19 +94,19 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().shp.enterKeyword(keyword);
     }
 
+   
     @When("user presses Enter in search for search module")
     public void user_presses_enter_in_search_for_search_module() {
         Pages.get().shp.pressEnter();
     }
 
+   
     @Then("relevant search results should be displayed for search module")
     public void relevant_search_results_should_be_displayed_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().srp.areResultsDisplayed(),
-            "Results not displayed"
-        );
+        Assert.assertTrue(Pages.get().srp.areResultsDisplayed(), "Results not displayed");
     }
 
+   
     @When("user searches using datatable for search module")
     public void user_searches_using_datatable_for_search_module(DataTable table) {
         List<List<String>> data = table.asLists(String.class);
@@ -114,26 +121,23 @@ public class SearchStepDefinition extends AllFunctionality {
             base.getDriver().get("https://www.edureka.co/");
 
             Pages.get().shp.clickSearchTrigger();
-            Assert.assertTrue(
-                Pages.get().shp.isSearchPanelDisplayed(),
-                "Search panel did not open for keyword: " + keyword
-            );
+            Assert.assertTrue(Pages.get().shp.isSearchPanelDisplayed(),
+                    "Search panel did not open for keyword: " + keyword);
 
             Pages.get().shp.enterKeyword(keyword);
             Pages.get().shp.pressEnter();
 
-            Assert.assertTrue(
-                Pages.get().srp.areResultsDisplayed(),
-                "Search failed for keyword: " + keyword
-            );
+            Assert.assertTrue(Pages.get().srp.areResultsDisplayed(), "Search failed for keyword: " + keyword);
         }
     }
 
+    
     @Then("datatable search should complete for search module")
     public void datatable_search_should_complete_for_search_module() {
         Assert.assertTrue(true, "Datatable search completed");
     }
 
+   
     @When("user stores first search result title for search module")
     public void user_stores_first_search_result_title_for_search_module() {
         firstResultTitle = Pages.get().srp.getFirstResultTitle();
@@ -143,51 +147,46 @@ public class SearchStepDefinition extends AllFunctionality {
         }
     }
 
+   
     @When("user clicks first search result for search module")
     public void user_clicks_first_search_result_for_search_module() {
         Pages.get().srp.clickFirstResult();
     }
 
+  
     @Then("opened course page title should match stored result title for search module")
     public void opened_course_page_title_should_match_stored_result_title_for_search_module() {
         String pageTitle = base.getDriver().getTitle().toLowerCase();
 
         Assert.assertTrue(
-            pageTitle.contains(firstResultTitle.toLowerCase())
-                || base.getDriver().getCurrentUrl().contains("course"),
-            "Opened page title does not match stored result title"
-        );
+                pageTitle.contains(firstResultTitle.toLowerCase())
+                        || base.getDriver().getCurrentUrl().contains("course"),
+                "Opened page title does not match stored result title");
     }
 
+    
     @Then("default search page should open for search module")
     public void default_search_page_should_open_for_search_module() {
-        Assert.assertTrue(
-            base.getDriver().getCurrentUrl().contains("search"),
-            "Default search page did not open"
-        );
+        Assert.assertTrue(base.getDriver().getCurrentUrl().contains("search"), "Default search page did not open");
     }
 
+  
     @Then("system should not crash for search module")
     public void system_should_not_crash_for_search_module() {
-        Assert.assertNotNull(
-            base.getDriver().getTitle(),
-            "System crashed or title is null"
-        );
+        Assert.assertNotNull(base.getDriver().getTitle(), "System crashed or title is null");
     }
 
+    
     @Then("callback form should be displayed for search module")
     public void callback_form_should_be_displayed_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().srp.isCallbackFormDisplayed(),
-            "Callback form is not displayed"
-        );
+        Assert.assertTrue(Pages.get().srp.isCallbackFormDisplayed(), "Callback form is not displayed");
     }
 
+   
     @When("user enters valid mobile number from excel sheet {string} row {int} for search module")
-    public void user_enters_valid_mobile_number_from_excel_sheet_row_for_search_module(
-            String sheet, Integer row) {
+    public void user_enters_valid_mobile_number_from_excel_sheet_row_for_search_module(String sheet, Integer row) {
         init(sheet);
-        String mobile = getData(row, 5); // validMobile
+        String mobile = getData(row, 5);
 
         if (mobile == null || mobile.trim().isEmpty()) {
             throw new RuntimeException("Valid mobile number is empty in excel");
@@ -196,11 +195,11 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().srp.enterMobileNumber(mobile);
     }
 
+   
     @When("user enters invalid mobile number from excel sheet {string} row {int} for search module")
-    public void user_enters_invalid_mobile_number_from_excel_sheet_row_for_search_module(
-            String sheet, Integer row) {
+    public void user_enters_invalid_mobile_number_from_excel_sheet_row_for_search_module(String sheet, Integer row) {
         init(sheet);
-        String mobile = getData(row, 6); // invalidMobile
+        String mobile = getData(row, 6);
 
         if (mobile == null || mobile.trim().isEmpty()) {
             throw new RuntimeException("Invalid mobile number is empty in excel");
@@ -209,42 +208,78 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().srp.enterMobileNumber(mobile);
     }
 
+    
     @Then("system should accept valid 10 digit mobile number for search module")
     public void system_should_accept_valid_10_digit_mobile_number_for_search_module() {
-        Assert.assertEquals(
-            Pages.get().srp.getEnteredMobileNumber().length(),
-            10,
-            "Valid mobile number was not accepted properly"
-        );
+        String mobile = Pages.get().srp.getEnteredMobileNumber();
+
+        Assert.assertEquals(mobile.length(), 10, "Valid mobile number was not accepted properly");
+        Assert.assertTrue(mobile.matches("\\d{10}"), "Valid mobile number is not a 10 digit number");
     }
 
+    /**
+     * Step: Then system should not accept more than 10 digits for search module
+     * Asserts that the system does not accept more than 10 digits.
+     */
     @Then("system should not accept more than 10 digits for search module")
     public void system_should_not_accept_more_than_10_digits_for_search_module() {
-        Assert.assertTrue(
-            Pages.get().srp.getEnteredMobileNumber().length() <= 10,
-            "System accepted more than 10 digits"
-        );
+        String mobile = Pages.get().srp.getEnteredMobileNumber();
+
+        Assert.assertEquals(mobile.length(), 10, "BUG: System accepted more than 10 digits. Actual value: " + mobile);
     }
 
+  
+    @When("user enters course name {string} in callback form")
+    public void user_enters_course_name_in_callback_form(String courseName) {
+        Pages.get().srp.enterCourseLookingFor(courseName);
+    }
+
+   
+    @When("user clicks Get a call back button")
+    public void user_clicks_get_a_call_back_button() {
+        Pages.get().srp.clickGetCallBackButton();
+    }
+
+        @Then("callback request should be submitted successfully")
+    public void callback_request_should_be_submitted_successfully() {
+        Assert.assertTrue(Pages.get().srp.isCallBackSuccessMessageDisplayed(),
+                "Callback request was not submitted successfully");
+    }
+
+   
+    @Then("callback request should not be submitted for invalid mobile")
+    public void callback_request_should_not_be_submitted_for_invalid_mobile() {
+        boolean isSubmitted = Pages.get().srp.isCallBackSuccessMessageDisplayed();
+
+        if (isSubmitted) {
+            Assert.fail("BUG: Callback request submitted even for invalid mobile number");
+        }
+    }
+
+    
     @When("user selects {string} from popular searches")
     public void user_selects_from_popular_searches(String keyword) {
         Pages.get().shp.clickPopularSearchByText(keyword);
     }
 
+  
     @Then("user should be navigated to search results page")
     public void user_should_be_navigated_to_search_results_page() {
         String url = base.getDriver().getCurrentUrl();
 
-        Assert.assertTrue(
-            url.contains("/search"),
-            "User not navigated to search results page"
-        );
+        Assert.assertTrue(url.contains("/search"), "User not navigated to search results page");
     }
 
+    /**
+     * Step: When user selects popular keyword from excel sheet {string} row {int}
+     * Selects a popular keyword from the specified Excel sheet and row.
+     * @param sheet The Excel sheet name.
+     * @param row The row number in the sheet.
+     */
     @When("user selects popular keyword from excel sheet {string} row {int}")
     public void user_selects_popular_keyword(String sheet, Integer row) {
         init(sheet);
-        String keyword = getData(row, 3); // popularKeyword
+        String keyword = getData(row, 3);
 
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new RuntimeException("Popular keyword is empty in excel");
@@ -253,18 +288,17 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().shp.clickPopularSearchByText(keyword);
     }
 
+ 
     @Then("search results should match selected keyword from excel")
     public void verify_keyword_match() {
-        Assert.assertTrue(
-            Pages.get().srp.areResultsDisplayed(),
-            "Search results not displayed"
-        );
+        Assert.assertTrue(Pages.get().srp.areResultsDisplayed(), "Search results not displayed");
     }
 
+ 
     @When("user selects category from excel sheet {string} row {int}")
     public void user_selects_category(String sheet, Integer row) {
         init(sheet);
-        String category = getData(row, 4); // category
+        String category = getData(row, 4);
 
         if (category == null || category.trim().isEmpty()) {
             throw new RuntimeException("Category is empty in excel");
@@ -273,76 +307,61 @@ public class SearchStepDefinition extends AllFunctionality {
         Pages.get().shp.clickCategoryByText(category);
     }
 
+   
     @Then("user should be navigated to category page for selected category")
     public void verify_category_navigation() {
-        Assert.assertTrue(
-            Pages.get().srp.getCategoryHeading().length() > 0,
-            "Category page not loaded"
-        );
+        Assert.assertTrue(Pages.get().srp.getCategoryHeading().length() > 0, "Category page not loaded");
     }
 
+    
     @Then("search results should match selected keyword {string}")
     public void search_results_should_match_selected_keyword(String keyword) {
         String url = base.getDriver().getCurrentUrl().toLowerCase();
 
-        Assert.assertTrue(
-            url.contains(keyword.toLowerCase().replace(" ", "-"))
-                || url.contains(keyword.toLowerCase()),
-            "Keyword not matching in URL"
-        );
+        Assert.assertTrue(url.contains(keyword.toLowerCase().replace(" ", "-")) || url.contains(keyword.toLowerCase()),
+                "Keyword not matching in URL");
 
-        Assert.assertTrue(
-            Pages.get().srp.areResultsDisplayed(),
-            "Search results not displayed"
-        );
+        Assert.assertTrue(Pages.get().srp.areResultsDisplayed(), "Search results not displayed");
     }
 
+ 
     @When("user selects {string} from popular categories")
     public void user_selects_from_popular_categories(String category) {
         Pages.get().shp.clickCategoryByText(category);
     }
 
+   
     @Then("user should be navigated to category page for {string}")
     public void user_should_be_navigated_to_category_page_for(String category) {
         String url = base.getDriver().getCurrentUrl().toLowerCase();
-        String formatted = category.toLowerCase()
-                                   .replace(" & ", " ")
-                                   .replace("&", "")
-                                   .replace(" ", "-")
-                                   .trim();
+        String formatted = category.toLowerCase().replace(" & ", " ").replace("&", "").replace(" ", "-").trim();
+
+        Assert.assertTrue(url.contains(formatted.split("-")[0]), "Navigation to category page failed");
 
         Assert.assertTrue(
-            url.contains(formatted.split("-")[0]),
-            "Navigation to category page failed"
-        );
-
-        Assert.assertTrue(
-            Pages.get().srp.getCategoryHeading().toLowerCase()
-                .contains(category.toLowerCase().split(" ")[0]),
-            "Category heading mismatch"
-        );
+                Pages.get().srp.getCategoryHeading().toLowerCase().contains(category.toLowerCase().split(" ")[0]),
+                "Category heading mismatch");
     }
 
+   
     @When("user clicks on Filter By Job Role dropdown")
     public void user_clicks_on_filter_by_job_role_dropdown() {
         Pages.get().srp.clickJobRoleDropdown();
     }
 
+   //Submit callback request
     @When("user selects {string} job role")
     public void user_selects_job_role(String role) {
         Pages.get().srp.selectJobRole(role);
     }
-
+    
+    /**
+     * Validate successful submission
+     */
     @Then("filtered results should be displayed for {string}")
     public void filtered_results_should_be_displayed_for(String role) {
-        Assert.assertTrue(
-            Pages.get().srp.areResultsDisplayed(),
-            "Filtered results not displayed"
-        );
+        Assert.assertTrue(Pages.get().srp.areResultsDisplayed(), "Filtered results not displayed");
 
-        Assert.assertTrue(
-            Pages.get().srp.isJobRoleSelected(role),
-            "Filter not applied correctly"
-        );
+        Assert.assertTrue(Pages.get().srp.isJobRoleSelected(role), "Filter not applied correctly");
     }
 }

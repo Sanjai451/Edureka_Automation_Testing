@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class AddInstructorPage {
 
-    // Locators
+    // Locators for instructor form fields
 
     @FindBy(id = "instructor_first_name")
     private WebElement firstNameInput;
@@ -36,7 +36,7 @@ public class AddInstructorPage {
     @FindBy(xpath = "//input[@type='submit' and @value='SUBMIT']")
     private WebElement submitButton;
 
-    // Getters
+    // Getters to access web elements
 
     public WebElement getFirstNameInput() {
         return firstNameInput;
@@ -74,7 +74,7 @@ public class AddInstructorPage {
         return submitButton;
     }
 
-    // Business logic using getters
+    // Methods to enter data into each field
 
     public void enterFirstName(String firstName) {
         getFirstNameInput().clear();
@@ -116,22 +116,24 @@ public class AddInstructorPage {
         getAboutYourselfTextArea().sendKeys(aboutYourself);
     }
 
+    // Method to click submit button with fallback using javascript
+
     public void clickSubmit(WebDriver driver) {
-    	 try {
-    	        getSubmitButton().click();
-    	    } catch (Exception e) {
+        try {
+            getSubmitButton().click();
+        } catch (Exception e) {
 
-    	        JavascriptExecutor js = (JavascriptExecutor) driver;
+            JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    	        // Scroll slightly DOWN instead of aligning to top
-    	        js.executeScript("window.scrollBy(0,300)");
+            // Scroll down to make button visible
+            js.executeScript("window.scrollBy(0,300)");
 
-    	        // JS click fallback
-    	        js.executeScript("arguments[0].click();", getSubmitButton());
-    	    }
+            // Click using javascript if normal click fails
+            js.executeScript("arguments[0].click();", getSubmitButton());
+        }
     }
 
-    // Complete form flow
+    // Method to fill entire instructor form
 
     public void fillInstructorForm(String firstName, String lastName, String mobile,
                                    String email, String course, String linkedIn,

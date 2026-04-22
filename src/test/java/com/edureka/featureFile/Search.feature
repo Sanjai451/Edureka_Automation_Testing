@@ -1,6 +1,5 @@
 Feature: Search functionality in Edureka
-
- #  BASIC SEARCH FLOW 
+# ================= BASIC SEARCH FLOW =================
 
   Scenario: Verify search bar visibility, panel opening, and valid search flow
     Given user is ready on homepage for search module
@@ -14,11 +13,7 @@ Feature: Search functionality in Edureka
     And user clicks first search result for search module
     Then opened course page title should match stored result title for search module
 
-
-
-  #PARTIAL + CASE INSENSITIVE
-
-
+  # ================= PARTIAL + CASE INSENSITIVE =================
   Scenario: Verify partial and case insensitive search using datatable
     Given user is ready on homepage for search module
     When user searches using datatable for search module
@@ -27,8 +22,6 @@ Feature: Search functionality in Edureka
       | AWS     |
       | aws     |
     Then datatable search should complete for search module
-
-
 
   Scenario Outline: Verify Filter By Job Role functionality
     Given user is ready on homepage for search module
@@ -43,7 +36,6 @@ Feature: Search functionality in Edureka
     Examples:
       | role              |
       | Tableau Developer |
-   
 
   Scenario: Verify navigation using popular search keywords
     Given user is ready on homepage for search module
@@ -60,19 +52,24 @@ Feature: Search functionality in Edureka
     When user selects category from excel sheet "SearchData" row 1
     Then user should be navigated to category page for selected category
 
-  Scenario: Verify invalid search and mobile validation
+  Scenario: Verify valid mobile number submission in callback form
     Given user is ready on homepage for search module
-    Then search bar should be visible for search module
     When user clicks the search bar for search module
     Then search panel should open for search module
     When user enters invalid keyword from excel sheet "SearchData" row 1
     And user presses Enter in search for search module
-    Then system should not crash for search module
     And callback form should be displayed for search module
     When user enters valid mobile number from excel sheet "SearchData" row 1 for search module
-    Then system should accept valid 10 digit mobile number for search module
+    And user clicks Get a call back button
+    Then callback request should be submitted successfully
+
+  Scenario: Verify invalid mobile number should not be accepted in callback form
+    Given user is ready on homepage for search module
+    When user clicks the search bar for search module
+    Then search panel should open for search module
+    When user enters invalid keyword from excel sheet "SearchData" row 1
+    And user presses Enter in search for search module
+    And callback form should be displayed for search module
     When user enters invalid mobile number from excel sheet "SearchData" row 1 for search module
-    Then system should not accept more than 10 digits for search module
-    
-    
-    
+    And user clicks Get a call back button
+    Then callback request should not be submitted for invalid mobile

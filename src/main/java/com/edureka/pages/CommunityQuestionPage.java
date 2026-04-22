@@ -11,6 +11,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/**
+ * Page Object Model class for the Community Question Page of the Edureka website.
+ * This class handles interactions with community question pages, including
+ * adding answers, comments, and voting on questions.
+ */
 public class CommunityQuestionPage {
 
 	// upvote on the question - First Upvote button
@@ -29,6 +34,13 @@ public class CommunityQuestionPage {
 	@FindBy(xpath = "//button[contains(text(), 'Add answer')]")
 	private WebElement postAnswerButton;
 	
+	/**
+	 * Adds an answer to the current question.
+	 * Closes any subscribe popup, clicks the answer button, enters the answer text into the CKEditor,
+	 * and submits the answer.
+	 * @param driver the WebDriver instance
+	 * @param answer the answer text to add
+	 */
 	public void addAnswerForQuestion(WebDriver driver, String answer) {
 	
 		// close pop
@@ -42,6 +54,13 @@ public class CommunityQuestionPage {
 		postAnswerButton.click();
 	}
 	
+	/**
+	 * Adds a comment to the current question.
+	 * Clicks the comment button, enters the comment text into the CKEditor,
+	 * and submits the comment.
+	 * @param driver the WebDriver instance
+	 * @param comment the comment text to add
+	 */
 	public void addCommentForQuestion(WebDriver driver, String comment) {
 		commentButton.click();
 		addTextToFrame(driver, comment);
@@ -49,6 +68,13 @@ public class CommunityQuestionPage {
 	}
 	
 	
+	/**
+	 * Private helper method to add text to a CKEditor iframe.
+	 * Scrolls to the answer section, switches to the appropriate iframe,
+	 * and inserts the text into the CKEditor body.
+	 * @param driver the WebDriver instance
+	 * @param answerText the text to insert into the editor
+	 */
 	private void addTextToFrame(WebDriver driver, String answerText) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 	    

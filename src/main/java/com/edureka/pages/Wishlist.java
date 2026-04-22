@@ -32,8 +32,11 @@ public class Wishlist {
 
 	// Click on profile dropdown
 	public void clickProfileDropDown() {
-		WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("dropdown-user_drop")));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+		WebElement element = wait.until(
+		        ExpectedConditions.presenceOfElementLocated(By.id("dropdown-user_drop"))
+		    );
+		    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
 //		profileDropDown.click();
 	}
 
@@ -42,6 +45,7 @@ public class Wishlist {
 		WebElement element = wait
 				.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='favourite']")));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
 //		wishList.click();
 	}
 

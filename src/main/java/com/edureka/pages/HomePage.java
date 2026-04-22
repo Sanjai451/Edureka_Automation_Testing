@@ -16,10 +16,15 @@ public class HomePage {
 
     WebDriver driver;
     WebDriverWait wait;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> main
     // Constructor
     public HomePage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
@@ -170,6 +175,10 @@ public class HomePage {
     	resourceIcon.click();
     	communityFromNavbar.click();
     }
+	
+	public WebElement getWebinarNavElement() {
+		return resourceIcon;
+	}
     
     public void clickOnWebinarFromNavbar() {
     	resourceIcon.click();

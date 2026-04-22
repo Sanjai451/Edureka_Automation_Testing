@@ -1,24 +1,21 @@
 package com.edureka.stepDefinition;
 
 import io.cucumber.java.en.*;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import com.edureka.utility.AllFunctionality;
 import com.edureka.utility.Base;
 import com.edureka.utility.Pages;
 
-public class CareerServicePage extends AllFunctionality {
+public class CareerService extends AllFunctionality {
 
 	private Base base;
 
-	public CareerServicePage(Base base) {
+	// Constructor to initialize base
+	public CareerService(Base base) {
 		this.base = base;
 	}
 
-	// DATA
+	// Test data variables
 
 	String company, linkedin, skills, jobLevel, industry, resume;
 	String job, employment, location, ctc, preferredLocation;
@@ -26,54 +23,52 @@ public class CareerServicePage extends AllFunctionality {
 	String degree, institute, smonth, syear, emonth, eyear;
 	String certName, certInstitute;
 
+	// Step to launch browser
 	@Given("user launches the browser")
 	public void launchBrowser() {
-		System.out.println("Browser launched");
+
 	}
 
+	// Step to navigate to application
 	@Given("user navigates to Edureka application")
 	public void navigateToApp() {
-		System.out.println("Navigated to app");
+
 	}
 
+	// Step to login using credentials
 	@Given("user logs in using config credentials")
 	public void login() throws InterruptedException {
-		base.getDriver().findElement(By.xpath("//button[text()='Log in']")).click();
-		Thread.sleep(2000);
+		Pages.get().loginPage.openLoginPopup();
+		
+		// Enter email
+		Pages.get().loginPage.enterEmail("ramanasekar2004@gmail.com");
 
-		// Enter Email
-		WebElement email = base.getDriver().findElement(By.id("loginFormEmail"));
-		email.clear();
-		email.sendKeys("ramanasekar2004@gmail.com");
+		// Enter password
+		Pages.get().loginPage.enterPassword("Password@123");
 
-		// Enter Password
-		WebElement password = base.getDriver().findElement(By.id("loginPassword"));
-		password.clear();
-		password.sendKeys("Password@123");
-
-		// Click LOGIN button
-		base.getDriver().findElement(By.xpath("//button[text()='LOG IN']")).click();
+		// Click login button
+		Pages.get().loginPage.clickLogin();
 	}
 
+	// Step to navigate to profile
 	@Given("user navigates to My Profile")
 	public void goToProfile() {
 		Pages.get().dashboard.navigateToMyProfile();
 	}
 
-	// NAVIGATION
-
+	// Step to click career services tab
 	@Given("user clicks on Career Services tab")
 	public void clickCareerServices() {
 		Pages.get().myProfile.clickCareerServices();
 	}
 
-	// PROFESSIONAL
-
+	// Step to click professional details edit
 	@When("user clicks Professional Details edit button")
 	public void clickProfessionalEdit() {
 		Pages.get().careerServicePage.clickProfessionalDetailsEdit();
 	}
 
+	// Step to read professional data from excel
 	@When("user reads professional details from excel")
 	public void readProfessionalExcel() {
 
@@ -87,14 +82,15 @@ public class CareerServicePage extends AllFunctionality {
 		resume = getData(1, 5);
 	}
 
+	// Step to enter professional data
 	@When("user enters professional details from excel")
 	public void enterProfessionalData() {
 
-		Pages.get().professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry, resume);
+		Pages.get().professionalDetailsPage.fillProfessionalDetails(company, linkedin, skills, jobLevel, industry,
+				resume);
 	}
 
-	// NEXT BUTTON
-
+	// Step to click next button
 	@When("user clicks Next button")
 	public void clickNext() {
 		waitForElementClickable(base.getDriver(), Pages.get().professionalDetailsPage.getNextButton(), 10);
@@ -103,8 +99,7 @@ public class CareerServicePage extends AllFunctionality {
 		waitForLoaderToDisappear(base.getDriver());
 	}
 
-	// CAREER INTERESTS
-
+	// Step to read career interests data
 	@When("user reads career interests data from excel")
 	public void readCareerExcel() {
 
@@ -118,17 +113,17 @@ public class CareerServicePage extends AllFunctionality {
 		preferredLocation = getData(1, 5);
 	}
 
+	// Step to enter career interests data
 	@When("user enters career interests data from excel")
 	public void enterCareerData() {
 
-		waitForLoaderToDisappear(base.getDriver()); // ADD THIS
+		waitForLoaderToDisappear(base.getDriver());
 
-		Pages.get().careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate, preferredLocation);
-
+		Pages.get().careerInterestsPage.fillCareerInterests(job, employment, location, ctc, relocate,
+				preferredLocation);
 	}
 
-	// OTHER DETAILS
-
+	// Step to read other details data
 	@When("user reads other details data from excel")
 	public void readOtherExcel() {
 
@@ -146,6 +141,7 @@ public class CareerServicePage extends AllFunctionality {
 		certInstitute = getData(1, 7);
 	}
 
+	// Step to enter other details
 	@When("user enters other details from excel")
 	public void enterOtherDetails() {
 
@@ -154,6 +150,7 @@ public class CareerServicePage extends AllFunctionality {
 		Pages.get().otherDetailsPage.fillCertification(certName, certInstitute, smonth, syear, emonth, eyear);
 	}
 
+	// Step to click save button
 	@When("user clicks Save button")
 	public void clickSave() {
 
@@ -162,16 +159,20 @@ public class CareerServicePage extends AllFunctionality {
 		Pages.get().otherDetailsPage.getSaveButton().click();
 	}
 
+	// Step to validate data saved
 	@Then("all career service details should be saved successfully")
 	public void validateSaved() {
+		Pages.get().myProfile.clickCareerServices();
 
 		Assert.assertTrue(Pages.get().careerServicePage.getCompanyName().isDisplayed(), "Data not saved");
 	}
 
-	
+	// Step to validate all data
 	@Then("updated career service details should be displayed correctly")
 	public void validateAllData() {
+
 		Pages.get().myProfile.getCareerServicesTab().click();
+
 		Assert.assertTrue(
 				Pages.get().careerServicePage.verifyAllCareerServiceData(company, industry, jobLevel, job, location,
 						relocate ? "Yes" : "No", employment, ctc, preferredLocation, institute),
