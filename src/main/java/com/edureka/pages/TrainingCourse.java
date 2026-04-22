@@ -15,60 +15,67 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TrainingCourse {
 
-    WebDriver driver;
+	WebDriver driver;
 
-    // Constructor
-    public TrainingCourse(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+	// Constructor
+	public TrainingCourse(WebDriver driver) {
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+	}
 
+	public void fillForm(String name, String email, String phone, String city) {
+		nameField.sendKeys(name);
+		emailField.sendKeys(email);
+		phoneField.sendKeys(phone);
+		queryField.sendKeys(city);
+		submitBtn.click();
+	}
 
-@FindBy(tagName = "h1")
-private WebElement title;
+	@FindBy(tagName = "h1")
+	private WebElement title;
 
-@FindBy(xpath = "//span[contains(text(),'Learners')]/..//span[@class='title_lltt__I4OeA']")
-    WebElement learnersCount;
+	@FindBy(xpath = "//span[contains(text(),'Learners')]/..//span[@class='title_lltt__I4OeA']")
+	WebElement learnersCount;
 
-@FindBy(xpath = "//button[.='Enroll Now']")
-private WebElement enrollButton;
+	@FindBy(xpath = "//button[.='Enroll Now']")
+	private WebElement enrollButton;
 
-@FindBy(xpath = "//img[@alt='Play Edureka course Preview Video']")
-    WebElement previewVideoBtn;
+	@FindBy(xpath = "//img[@alt='Play Edureka course Preview Video']")
+	WebElement previewVideoBtn;
 
-@FindBy(name = "first_name")
-    WebElement nameField;
+	@FindBy(name = "first_name")
+	WebElement nameField;
 
-    @FindBy(name = "email")
-    WebElement emailField;
+	@FindBy(name = "email")
+	WebElement emailField;
 
-    @FindBy(name = "phone")
-    WebElement phoneField;
-   
-    @FindBy(name = "query")
-    WebElement queryField;
-   
-    @FindBy(id = "formCompanyName")
-    WebElement companyNameField;
-   
-    @FindBy(id = "taningForm.ControlSelect1")
-    WebElement selectField;
+	@FindBy(name = "phone")
+	WebElement phoneField;
 
-    @FindBy(xpath = "//button[.='Submit']")
-    WebElement submitBtn;
-    
-    @FindBy(xpath = "//button[.='Enroll Now']")
-    WebElement enrollNowButton;
-    
-    @FindBy(xpath = "//div[contains(@class,'modal')]//input[@name='email']")
-    WebElement emailPopUpInput;
+	@FindBy(name = "query")
+	WebElement queryField;
 
-    @FindBy(xpath = "//div[contains(@class,'modal')]//input[@name='phone']")
-    WebElement phonePopUpInput;
+	@FindBy(id = "formCompanyName")
+	WebElement companyNameField;
 
-    @FindBy(xpath = "//div[contains(@class,'modal')]//button[.='ENROLL NOW']")
-    WebElement enrollNowPopupButton;
-    
+	@FindBy(id = "taningForm.ControlSelect1")
+	WebElement selectField;
+
+	@FindBy(xpath = "//button[.='Submit']")
+	WebElement submitBtn;
+
+	@FindBy(xpath = "//button[.='Enroll Now']")
+	WebElement enrollNowButton;
+
+	@FindBy(xpath = "//div[contains(@class,'modal')]//input[@name='email']")
+	WebElement emailPopUpInput;
+
+	@FindBy(xpath = "//div[contains(@class,'modal')]//input[@name='phone']")
+	WebElement phonePopUpInput;
+
+	@FindBy(xpath = "//div[contains(@class,'modal')]//button[.='ENROLL NOW']")
+	WebElement enrollNowPopupButton;
+
 //    @FindBy(name = "email")
 //    WebElement emailPopUpInput;
 //    
@@ -77,220 +84,212 @@ private WebElement enrollButton;
 //    
 //    @FindBy(xpath = "//button[.='ENROLL NOW']")
 //    WebElement enrollNowPopupButton;
-    
-    @FindBy(xpath = "//button[.='GET A SAMPLE CERTIFICATE']")
-    WebElement getSampleCertificateButton;
-    
-    @FindBy(id = "sampleCertificateName")
-    WebElement nameForGettingCertificate;
-    
 
-    @FindBy(id = "sampleCertificateEmail")
-    WebElement emailForGettingCertificate;
-    
+	@FindBy(xpath = "//button[.='GET A SAMPLE CERTIFICATE']")
+	WebElement getSampleCertificateButton;
 
-    @FindBy(id = "sampleCertificatePhone")
-    WebElement phoneForGettingCertificate;
-    
-    @FindBy(xpath = "//button[.='PREVIEW CERTIFICATE']")
-    WebElement previewCert;
-    
-    @FindBy(xpath = "//h4[.='Certificate sent to your inbox']")
-    WebElement successMessageforCertPreview;
-    
+	@FindBy(id = "sampleCertificateName")
+	WebElement nameForGettingCertificate;
 
-@FindBy(xpath = "//button[.='Download Curriculum']")
-private WebElement downloadCurruculumButton;
+	@FindBy(id = "sampleCertificateEmail")
+	WebElement emailForGettingCertificate;
 
-public String getCourseTitle() {
-return title.getText();
-}
+	@FindBy(id = "sampleCertificatePhone")
+	WebElement phoneForGettingCertificate;
 
-    public void clickEnrollNow() {
-        enrollButton.click();
-    }
+	@FindBy(xpath = "//button[.='PREVIEW CERTIFICATE']")
+	WebElement previewCert;
 
-    public void downloadCurriculum() {
-        downloadCurruculumButton.click();
-    }
+	@FindBy(xpath = "//h4[.='Certificate sent to your inbox']")
+	WebElement successMessageforCertPreview;
 
-    public void playPreviewVideo() {
-        previewVideoBtn.click();
-    }
-   
-    public void enrollNow(WebDriver driver, String email, String phone) {
-    	enrollButton.click();
-    	fillDetailsInPopup(driver, email, phone);
-    }
-    
-    public void fillDetailsInPopup(WebDriver driver, String email, String phone) {
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	@FindBy(xpath = "//button[.='Download Curriculum']")
+	private WebElement downloadCurruculumButton;
 
-        WebElement emailField = wait.until(
-            ExpectedConditions.visibilityOf(emailPopUpInput)
-        );
+	public String getCourseTitle() {
+		return title.getText();
+	}
 
-        WebElement phoneField = wait.until(
-            ExpectedConditions.visibilityOf(phonePopUpInput)
-        );
+	public void clickEnrollNow() {
+		enrollButton.click();
+	}
 
-        emailField.clear();
-        emailField.sendKeys(email);
+	public void downloadCurriculum() {
+		downloadCurruculumButton.click();
+	}
 
-        phoneField.clear();
-        phoneField.sendKeys(phone);
+	public void playPreviewVideo() {
+		previewVideoBtn.click();
+	}
 
-        WebElement enrollBtn = wait.until(
-            ExpectedConditions.elementToBeClickable(enrollNowPopupButton)
-        );
+	public void enrollNow(WebDriver driver, String email, String phone) {
+		enrollButton.click();
+		fillDetailsInPopup(driver, email, phone);
+	}
 
-        enrollBtn.click();
-    }
-    
-    public void selectDropDown(String value) {
-    Select select = new Select(selectField);
-    select.selectByVisibleText(value);
-    }
+	public void fillDetailsInPopup(WebDriver driver, String email, String phone) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
+		WebElement emailField = wait.until(ExpectedConditions.visibilityOf(emailPopUpInput));
 
-    
-    public void fillQueryForm(WebDriver driver, String name, String email, String phone, String companyName, String training) {
+		WebElement phoneField = wait.until(ExpectedConditions.visibilityOf(phonePopUpInput));
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		emailField.clear();
+		emailField.sendKeys(email);
 
+		phoneField.clear();
+		phoneField.sendKeys(phone);
 
-        WebElement nameFieldFresh = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(By.name("first_name"))
-        );
+		WebElement enrollBtn = wait.until(ExpectedConditions.elementToBeClickable(enrollNowPopupButton));
 
-        WebElement companyFieldFresh = driver.findElement(By.id("formCompanyName"));
-        WebElement emailFieldFresh = driver.findElement(By.name("email"));
-        WebElement phoneFieldFresh = driver.findElement(By.name("phone"));
-        WebElement dropdownFresh = driver.findElement(By.id("taningForm.ControlSelect1"));
+		enrollBtn.click();
+	}
 
+	public void selectDropDown(String value) {
+		Select select = new Select(selectField);
+		select.selectByVisibleText(value);
+	}
 
-        nameFieldFresh.clear();
-        nameFieldFresh.sendKeys(name);
+	public void fillQueryForm(WebDriver driver, String name, String email, String phone, String companyName,
+			String training) {
 
-        companyFieldFresh.clear();
-        companyFieldFresh.sendKeys(companyName);
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        emailFieldFresh.clear();
-        emailFieldFresh.sendKeys(email);
+		// Re-locate elements AFTER scroll
+		WebElement nameFieldFresh = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("first_name")));
 
-        phoneFieldFresh.clear();
-        phoneFieldFresh.sendKeys(phone);
+		WebElement companyFieldFresh = driver.findElement(By.id("formCompanyName"));
+		WebElement emailFieldFresh = driver.findElement(By.name("email"));
+		WebElement phoneFieldFresh = driver.findElement(By.name("phone"));
+		WebElement dropdownFresh = driver.findElement(By.id("taningForm.ControlSelect1"));
+//      WebElement submitFresh = driver.findElement(By.xpath("//button[.='Submit']"));
 
-        Select select = new Select(dropdownFresh);
-        select.selectByVisibleText(training);
+		nameFieldFresh.clear();
+		nameFieldFresh.sendKeys(name);
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+		companyFieldFresh.clear();
+		companyFieldFresh.sendKeys(companyName);
 
-     // re-locate fresh element (avoid stale)
-     WebElement submitFresh = driver.findElement(By.xpath("//button[.='Submit']"));
+		emailFieldFresh.clear();
+		emailFieldFresh.sendKeys(email);
 
-     // scroll to center (important)
-     js.executeScript(
-         "arguments[0].scrollIntoView({block:'center'});",
-         submitFresh
-     );
+		phoneFieldFresh.clear();
+		phoneFieldFresh.sendKeys(phone);
 
-     // small wait for UI stabilization
-     try { Thread.sleep(500); } catch (Exception e) {}
+		Select select = new Select(dropdownFresh);
+		select.selectByVisibleText(training);
 
-     // JS click (bypass interactability issue)
-     js.executeScript("arguments[0].click();", submitFresh);
-    }
-    
-    public void scrollToQueryForm(WebDriver driver) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        js.executeScript(
-            "arguments[0].scrollIntoView({block: 'center'});",
-            nameField
-        );
-    }
-    
-    public void scrollToPreviewCertificate(WebDriver driver) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+		// re-locate fresh element (avoid stale)
+		WebElement submitFresh = driver.findElement(By.xpath("//button[.='Submit']"));
 
-        js.executeScript(
-            "arguments[0].scrollIntoView({block:'center'});",
-            getSampleCertificateButton
-        );
-    }
-    
-    public void fillDetailForGettingCert(String name, String email, String phone) {
-    	
-    	previewCert.click();
-    	
-    	nameForGettingCertificate.sendKeys(name);
-    	emailForGettingCertificate.sendKeys(email);
-    	phoneForGettingCertificate.sendKeys(phone);
-    	previewCert.click();
-    	
-    	try {
+		// scroll to center (important)
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", submitFresh);
+
+		// small wait for UI stabilization
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+		}
+
+		// JS click (bypass interactability issue)
+		js.executeScript("arguments[0].click();", submitFresh);
+	}
+
+	public void scrollToQueryForm(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		js.executeScript("arguments[0].scrollIntoView({block: 'center'});", nameField);
+	}
+
+	public void scrollToPreviewCertificate(WebDriver driver) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", getSampleCertificateButton);
+	}
+
+	public void fillDetailForGettingCert(String name, String email, String phone) {
+
+		previewCert.click();
+
+		nameForGettingCertificate.sendKeys(name);
+		emailForGettingCertificate.sendKeys(email);
+		phoneForGettingCertificate.sendKeys(phone);
+		previewCert.click();
+
+		try {
 			Thread.sleep(2000);
-		} catch (Exception e) {}
-    }
+		} catch (Exception e) {
+		}
+	}
 
-    public void clickPreviewCertificate(WebDriver driver) {
+	public void clickPreviewCertificate(WebDriver driver) {
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        // re-locate to avoid stale
-        WebElement sampleCert = wait.until(
-            ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//button[.='GET A SAMPLE CERTIFICATE']")
-            )
-        );
+		// re-locate to avoid stale
+		WebElement sampleCert = wait
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[.='GET A SAMPLE CERTIFICATE']")));
 
 //        js.executeScript(
 //            "arguments[0].scrollIntoView({block:'center'});",
 //            sampleCert
 //        );
 
-        // JS click
-        js.executeScript("arguments[0].click();", sampleCert);
-    }
-    public void fillDetailForGettingCert(WebDriver driver, String name, String email, String phone) {
+		// JS click
+		js.executeScript("arguments[0].click();", sampleCert);
+	}
 
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	public void fillDetailForGettingCert(WebDriver driver, String name, String email, String phone) {
 
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
-        WebElement nameFresh = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-                By.id("sampleCertificateName")
-            )
-        );
+		// WAIT for popup to appear
+		WebElement nameFresh = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleCertificateName")));
 
-        WebElement emailFresh = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-                By.id("sampleCertificateEmail")
-            )
-        );
+		WebElement emailFresh = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleCertificateEmail")));
 
-        WebElement phoneFresh = wait.until(
-            ExpectedConditions.visibilityOfElementLocated(
-                By.id("sampleCertificatePhone")
-            )
-        );
+		WebElement phoneFresh = wait
+				.until(ExpectedConditions.visibilityOfElementLocated(By.id("sampleCertificatePhone")));
 
-        nameFresh.clear();
-        nameFresh.sendKeys(name);
+		nameFresh.clear();
+		nameFresh.sendKeys(name);
 
-        emailFresh.clear();
-        emailFresh.sendKeys(email);
+		emailFresh.clear();
+		emailFresh.sendKeys(email);
 
-        phoneFresh.clear();
-        phoneFresh.sendKeys(phone);
+		phoneFresh.clear();
+		phoneFresh.sendKeys(phone);
 
-        WebElement previewSubmit = driver.findElement(
-            By.xpath("//button[contains(text(),'PREVIEW CERTIFICATE')]")
-        );
+		// Now click submit inside popup
+		WebElement previewSubmit = driver.findElement(By.xpath("//button[contains(text(),'PREVIEW CERTIFICATE')]"));
 
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", previewSubmit);
-    }
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", previewSubmit);
+	}
+
+	public void safeClick(WebElement element) {
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+
+		wait.until(ExpectedConditions.visibilityOf(element));
+
+		js.executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+		}
+
+		try {
+			wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+		} catch (Exception e) {
+			js.executeScript("arguments[0].click();", element);
+		}
+	}
 }

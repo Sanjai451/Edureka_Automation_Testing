@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class OtherDetailsPage {
 
-    // ================= ADD BUTTONS =================
+    // Add buttons for degree and certification
 
     @FindBy(xpath = "//span[text()='Add Another Degree']/ancestor::button")
     private WebElement addDegreeBtn;
@@ -14,7 +14,7 @@ public class OtherDetailsPage {
     @FindBy(xpath = "//span[text()='Add Another Certification']/ancestor::button")
     private WebElement addCertificationBtn;
 
-    // ================= DEGREE =================
+    // Degree input fields
 
     @FindBy(id = "degree-name")
     private WebElement degreeInput;
@@ -22,23 +22,26 @@ public class OtherDetailsPage {
     @FindBy(id = "company-name")
     private WebElement instituteInput;
 
-    // ================= DEGREE TIME =================
+    // Degree start and end time fields
 
     @FindBy(name = "start_month")
     private WebElement startMonth;
 
     @FindBy(xpath = "(//select[@formcontrolname='start_year'])[1]")
     private WebElement startYear;
+
     @FindBy(xpath= "(//select[@formcontrolname='end_month'])[1]")
     private WebElement endMonth;
 
     @FindBy(xpath= "(//select[@formcontrolname='end_year'])[1]")
     private WebElement endYear;
 
+    // Highest qualification radio button
+
     @FindBy(xpath = "//label[contains(text(),'highest educational qualification')]/preceding::input[1]")
     private WebElement highestQualificationRadio;
 
-    // ================= CERTIFICATION =================
+    // Certification input fields
 
     @FindBy(id = "certificate-name")
     private WebElement certificationName;
@@ -58,13 +61,13 @@ public class OtherDetailsPage {
     @FindBy(xpath = "(//select[@formcontrolname='end_year'])[2]")
     private WebElement certEndYear;
 
-    // ================= SAVE =================
+    // Save button
 
     @FindBy(xpath = "//button[@type='submit' and contains(text(),'Save')]")
     private WebElement saveButton;
     
     
- // ================= GETTERS =================
+    // Getter methods
 
     public WebElement getAddDegreeBtn() {
         return addDegreeBtn;
@@ -130,7 +133,7 @@ public class OtherDetailsPage {
         return saveButton;
     }
 
-    // ================= ACTION METHODS =================
+    // Method to fill degree details
 
     public void fillDegree(String degree, String institute,
                            String smonth, String syear,
@@ -152,6 +155,8 @@ public class OtherDetailsPage {
         highestQualificationRadio.click();
     }
 
+    // Method to fill certification details
+
     public void fillCertification(String name, String institute,
                                   String smonth, String syear,
                                   String emonth, String eyear) {
@@ -169,6 +174,8 @@ public class OtherDetailsPage {
         new Select(certEndMonth).selectByVisibleText(emonth);
         new Select(certEndYear).selectByVisibleText(eyear);
     }
+
+    // Method to click save button
 
     public void clickSave() {
         saveButton.click();
