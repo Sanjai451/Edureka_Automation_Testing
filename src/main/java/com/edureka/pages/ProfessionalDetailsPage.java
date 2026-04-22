@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ProfessionalDetailsPage {
 
-    // Locators
+    // Locators for professional details page elements
 
     @FindBy(xpath = "//a[@aria-controls='professionalDetails']")
     private WebElement professionalDetailsTab;
@@ -32,7 +32,7 @@ public class ProfessionalDetailsPage {
     @FindBy(xpath = "//button[text()='Next']")
     private WebElement nextButton;
 
-    // Getters
+    // Getter methods
 
     public WebElement getProfessionalDetailsTab() {
         return professionalDetailsTab;
@@ -66,7 +66,7 @@ public class ProfessionalDetailsPage {
         return nextButton;
     }
 
-    // Business methods
+    // Methods to interact with professional details page
 
     public void clickProfessionalDetailsTab() {
         getProfessionalDetailsTab().click();
@@ -107,7 +107,7 @@ public class ProfessionalDetailsPage {
         }
     }
 
-    // Combined action
+    // Method to fill complete professional details form
 
     public void fillProfessionalDetails(String company, String linkedin,
                                         String skills, String jobLevel,

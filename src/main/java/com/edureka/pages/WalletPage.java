@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class WalletPage {
 
-    // Locators
+    // Locators for wallet details
 
     @FindBy(xpath = "//h4[contains(text(),'Account Balance')]")
     private WebElement accountBalanceTitle;
@@ -19,7 +19,7 @@ public class WalletPage {
     @FindBy(xpath = "//p[contains(text(),'Referral & Refund Credits')]/following-sibling::h4")
     private WebElement referralCreditsAmount;
 
-    // Getters
+    // Getter methods
 
     public WebElement getAccountBalanceTitle() {
         return accountBalanceTitle;
@@ -37,7 +37,7 @@ public class WalletPage {
         return referralCreditsAmount;
     }
 
-    // Business Logic
+    // Methods to retrieve wallet information
 
     public boolean isAccountBalanceDisplayed() {
         return accountBalanceTitle.isDisplayed();
@@ -55,7 +55,7 @@ public class WalletPage {
         return referralCreditsAmount.getText();
     }
 
-    // Validation
+    // Validation method to verify all wallet elements are visible
 
     public boolean verifyWalletBalanceVisible() {
         return isAccountBalanceDisplayed()

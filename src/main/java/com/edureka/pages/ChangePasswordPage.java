@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class ChangePasswordPage {
 
-    // Locators
+    // Locators for password fields and submit button
 
     @FindBy(css = "input[placeholder='Enter Existing Password']")
     private WebElement existingPasswordInput;
@@ -13,14 +13,14 @@ public class ChangePasswordPage {
     @FindBy(css = "input[placeholder='New Password']")
     private WebElement newPasswordInput;
 
-    // ✅ NEW - Confirm Password
+    // Locator for confirm password field
     @FindBy(css = "input[placeholder='Confirm New Password']")
     private WebElement confirmPasswordInput;
 
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitButton;
 
-    // Getters
+    // Getter methods for all elements
 
     public WebElement getExistingPasswordInput() {
         return existingPasswordInput;
@@ -30,7 +30,6 @@ public class ChangePasswordPage {
         return newPasswordInput;
     }
 
-  
     public WebElement getConfirmPasswordInput() {
         return confirmPasswordInput;
     }
@@ -39,7 +38,7 @@ public class ChangePasswordPage {
         return submitButton;
     }
 
-    // Business methods
+    // Methods to enter password values
 
     public void enterExistingPassword(String existingPassword) {
         existingPasswordInput.clear();
@@ -51,17 +50,20 @@ public class ChangePasswordPage {
         newPasswordInput.sendKeys(newPassword);
     }
 
+    // Method to enter confirm password
 
     public void enterConfirmPassword(String confirmPassword) {
         confirmPasswordInput.clear();
         confirmPasswordInput.sendKeys(confirmPassword);
     }
 
+    // Method to click submit button
+
     public void clickSubmit() {
         submitButton.click();
     }
 
-    // Combined action
+    // Method to perform complete password change action
 
     public void changePassword(String oldPassword, String newPassword, String confirmPassword) {
         enterExistingPassword(oldPassword);
@@ -70,7 +72,7 @@ public class ChangePasswordPage {
         clickSubmit();
     }
 
-    // Validation
+    // Method to check if submit button is enabled
 
     public boolean isSubmitButtonEnabled() {
         return submitButton.isEnabled();
