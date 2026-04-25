@@ -1,0 +1,290 @@
+<div align="center">
+
+# 🚀 Edureka Automation Testing Framework
+
+### BDD test automation framework built with Selenium 4, Cucumber 7 & TestNG
+
+[![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com)
+[![Selenium](https://img.shields.io/badge/Selenium-4.38.0-43B02A?style=for-the-badge&logo=selenium&logoColor=white)](https://www.selenium.dev)
+[![Cucumber](https://img.shields.io/badge/Cucumber-7.28.2-23D96C?style=for-the-badge&logo=cucumber&logoColor=white)](https://cucumber.io)
+[![TestNG](https://img.shields.io/badge/TestNG-Latest-FF6600?style=for-the-badge)](https://testng.org)
+[![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)](https://maven.apache.org)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+<br/>
+
+> **Automate. Validate. Ship with Confidence.**  
+> End-to-end UI test automation for the Edureka learning portal — written in plain English,  
+> powered by Selenium, and executed with zero flakiness.
+
+</div>
+
+---
+
+## 📑 Table of Contents
+
+- [About the Project](#-about-the-project)
+- [Tech Stack](#-tech-stack)
+- [Framework Architecture](#-framework-architecture)
+- [Project Structure](#-project-structure)
+- [Prerequisites](#-prerequisites)
+- [Getting Started](#-getting-started)
+- [Running Tests](#-running-tests)
+- [Test Reports](#-test-reports)
+- [Configuration](#-configuration)
+- [Design Patterns](#-design-patterns)
+- [Author](#-author)
+
+---
+
+## 📌 About the Project
+
+This framework automates end-to-end UI testing for the **Edureka e-learning portal** (`https://www.edureka.co`) using a **Behaviour-Driven Development (BDD)** approach. Test scenarios are written in plain English using **Gherkin syntax**, making them readable by developers, testers, and non-technical stakeholders alike.
+
+### Key Highlights
+
+| Feature | Detail |
+|---|---|
+| **BDD Approach** | Gherkin feature files — readable by all stakeholders |
+| **Page Object Model** | Clean separation of locators and test logic |
+| **Data-Driven Testing** | External test data via Apache POI (Excel `.xlsx`) |
+| **Dependency Injection** | PicoContainer for shared state across step definitions |
+| **Rich Reporting** | ExtentReports 5 — HTML dashboards with screenshots on failure |
+| **CI/CD Ready** | Maven Surefire plugin with `testng.xml` suite configuration |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology | Version |
+|---|---|---|
+| Language | Java | 17+ |
+| Browser Automation | Selenium WebDriver | 4.38.0 |
+| BDD Framework | Cucumber (Core + Java + TestNG) | 7.28.2 |
+| Test Runner | TestNG via `cucumber-testng` | 7.28.2 |
+| Dependency Injection | Cucumber PicoContainer | 7.28.2 |
+| Data Handling | Apache POI (OOXML) | 5.4.1 |
+| Reporting | ExtentReports | 5.1.2 |
+| Build Tool | Apache Maven | 3.x |
+| IDE | Eclipse / IntelliJ IDEA | — |
+
+---
+
+## 🏗 Framework Architecture
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                    TestNG Runner                         │
+│              testng.xml + @CucumberOptions               │
+└──────────────────────┬───────────────────────────────────┘
+                       │ triggers
+          ┌────────────┴─────────────┐
+          ▼                          ▼
+┌─────────────────┐       ┌───────────────────────┐
+│  Feature Files  │◄─────►│   Step Definitions    │
+│  (Gherkin BDD)  │  glue │  (@Given @When @Then) │
+└─────────────────┘       └──────────┬────────────┘
+                                     │ calls
+                          ┌──────────▼─────────────┐
+                          │    Page Objects (POM)  │
+                          │  Locators + UI Actions │
+                          └──────────┬─────────────┘
+                                     │ extends
+                    ┌────────────────▼────────────────────┐
+                    │            Base Class               │
+                    │  Driver init · Waits · Teardown     │
+                    └──────────┬────────────────┬─────────┘
+                               │                │ uses
+                   ┌───────────▼───┐   ┌────────▼───────────┐
+                   │  Utilities    │   │  External Sources  │
+                   │  Screenshots  │   │  Excel · Config    │
+                   │  Config Reader│   │  .properties files │
+                   └───────────────┘   └────────────────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │      Reports        │
+                    │    ExtentReports    │
+                    │  TestNG test-output │
+                    └─────────────────────┘
+```
+
+---
+
+## 📁 Project Structure
+
+```
+Edureka_Automation_Testing/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── com/edureka/
+│   │           ├── com.edureka.base/              # BaseClass — WebDriver init & teardown
+│   │           ├── com.edureka.pages/             # Page Object classes (POM)
+│   │           └── com.edureka.utils/             # Utilities — Excel reader, screenshots, config
+│   │
+│   └── test/
+│       ├── java/
+│       │   └── com/edureka/
+│       │       ├── com.edureka.runner/            # TestRunner.java (@CucumberOptions)
+│       │       ├── com.edureka.steps/             # Step Definition classes
+│       │       └── com.edureka.hooks/             # Cucumber @Before / @After hooks
+│       └── resources/
+│           └── com.edureka.features/             # .feature files (Gherkin scenarios)
+│
+├── test-output/                       # TestNG generated HTML & XML reports
+├── test-data/                         # Excel files for data-driven testing
+├── testng.xml                         # TestNG suite configuration
+├── pom.xml                            # Maven dependencies & build config
+└── README.md
+```
+
+---
+
+## ✅ Prerequisites
+
+Ensure the following are installed before running the framework:
+
+- **Java JDK** 17 or higher — [Download](https://adoptium.net)
+- **IDE** Eclipse / IntelliJ
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Sanjai451/Edureka_Automation_Testing.git
+cd Edureka_Automation_Testing
+```
+
+### 2. Install dependencies
+
+```bash
+mvn clean install -DskipTests
+```
+
+---
+
+## ▶ Running Tests
+
+### Run the full test suite (via Maven)
+
+```bash
+mvn clean test
+```
+
+### Run using a specific TestNG suite
+
+```bash
+mvn test -DsuiteXmlFile=testng.xml
+```
+
+### Run a specific feature file
+
+```bash
+mvn test -Dcucumber.filter.tags="@smoke"
+```
+
+### Run by tag
+
+```bash
+# Run only smoke tests
+mvn test -Dcucumber.filter.tags="@smoke"
+
+# Run only regression tests
+mvn test -Dcucumber.filter.tags="@regression"
+
+# Exclude a tag
+mvn test -Dcucumber.filter.tags="not @wip"
+```
+---
+
+## 📊 Test Reports
+
+After execution, reports are generated in two locations:
+
+### ExtentReports (Rich HTML)
+```
+target/ExtentReports.html
+```
+Open in any browser. Includes:
+- Pass / Fail / Skip summary
+- Step-level details with timestamps
+- Automatic screenshots on failure
+- Environment metadata
+
+### TestNG Default Report
+```
+test-output/index.html
+test-output/emailable-report.html
+```
+
+---
+
+## ⚙ Configuration
+
+All environment-specific values are externalised. Edit `src/test/resources/config.properties`:
+
+```properties
+# Application URL
+base.url=https://www.edureka.co
+
+# Browser (chrome | firefox | edge)
+browser=chrome
+
+# Credentials (use environment variables in CI)
+username=your-email@example.com
+password=your-password
+
+# Timeouts (in seconds)
+implicit.wait=10
+explicit.wait=20
+
+# Report path
+report.path=target/ExtentReports/TestReport.html
+```
+
+---
+
+## 🎨 Design Patterns
+
+### Page Object Model (POM)
+Each page of the application is represented as a Java class. Locators and user actions are encapsulated within the page class, keeping step definitions clean and free of Selenium code.
+
+### Behaviour-Driven Development (BDD)
+Test scenarios live in `.feature` files written in Gherkin. This creates a single source of truth that developers, testers, and business analysts can all understand.
+
+### Dependency Injection via PicoContainer
+`cucumber-picocontainer` enables shared state between step definition classes without static variables, ensuring thread-safety and clean test isolation.
+
+### Data-Driven Testing via Apache POI
+Test data is read from external Excel (`.xlsx`) files at runtime. Adding new test data requires zero code changes.
+
+---
+
+## 👤 Authors
+
+**Sanjai Kumar R**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Sanjai451-181717?style=flat&logo=github)](https://github.com/sanjai451)
+
+**Ramana K S**
+
+[![GitHub](https://img.shields.io/badge/GitHub-RamanaKS-181717?style=flat&logo=github)](https://github.com/RamanaKS)
+
+**Sathyasreee**
+
+[![GitHub](https://img.shields.io/badge/GitHub-Sathyasreee07-181717?style=flat&logo=github)](https://github.com/Sathyasreee07)
+
+**Jaysree**
+
+[![GitHub](https://img.shields.io/badge/GitHub-jaysree11-181717?style=flat&logo=github)](https://github.com/jaysree11)
+
+**Madheswari G B**
+
+[![GitHub](https://img.shields.io/badge/GitHub-MadheswariGB-181717?style=flat&logo=github)](https://github.com/MadheswariGB)
+
+
+---
