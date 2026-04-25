@@ -9,13 +9,12 @@
 [![Cucumber](https://img.shields.io/badge/Cucumber-7.28.2-23D96C?style=for-the-badge&logo=cucumber&logoColor=white)](https://cucumber.io)
 [![TestNG](https://img.shields.io/badge/TestNG-Latest-FF6600?style=for-the-badge)](https://testng.org)
 [![Maven](https://img.shields.io/badge/Maven-3.x-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)](https://maven.apache.org)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 <br/>
 
 > **Automate. Validate. Ship with Confidence.**  
 > End-to-end UI test automation for the Edureka learning portal — written in plain English,  
-> powered by Selenium, and executed with zero flakiness.
+> powered by Selenium.
 
 </div>
 
@@ -204,7 +203,7 @@ mvn test -Dcucumber.filter.tags="not @wip"
 
 After execution, reports are generated in two locations:
 
-### ExtentReports (Rich HTML)
+### ExtentReports 
 ```
 target/ExtentReports.html
 ```
@@ -220,11 +219,16 @@ test-output/index.html
 test-output/emailable-report.html
 ```
 
+### Cucumber Report 
+```
+target/cucumber-report.html
+```
+
 ---
 
 ## ⚙ Configuration
 
-All environment-specific values are externalised. Edit `src/test/resources/config.properties`:
+All environment-specific values are externalised. Edit `src/test/resources/edureka.properties`:
 
 ```properties
 # Application URL
