@@ -119,21 +119,20 @@ Edureka_Automation_Testing/
 │   ├── main/
 │   │   └── java/
 │   │       └── com/edureka/
-│   │           ├── com.edureka.base/              # BaseClass — WebDriver init & teardown
 │   │           ├── com.edureka.pages/             # Page Object classes (POM)
-│   │           └── com.edureka.utils/             # Utilities — Excel reader, screenshots, config
+│   │           └── com.edureka.utility/           # Utilities — Excel reader, screenshots, config, Extent Report
 │   │
 │   └── test/
-│       ├── java/
+│       ├─── java/
 │       │   └── com/edureka/
-│       │       ├── com.edureka.runner/            # TestRunner.java (@CucumberOptions)
-│       │       ├── com.edureka.steps/             # Step Definition classes
-│       │       └── com.edureka.hooks/             # Cucumber @Before / @After hooks
-│       └── resources/
-│           └── com.edureka.features/             # .feature files (Gherkin scenarios)
+│       │       ├── com.edureka.testRunner/                 # TestRunner.java (@CucumberOptions)
+│       │       ├── com.edureka.stepDefinition/             # Step Definition classes
+│       │       └── com.edureka.featureFile/                # .feature files (Gherkin scenarios)
+│       └─── resources/
+│           └── edureka.propertires                         # Properties file 
+│           └── edureka.xlsx                                # Excel files for data-driven testing
 │
 ├── test-output/                       # TestNG generated HTML & XML reports
-├── test-data/                         # Excel files for data-driven testing
 ├── testng.xml                         # TestNG suite configuration
 ├── pom.xml                            # Maven dependencies & build config
 └── README.md
@@ -145,7 +144,7 @@ Edureka_Automation_Testing/
 
 Ensure the following are installed before running the framework:
 
-- **Java JDK** 17 or higher — [Download](https://adoptium.net)
+- **Java JDK** 17 or higher
 - **IDE** Eclipse / IntelliJ
 
 ---
@@ -229,21 +228,18 @@ All environment-specific values are externalised. Edit `src/test/resources/confi
 
 ```properties
 # Application URL
-base.url=https://www.edureka.co
+url=https://www.edureka.co
+
+# Credentials
+username=your_email
+password=your_password
 
 # Browser (chrome | firefox | edge)
-browser=chrome
-
-# Credentials (use environment variables in CI)
-username=your-email@example.com
-password=your-password
+broswer=edge
 
 # Timeouts (in seconds)
-implicit.wait=10
-explicit.wait=20
+implicitTime=10
 
-# Report path
-report.path=target/ExtentReports/TestReport.html
 ```
 
 ---
