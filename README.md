@@ -226,6 +226,198 @@ target/cucumber-report.html
 
 ---
 
+## 🧩 Modules Covered
+
+This framework covers **12 functional modules** of the [Edureka](https://www.edureka.co) e-learning portal,
+organised into **4 domain groups** with a total of **40+ automated scenarios** across positive, negative, and edge cases.
+
+---
+
+### 🗂️ Module Overview
+
+| # | Module | Domain | Scenarios |
+|---|---|---|---|
+| 1 | Authentication | 🔐 User Access | Login, Logout, Registration |
+| 2 | Profile | 🔐 User Access | View, Edit, Avatar |
+| 3 | Home Page | 🌐 Discovery | Banner, Navigation, Search |
+| 4 | All Courses | 🌐 Discovery | Browse, Filter, Sort |
+| 5 | Search & Filter | 🌐 Discovery | Keyword, Category, Price |
+| 6 | Blogs | 📝 Content | List, Read, Category filter |
+| 7 | Webinar | 📝 Content | List, Register, Details |
+| 8 | Community | 📝 Content | Feed, Post, Interaction |
+| 9 | Become an Instructor | 🎓 Instructor | Apply, Form validation |
+| 10 | Become a Partner | 🎓 Instructor | Apply, Form validation |
+| 11 | Post a Job | 💼 Career | Create, Validate, Submit |
+| 12 | Corporate Training | 💼 Career | Enquiry, Form, Validation |
+
+---
+
+### 🔐 User Access
+
+<details>
+<summary><strong>1 · Authentication</strong></summary>
+
+<br/>
+
+> Covers the complete entry and exit lifecycle of a user on the Edureka platform.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>2 · Profile</strong></summary>
+
+<br/>
+
+> Validates that a logged-in user can view and manage their personal profile information.
+
+
+</details>
+
+---
+
+### 🌐 Discovery
+
+<details>
+<summary><strong>3 · Home Page</strong></summary>
+
+<br/>
+
+> Validates the landing experience and primary navigation paths a user encounters on first visit.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>4 · All Courses</strong></summary>
+
+<br/>
+
+> Validates the course listing page — the primary conversion surface of the Edureka platform.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>5 · Search & Filter</strong></summary>
+
+<br/>
+
+> Validates the platform's global search capability and multi-filter combinations.
+
+
+</details>
+
+---
+
+### 📝 Content
+
+<details>
+<summary><strong>6 · Blogs</strong></summary>
+
+<br/>
+
+> Validates the Edureka blog portal.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>7 · Webinar</strong></summary>
+
+<br/>
+
+> Validates the webinar discovery and registration flow.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>8 · Community</strong></summary>
+
+<br/>
+
+> Validates the Edureka community forum — where learners interact and post questions.
+
+
+</details>
+
+---
+
+### 🎓 Instructor
+
+<details>
+<summary><strong>9 · Become an Instructor</strong></summary>
+
+<br/>
+
+> Validates the instructor application flow.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>10 · Become a Partner</strong></summary>
+
+<br/>
+
+> Validates the partner application flow .
+
+
+</details>
+
+---
+
+### 💼 Career
+
+<details>
+<summary><strong>11 · Post a Job</strong></summary>
+
+<br/>
+
+> Validates the job posting feature — allowing companies to list positions on the Edureka platform.
+
+
+</details>
+
+---
+
+<details>
+<summary><strong>12 · Corporate Training</strong></summary>
+
+<br/>
+
+> Validates the B2B corporate training enquiry form.
+
+
+</details>
+
+---
+
+### 📊 Test Coverage Summary
+
+```
+Total Modules        : 12
+Domain Groups        : 4  (User Access · Discovery · Content · Career & Instructor)
+Total Scenarios      : 55+
+Positive Scenarios   : 35+
+```
+
+
+---
+
 ## ⚙ Configuration
 
 All environment-specific values are externalised. Edit `src/test/resources/edureka.properties`:
