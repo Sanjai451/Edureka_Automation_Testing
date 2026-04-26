@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -48,6 +49,10 @@ public class WebinarCategoryPage {
     @FindBy(xpath = "//div[@class='top_title']//h1")
     private WebElement titlePage;
     
+    // Success message span
+    @FindBy(xpath = "//span[contains(text(),'Thank you for your Registration !')]")
+    private WebElement successMessage;
+    
     /**
      * Fills out the webinar registration form with the provided details and submits it.
      * Selects experience from dropdown, enters email and phone number, then clicks submit.
@@ -61,6 +66,10 @@ public class WebinarCategoryPage {
     	emailInputField.sendKeys(email);
     	phoneNumber.sendKeys(phone);
     	submitButton.click();
+    	
+    	// Wait until success message becomes visible
+        wait.until(ExpectedConditions.visibilityOf(successMessage));
+    	
     }
     
     /**

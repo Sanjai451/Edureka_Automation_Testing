@@ -21,7 +21,7 @@ import io.cucumber.java.en.When;
  * This class contains Cucumber steps for navigating to community, interacting with questions,
  * adding comments and answers, and posting new questions.
  */
-public class CommunityQuestionTests extends AllFunctionality {
+public class CommunityQuestion extends AllFunctionality {
 	
 	private Base base;
 	private ExtentTest logs;
@@ -32,7 +32,7 @@ public class CommunityQuestionTests extends AllFunctionality {
 	 * Initializes base, logs, and wait using the provided Base instance.
 	 * @param base the Base instance for WebDriver access
 	 */
-	public CommunityQuestionTests(Base base) {
+	public CommunityQuestion(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
 		this.wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));

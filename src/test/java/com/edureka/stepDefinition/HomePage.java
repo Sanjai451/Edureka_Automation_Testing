@@ -2,6 +2,12 @@ package com.edureka.stepDefinition;
 
 import static org.testng.Assert.assertTrue;
 
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.edureka.utility.AllFunctionality;
@@ -17,7 +23,7 @@ import io.cucumber.java.en.When;
  * Step definitions for home page interactions in Cucumber tests.
  * Handles navigation, login, and UI element clicks on the Edureka home page.
  */
-public class HomePageTest extends AllFunctionality{
+public class HomePage extends AllFunctionality{
 	private Base base;
 	private ExtentTest logs;
 
@@ -26,7 +32,7 @@ public class HomePageTest extends AllFunctionality{
 	 * Initializes base and logs using the provided Base instance.
 	 * @param base the Base instance for WebDriver access
 	 */
-	public HomePageTest(Base base) {
+	public HomePage(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
 	}
@@ -39,7 +45,7 @@ public class HomePageTest extends AllFunctionality{
 	public void goto_home_page() {
 		initPropertiesUtility("./src/main/resources/edureka.properties");
 		String homePageUrl = getPropertyData("url");
-		System.out.println("Home page URL : " + homePageUrl);
+//		System.out.println("Home page URL : " + homePageUrl);
 		base.getDriver().get(homePageUrl);
 		System.out.println("Navigated to home page");
 	}
@@ -75,8 +81,15 @@ public class HomePageTest extends AllFunctionality{
 	@Given("User needs to login to view forum icon on home page")
 	public void user_needs_to_login_to_view_forum_icon_on_home_page() {
 		Pages.get().loginPage.openLoginPopup();
-	    Pages.get().loginPage.enterEmail("sanjai6369kumar@gmail.com");
-	    Pages.get().loginPage.enterPassword("Password");
+		
+		String USERNAME = getPropertyData("username");
+		String PASSWORD = getPropertyData("password");
+		
+//		System.out.println("USERNAME : " + USERNAME);
+//		System.out.println("PASSWORD : " + PASSWORD);
+		
+	    Pages.get().loginPage.enterEmail(USERNAME);
+	    Pages.get().loginPage.enterPassword(PASSWORD);
 	    Pages.get().loginPage.clickLogin();
 	    
 	    try {Thread.sleep(4000);} catch (Exception e) {}
@@ -100,8 +113,17 @@ public class HomePageTest extends AllFunctionality{
 	public void the_user_should_be_redirected_to_the_page(String string) {
 		String currPageURL = getUrl(base.getDriver());
 		System.out.println("redirected URL : " + currPageURL);
+		
+		By loaderLocator = By.cssSelector("[class*='loader_loader_div']");
+		
+		WebDriverWait wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(10));
+
+        // Wait until loader is invisible or removed from DOM
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(loaderLocator));
+    	
+    	System.out.println("Loader disappeared");
+    	
 		assertTrue(currPageURL.contains(string));
-//		assertTrue(false);
 	}
 	
 	/**
@@ -147,8 +169,12 @@ public class HomePageTest extends AllFunctionality{
 	@Given("user logs in for performing action in community page")
 	public void user_logs_in_for_performing_action_in_community_page() {
 		Pages.get().loginPage.openLoginPopup();
-	    Pages.get().loginPage.enterEmail("sanjai6369kumar@gmail.com");
-	    Pages.get().loginPage.enterPassword("Password");
+		
+		String USERNAME = getPropertyData("username");
+		String PASSWORD = getPropertyData("password");
+		
+	    Pages.get().loginPage.enterEmail(USERNAME);
+	    Pages.get().loginPage.enterPassword(PASSWORD);
 	    
 	    try {Thread.sleep(1000);} catch (Exception e) {}
 	    

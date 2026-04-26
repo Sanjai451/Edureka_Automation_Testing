@@ -131,24 +131,79 @@ public class TrainingCourse {
 	}
 
 	// Fill details inside enroll popup
+//	public void fillDetailsInPopup(WebDriver driver, String email, String phone) {
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+//
+//		WebElement emailField = wait.until(ExpectedConditions.visibilityOf(emailPopUpInput));
+//
+//		WebElement phoneField = wait.until(ExpectedConditions.visibilityOf(phonePopUpInput));
+//
+////		emailField.clear();
+//		emailField.sendKeys(email);
+//
+////		phoneField.clear();
+//		phoneField.sendKeys(phone);
+//		
+//		try {Thread.sleep(700);} catch (Exception e) {}
+//
+//		WebElement enrollBtn = wait.until(ExpectedConditions.elementToBeClickable(enrollNowPopupButton));
+//
+//		enrollBtn.click();
+//	}
 	public void fillDetailsInPopup(WebDriver driver, String email, String phone) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
 
-		WebElement emailField = wait.until(ExpectedConditions.visibilityOf(emailPopUpInput));
+	    // Wait for email field and fill it properly
+	    WebElement emailField = wait.until(
+	        ExpectedConditions.elementToBeClickable(emailPopUpInput)
+	    );
+	    fillReactField(driver, emailField, email);
 
-		WebElement phoneField = wait.until(ExpectedConditions.visibilityOf(phonePopUpInput));
+	    // Wait for phone field and fill it properly
+	    WebElement phoneField = wait.until(
+	        ExpectedConditions.elementToBeClickable(phonePopUpInput)
+	    );
+	    fillReactField(driver, phoneField, phone);
 
-		emailField.clear();
-		emailField.sendKeys(email);
+	    try { Thread.sleep(700); } catch (Exception e) {}
 
-		phoneField.clear();
-		phoneField.sendKeys(phone);
-
-		WebElement enrollBtn = wait.until(ExpectedConditions.elementToBeClickable(enrollNowPopupButton));
-
-		enrollBtn.click();
+	    WebElement enrollBtn = wait.until(
+	        ExpectedConditions.elementToBeClickable(enrollNowPopupButton)
+	    );
+	    enrollBtn.click();
 	}
 
+	/**
+	 * Fills a field in a way that triggers React/Angular/Vue JS validation events.
+	 */
+	private void fillReactField(WebDriver driver, WebElement field, String value) {
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+	    // 1. Scroll into view and click to focus
+	    js.executeScript("arguments[0].scrollIntoView({block:'center'});", field);
+	    field.click();
+
+	    // 2. Clear existing value via JS (avoids stale issues)
+	    js.executeScript("arguments[0].value = '';", field);
+
+	    // 3. Type character by character to simulate real user input
+	    for (char c : value.toCharArray()) {
+	        field.sendKeys(String.valueOf(c));
+	        try { Thread.sleep(50); } catch (Exception e) {}
+	    }
+
+	    // 4. Fire JS events so the framework registers the change
+	    js.executeScript(
+	        "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+	        "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
+	        "arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));",
+	        field
+	    );
+	}
+	
+	
+	
 	// Select dropdown value
 	public void selectDropDown(String value) {
 		Select select = new Select(selectField);

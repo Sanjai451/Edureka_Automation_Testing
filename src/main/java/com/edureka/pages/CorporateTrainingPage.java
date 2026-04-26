@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Page Object Model class for the Corporate Training Page of the Edureka website.
@@ -39,6 +41,9 @@ public class CorporateTrainingPage {
 
 	@FindBy(xpath = "//div[@id='mCSB_1_container']//a")
 	private List<WebElement> listOfCurriculums;
+	
+	@FindBy(xpath = "//span[contains(text(), 'Thank You!')]")
+	private WebElement successMessage;
 
 	/**
 	 * Clicks the "CONNECT WITH US" button to initiate contact.
@@ -104,5 +109,9 @@ public class CorporateTrainingPage {
 
 		listOfCurriculums.stream().forEach(System.out::println);
 		
+	}
+	
+	public void waitUntilSuccessMessage(WebDriverWait wait) {
+		wait.until(ExpectedConditions.visibilityOf(successMessage));
 	}
 }

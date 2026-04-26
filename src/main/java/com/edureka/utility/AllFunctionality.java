@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * reusable methods across test automation scripts.
  */
 public class AllFunctionality {
-	Properties properties;
+	static Properties properties;
 
 	public AllFunctionality() {
 	}
@@ -204,7 +204,7 @@ public class AllFunctionality {
 		try (FileInputStream fis = new FileInputStream(path);) {
 			properties = new Properties();
 			properties.load(fis);
-			System.out.println("Properties : " + properties);
+//			System.out.println("Properties : " + properties);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -231,7 +231,7 @@ public class AllFunctionality {
 
 	// ==================== EXCEL UTILITY =========================
 
-	private static final String FILE_PATH = "./src/main/resources/edureka.xlsx";
+	private static final String FILE_PATH = "./src/test/resources/edureka.xlsx";
 
 	Workbook workbook;
 	Sheet sheet;

@@ -22,7 +22,7 @@ import io.cucumber.java.en.When;
  * This class contains Cucumber steps for navigating to corporate training page,
  * filling out the contact form, and verifying submission.
  */
-public class CorporateTrainingTest {
+public class CorporateTraining {
 	private Base base;
 	private ExtentTest logs;
 	private WebDriverWait wait;
@@ -32,7 +32,7 @@ public class CorporateTrainingTest {
 	 * Initializes base, logs, and wait using the provided Base instance.
 	 * @param base the Base instance for WebDriver access
 	 */
-	public CorporateTrainingTest(Base base) {
+	public CorporateTraining(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
 		this.wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));
@@ -77,6 +77,7 @@ public class CorporateTrainingTest {
 
 	@Then("user should see successful submission message")
 	public void user_should_see_successful_submission_message() {
+		Pages.get().corporateTrainingPage.waitUntilSuccessMessage(wait);
 		logs.log(Status.PASS, "User successfully submitted corporate training request");
 	}
 }
