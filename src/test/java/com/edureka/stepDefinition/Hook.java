@@ -44,18 +44,18 @@ public class Hook extends AllFunctionality {
 	@Before
 	public void setUp(Scenario scenario) throws IOException {
 		
-		initPropertiesUtility("./src/main/resources/edureka.properties");
+		initPropertiesUtility("./src/test/resources/edureka.properties");
 		String URL = getPropertyData("url");
 		String BROWSWER = getPropertyData("broswer");
+		
 		base.initDriver(BROWSWER);
 		
-//		String USERNAME = getPropertyData("username");
-//		String PASSWORD = getPropertyData("password");
+		int implicitTime = Integer.parseInt(getPropertyData("implicitTime"));
 		
 		setMaximizeBrowser(base.getDriver());
-		implicitlyWait(base.getDriver(), 5);
 		
-		
+		implicitlyWait(base.getDriver(), implicitTime);
+				
 		base.getDriver().get(URL);
 		
 		Pages.loadAllPages(base.getDriver());
@@ -92,9 +92,9 @@ public class Hook extends AllFunctionality {
 
         } else {
             test.pass("Scenario PASSED: " + scenario.getName());
+            Base.quitDriver();
         }
 
-//        Base.quitDriver();
         Pages.cleanUp();
         
 	}
@@ -118,7 +118,7 @@ public class Hook extends AllFunctionality {
 	        test.log(Status.FAIL, "Step FAILED in: " + scenario.getName(),
 	                MediaEntityBuilder.createScreenCaptureFromBase64String(base64Screenshot).build());
 	    } else {
-	        test.log(Status.PASS, "Step PASSED");
+//	        test.log(Status.PASS, "Step PASSED : ");
 	    }
 	}
 	

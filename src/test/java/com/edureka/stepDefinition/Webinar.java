@@ -27,7 +27,7 @@ import io.cucumber.java.en.When;
  * This class contains Cucumber step implementations for navigating to webinars,
  * validating pages, and filling registration forms.
  */
-public class WebinarTest extends AllFunctionality {
+public class Webinar extends AllFunctionality {
 	private Base base;
 	private String homePageHandle;
 	private ExtentTest logs;
@@ -38,7 +38,7 @@ public class WebinarTest extends AllFunctionality {
 	 * Initializes the base, logs, and wait objects.
 	 * @param base the Base instance for WebDriver access
 	 */
-	public WebinarTest(Base base) {
+	public Webinar(Base base) {
 		this.base = base;
 		logs = ExtentReportManager.getTest();
 		this.wait = new WebDriverWait(base.getDriver(), Duration.ofSeconds(15));
@@ -99,7 +99,7 @@ public class WebinarTest extends AllFunctionality {
 	public void webinars_page_should_load_successfully() {
 		wait.until(driver -> getUrl(driver).contains("webinar"));
 		
-		System.out.println("87 Current Page :" + getUrl(base.getDriver()));
+		System.out.println("Current Page :" + getUrl(base.getDriver()));
 	}
 
 	@Then("all upcoming webinars should be displayed")
@@ -167,24 +167,22 @@ public class WebinarTest extends AllFunctionality {
 	 * @param dataTable the Cucumber DataTable containing form data
 	 */
 	@Then("fill the details in registration form")
-	public void fill_the_details_in_registration_form(io.cucumber.datatable.DataTable dataTable) {
+	public void fill_the_details_in_registration_form() {
 		
 		if(base.getDriver().getWindowHandles().size() < 2) {
 			System.out.println("Filling failed : No webinar present at the page at this time + " + new Date());
 			logs.log(Status.WARNING,"No webinar present at the page at this time");
 			return;
 		}
-		
-		// For other transformations you can register a DataTableType.
-		List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-
-	    // Get first row
-	    Map<String, String> userData = data.get(0);
-
-	    String name = userData.get("Name");
-	    String email = userData.get("Email");
-	    String phone = userData.get("Phone");
-	    String experience = userData.get("Experience");
+	    
+	    init("WebinarData");
+	    
+	    String name = getData(1, 0);
+	    String email = getData(1, 1);
+	    String phone = getData(1, 2);
+	    String experience = getData(1, 3);
+	    
+	    System.out.println("email : " + email + " phone : " + phone + " exper : " + experience);
 
 	    // Pass to Page Object
 	    Pages.get().webinarCategoryPage.fillDetailAndSubmit(email, phone, experience);

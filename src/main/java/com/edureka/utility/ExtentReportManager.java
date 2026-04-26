@@ -31,7 +31,7 @@ public class ExtentReportManager {
                     extent.attachReporter(spark);
                     extent.setSystemInfo("Application", "Edureka");
                     extent.setSystemInfo("Browser", "Edge");
-                    extent.setSystemInfo("Environment", "Production");
+                    extent.setSystemInfo("Environment", "Testing");
                     extent.setSystemInfo("Author", "QA Team");
                 }
             }
